@@ -1,9 +1,10 @@
 module.exports = {
   extends: [
-    './rules/javascript'
+    './rules/javascript',
   ].map(require.resolve),
 
   parser: 'babel-eslint',
+  // envs: ['nodejs'],
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: 'module',
@@ -13,4 +14,5 @@ module.exports = {
       jsx: true,
     },
   },
-}
+  root: true,
+};

@@ -67,7 +67,6 @@ function bar1() {
 }
 
 // 不要用空行来填充块语句
-// bad
 if (baz) {
 
   console.log(qux);
@@ -134,3 +133,118 @@ function foo6() {
   return
     'search your feelings, you know it to be foo'
 }
+
+// 错误使用 var
+var a = 1;
+var b = 2;
+// 错误造成全局变量
+foo7 = 'foo';
+
+// 错误使用 let
+let flag = true;
+if (flag) {
+  console.log(flag);
+}
+
+// 针对数组、对象数据类型错误使用 let
+let arr1 = [];
+let obj3 = {};
+arr[0] = 'foo';
+obj.name = 'bar';
+
+const items = goSportsTeam = true,
+    dragonball = 'z';
+  
+// 使用字面量语法，而不是使用构造函数
+const item = new Object();
+const items3 = new Array();
+const add = new Function('a', 'b', 'return a + b');
+const subtract = Function('a', 'b', 'return a - b');
+
+// 对象属性名优先不实用单引号，除非包含不合法的字符
+const bad = {
+  'foo': 3,
+  'bar': 4,
+  'data-blah': 5,
+  'one two': 12,
+};
+
+(function example() {
+  // JavaScript interprets this as
+  // let a = ( b = ( c = 1 ) );
+  // The let keyword only applies to variable a; variables b and c become
+  // global variables.
+  let a = b = c = 1;
+}());
+
+console.log(a); // throws ReferenceError
+console.log(b); // 1
+console.log(c); // 1
+
+
+const foo9 = 
+  'superLongLongLongLongLongLongLongLongString';
+
+const some_unused_var = 42;
+
+// Write-only variables are not considered as used.
+let y1 = 10;
+y1 = 5;
+
+// Unused function arguments.
+function getX(x, y) {
+  return x;
+}
+
+const obj23 = {
+  foo: 'foo',
+  hasOwnProperty: false,
+};
+const objNull = Object.create(null);
+
+// bad => Uncaught TypeError: obj.hasOwnProperty is not a function
+console.log(obj23.hasOwnProperty('foo'));
+console.log(objNull.hasOwnProperty('foo'));
+
+const luke = {
+  jedi: true,
+  age: 28,
+};
+
+// 对象属性优先使用 . 进行访问
+const isJedi = luke['jedi'];
+
+[[0, 1], [2, 3], [4, 5]].reduce((acc, item, index) => {
+  const flatten = acc.concat(item);
+});
+
+[{ subtract: 'Mockingbird', author: 'Harper Lee' }].filter((msg) => {
+  const { subject, author } = msg;
+  if (subject === 'Mockingbird') {
+    author === 'Harper Lee';
+  } else {}
+});
+
+import foo2 from 'foodf';
+// … some other imports … //
+import { named1, named2 } from 'foodf';
+
+if (test)
+  console.log(3)
+
+if (test) {
+  const bbc = 3;
+}
+else {
+  const bbc = 3;
+}
+
+const totalScore = new String(this.reviewScore); // typeof totalScore is "object" not "string"
+const totalScore1 = this.reviewScore + ''; // invokes this.reviewScore.valueOf()
+const totalScore2 = this.reviewScore.toString(); // isn’t guaranteed to return a string
+const val = new Number(inputValue);
+const hasAge = new Boolean(age);
+
+isNaN('1.2');
+isNaN('1.2.3');
+isFinite('2e3'); // true
