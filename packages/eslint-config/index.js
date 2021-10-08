@@ -1,10 +1,13 @@
 module.exports = {
   extends: [
-    './rules/javascript',
+    './rules/best-practices',
+    './rules/errors',
+    './rules/style',
+    './rules/variables',
+    './rules/imports',
+    './rules/es6',
   ].map(require.resolve),
 
-  parser: 'babel-eslint',
-  // envs: ['nodejs'],
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: 'module',
@@ -14,5 +17,6 @@ module.exports = {
       jsx: true,
     },
   },
+
   root: true,
 };
