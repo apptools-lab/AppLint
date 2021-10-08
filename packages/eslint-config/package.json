@@ -1,10 +1,10 @@
 {
   "name": "eslint-config-applint",
   "description": "",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
-    "eslint": ">=6.8.0"
+    "eslint": ">=7.0.0"
   }
 }
