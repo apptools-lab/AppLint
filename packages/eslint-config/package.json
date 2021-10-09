@@ -1,10 +1,14 @@
 {
   "name": "eslint-config-applint",
   "description": "",
-  "version": "1.0.0-beta.2",
+  "version": "0.1.0-beta.0",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
-    "eslint": ">=7.0.0"
+    "eslint": ">=7.0.0",
+    "eslint-plugin-import": "^2.24.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-import": "^2.24.2"
   }
 }

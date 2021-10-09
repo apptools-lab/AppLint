@@ -12,7 +12,7 @@ module.exports = {
     }],
 
     // 对象中不使用重复的 key
-    'no-dup-keys': 'error',
+    'no-dupe-keys': 'error',
 
     // 在数组方法中必须在回调函数 callback 中包含 return 语句，保证任何情况下都有返回
     'array-callback-return': ['error', {
@@ -26,7 +26,7 @@ module.exports = {
     'wrap-iife': ['error', 'outside', { functionPrototypeMethods: false }],
 
     // 禁止使用重复的参数名称
-    'no-dup-args': 'error',
+    'no-dupe-args': 'error',
 
     // case 或 default 字句出现词法声明时，必须用块包裹
     'no-case-declarations': 'error',
