@@ -71,10 +71,8 @@ module.exports = {
         },
       },
     ],
-    // 块的左大括号前有一个空格
-    'space-before-blocks': 'error',
 
-    // 强制在块之前使用一致的空格
+    // 块的左大括号前有一个空格
     'space-before-blocks': 'error',
 
     // 关键字前后各一个空格
@@ -127,12 +125,13 @@ module.exports = {
     }],
 
     // 使用字面量创建对象
-    'no-new-object': 'error',
+    'no-new-object': 'warn',
+
     // 不要使用 new Array() 和 Array() 创建数组，除非为了构造某一长度的空数组。
-    'no-array-constructor': 'error',
+    'no-array-constructor': 'warn',
   
     // 禁止使用链式(chain variable assignments)赋值
-    'no-multi-assign': ['error'],
+    'no-multi-assign': ['warn'],
 
     // 避免使用 = 时的赋值语句造成的换行
     'operator-linebreak': 'error',
@@ -205,6 +204,6 @@ module.exports = {
     'no-unneeded-ternary': ['error', { defaultAssignment: false }],
 
     // 禁用否定的表达式
-    'no-negated-condition': 'error',
+    'no-negated-condition': 'warn',
   }
 }

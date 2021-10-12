@@ -17,7 +17,7 @@ module.exports = {
     }],
 
     // 禁止修改 const 声明的变量
-    'no-const-assign': 'error',
+    'no-const-assign': 'warn',
     
     // 使用 const 或 let 声明变量，不要使用 var
     'no-var': 'error',
@@ -32,26 +32,26 @@ module.exports = {
     ],
 
     // 避免不必要的 constructor
-    'no-useless-constructor': 'error',
+    'no-useless-constructor': 'warn',
 
     // 从同一个位置引用同一个路径的内容
-    'no-duplicate-imports': 'error',
+    'no-duplicate-imports': 'warn',
     
     // 字符串拼接优先使用模板字符串
     'prefer-template': 'error',
     'template-curly-spacing': 'error',
 
     // 禁止使用 arguments 对象，使用语法剩余参数操作符 ... 代替
-    'prefer-rest-params': 'error',
+    'prefer-rest-params': 'warn',
 
     // 避免重复的类成员命名
-    'no-dupe-class-members': 'error',
+    'no-dupe-class-members': 'warn',
 
     // 子类的 constructor 中必须使用 super，非子类的 constructor 中不能使用 super
-    'constructor-super': 'error',
+    'constructor-super': 'warn',
 
     // 禁止在 super 调用前使用 this
-    'no-this-before-super': 'error',
+    'no-this-before-super': 'warn',
 
     // 回调函数使用箭头函数而不是匿名函数
     'prefer-arrow-callback': [

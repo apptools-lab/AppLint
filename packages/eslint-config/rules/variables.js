@@ -10,16 +10,16 @@ module.exports = {
   },
   rules: {
     // 禁止使用未声明的变量
-    'no-undef': 'error',
+    'no-undef': 'warn',
 
     // 禁止定义没有使用的变量
-    'no-unused-vars': ['error', {
+    'no-unused-vars': ['warn', {
       vars: 'all', args: 'after-used', ignoreRestSiblings: true,
     }],
 
     // 禁用使用特定的全局变量
     'no-restricted-globals': [
-      'error',
+      'warn',
       {
         name: 'isFinite',
         message:
@@ -33,6 +33,6 @@ module.exports = {
     ],
 
     // 禁止删除变量
-    'no-delete-var': 'error',
+    'no-delete-var': 'warn',
   }
 };
