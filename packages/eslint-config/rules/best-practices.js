@@ -39,5 +39,31 @@ module.exports = {
 
     // 使用 parseInt() 方法时总是带上基数
     radix: 'warn',
+
+    // 禁止不必要的 .bind() 调用
+    'no-extra-bind': 'error',
+
+    // 禁止不必要的 label
+    'no-extra-label': 'error',
+
+    // 不要省略小数点前或小数点后的 0
+    'no-floating-decimal': 'error',
+
+    // 禁止出现多个连续空格
+    'no-multi-spaces': [
+      'error',
+      {
+        ignoreEOLComments: false,
+      },
+    ],
+
+    // 禁止未使用的标签
+    'no-unused-labels': 'error',
+
+    // 禁止多余的 return; 语句
+    'no-useless-return': 'error',
+
+    // 将立即执行函数表达式（IIFE）用小括号包裹
+    'wrap-iife': ['error', 'any', { functionPrototypeMethods: false }],
   }
 }

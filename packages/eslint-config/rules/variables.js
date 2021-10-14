@@ -34,5 +34,8 @@ module.exports = {
 
     // 禁止删除变量
     'no-delete-var': 'warn',
+
+    // 不要将变量初始化成 undefined
+    'no-undef-init': 'error',
   }
 };

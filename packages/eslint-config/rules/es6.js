@@ -61,5 +61,45 @@ module.exports = {
         allowUnboundThis: true,
       },
     ],
+
+    // 箭头函数的箭头前后各留一个空格
+    'arrow-spacing': ['error', { before: true, after: true }],
+
+    // 避免箭头函数与比较操作符产生混淆
+    'no-confusing-arrow': 'error',
+
+    // 对象的属性名不要使用无必要的计算属性
+    'no-useless-computed-key': 'error',
+
+    // 禁止在解构/import/export时进行无用的重命名
+    'no-useless-rename': [
+      'error',
+      {
+        ignoreDestructuring: false,
+        ignoreImport: false,
+        ignoreExport: false,
+      },
+    ],
+
+     // 使用对象和数组的解构
+    'prefer-destructuring': [
+      'error',
+      {
+        VariableDeclarator: {
+          array: false,
+          object: true,
+        },
+        AssignmentExpression: {
+          array: false,
+          object: false,
+        },
+      },
+      {
+        enforceForRenamedProperties: false,
+      },
+    ],
+
+    // 剩余和扩展操作符与操作对象间不应有空格
+    'rest-spread-spacing': ['error', 'never'],
   }
 }

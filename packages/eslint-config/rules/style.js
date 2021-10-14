@@ -205,5 +205,59 @@ module.exports = {
 
     // 禁用否定的表达式
     'no-negated-condition': 'warn',
+
+    // 方括号内部两侧无空格-计算属性
+    'computed-property-spacing': ['error', 'never'],
+
+    // 在函数的小括号内使用一致的换行风格
+    'function-paren-newline': ['error', 'consistent'],
+
+    // JSX 属性使用双引号，不要使用单引号
+    'jsx-quotes': ['error', 'prefer-double'],
+
+    // 类成员之间保留一个空行
+    'lines-between-class-members': ['off', 'always', { exceptAfterSingleLine: false }],
+
+    // 禁止在调用构造函数时省略小括号
+    'new-parens': 'error',
+
+    // 在长方法链式调用时进行换行
+    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
+
+    // 禁止 if 作为唯一语句出现在 else 中，此时应写成 else if
+    'no-lonely-if': 'error',
+
+    // 禁止属性调用前有空格
+    'no-whitespace-before-property': 'error',
+
+    // 对象的属性需遵循一致的换行风格：即所有属性要么都换行，要么都写在一行
+    'object-property-newline': [
+      'error',
+      {
+        allowAllPropertiesOnSameLine: true,
+      },
+    ],
+
+    // 分号的前面无空格，后面有空格
+    'semi-spacing': ['error', { before: false, after: true }],
+
+    // 分号必须写在行尾
+    'semi-style': ['error', 'last'],
+
+    // 一元操作符两侧无空格，包括 -、+、--、++、!、!!
+    'space-unary-ops': [
+      'error',
+      {
+        words: true,
+        nonwords: false,
+        overrides: {},
+      },
+    ],
+
+    // switch 的 case 和 default 子句冒号前面无空格，后面有空格
+    'switch-colon-spacing': ['error', { after: true, before: false }],
+
+    // 模板字符串的 tag 后面无空格
+    'template-tag-spacing': ['error', 'never'],
   }
 }

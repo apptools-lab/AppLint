@@ -8,5 +8,17 @@ module.exports = {
   
     // 强制 typeof 的计算值为固定为合法的字符串字面量
     'valid-typeof': ['warn', { requireStringLiterals: true }],
+
+    // 避免不必要的布尔类型转换
+    'no-extra-boolean-cast': 'error',
+
+    // 禁止不必要的分号
+    'no-extra-semi': 'error',
+
+    // 禁止在正则表达式中出现多个连续空格
+    'no-regex-spaces': 'error',
+
+    // 多行语句必须用大括号包裹，单行语句推荐用大括号包裹
+    curly: ['error', 'multi-line'],
   }
 }
