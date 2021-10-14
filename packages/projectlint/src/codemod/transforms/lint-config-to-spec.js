@@ -79,7 +79,7 @@ const SCRIPT_TEMPLATE = {
   lint: 'npm run eslint && npm run stylelint',
 };
 
-export default (fileInfo, api, options) => {
+module.exports = (fileInfo, api, options) => {
   const j = api.jscodeshift;
   const dir = path.dirname(fileInfo.path);
   const basename = path.basename(fileInfo.path);

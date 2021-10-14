@@ -6,20 +6,27 @@ import allRules from './rules';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
-export default async function runTransforms({ cwd, rules, mode, jscodeshiftArgs = [] }: Params) {
+export default async function runTransform({ cwd, rules, mode, jscodeshiftArgs = [] }: Params) {
   const files = getFiles(cwd);
   const transformOptions  = await getTransformOptions(cwd);
-  const allRuleKeys = Object.keys(allRules);
   let args = mode === 'check' ? ['--dry'] : [];
   args = args.concat(files);
   args = args.concat(jscodeshiftArgs);
   args = args.concat(transformOptions);
 
+  const results = await transform({ rules, args, mode });
+  return results.filter((result) => result);
+}
+
+async function transform({ rules, args, mode }: Pick<Params, 'mode' | 'rules'> & { args: string[] }) {
+  const allRuleKeys = Object.keys(allRules);
+
+ 
   const workers = Object.entries(rules).map(([ruleName, severity]) => {
     return new Promise((resolve) => {
-      if (!(ruleName in allRuleKeys)) {
+      if (!allRuleKeys.includes(ruleName)) {
         // if user set transform isn't in our config
-        return;
+        resolve(null);
       }
       const transformConfig = {
         ...allRules[ruleName],
@@ -63,7 +70,8 @@ export default async function runTransforms({ cwd, rules, mode, jscodeshiftArgs 
   })
 
   const results = await Promise.all(workers);
-  return results.filter((result) => result);
+
+  return results;
 }
 
 function getFiles(cwd: string) {
@@ -78,11 +86,8 @@ function getFiles(cwd: string) {
   );
   return files;
 }
-interface TransformConfig extends Rule {
-  severity: string
-}
 
-function getTransformFile(key: string, transformConfig: TransformConfig) {
+function getTransformFile(key: string, transformConfig: Rule & { severity: string }) {
   let transformFile = '';
   if (transformConfig.package && transformConfig.transform) {
     const packageDir = path.dirname(require.resolve(`${transformConfig.package}/package.json`));
@@ -92,7 +97,6 @@ function getTransformFile(key: string, transformConfig: TransformConfig) {
   }
   return transformFile;
 }
-
 
 async function getTransformOptions(cwd: string) {
   const transformOptions = [
