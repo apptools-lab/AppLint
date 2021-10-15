@@ -17,8 +17,5 @@ module.exports = {
 
     // 禁止在正则表达式中出现多个连续空格
     'no-regex-spaces': 'error',
-
-    // 多行语句必须用大括号包裹，单行语句推荐用大括号包裹
-    curly: ['error', 'multi-line'],
   }
 }

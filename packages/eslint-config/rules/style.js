@@ -209,23 +209,11 @@ module.exports = {
     // 方括号内部两侧无空格-计算属性
     'computed-property-spacing': ['error', 'never'],
 
-    // 在函数的小括号内使用一致的换行风格
-    'function-paren-newline': ['error', 'consistent'],
-
     // JSX 属性使用双引号，不要使用单引号
     'jsx-quotes': ['error', 'prefer-double'],
 
-    // 类成员之间保留一个空行
-    'lines-between-class-members': ['off', 'always', { exceptAfterSingleLine: false }],
-
     // 禁止在调用构造函数时省略小括号
     'new-parens': 'error',
-
-    // 在长方法链式调用时进行换行
-    'newline-per-chained-call': ['error', { ignoreChainWithDepth: 4 }],
-
-    // 禁止 if 作为唯一语句出现在 else 中，此时应写成 else if
-    'no-lonely-if': 'error',
 
     // 禁止属性调用前有空格
     'no-whitespace-before-property': 'error',

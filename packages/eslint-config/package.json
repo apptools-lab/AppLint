@@ -1,14 +1,26 @@
 {
   "name": "eslint-config-applint",
-  "description": "",
-  "version": "0.1.0-beta.0",
+  "description": "ESLint Shareable Config for Alibaba Tao Tech.",
+  "version": "0.1.0-beta.5",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
     "eslint": ">=7.0.0",
-    "eslint-plugin-import": "^2.24.2"
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-jsx-plus": "^0.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
   },
   "devDependencies": {
-    "eslint-plugin-import": "^2.24.2"
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-jsx-plus": "^0.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }
