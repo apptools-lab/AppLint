@@ -11,9 +11,10 @@
     "eslint:rax": "cd examples/rax && eslint **/*.jsx",
     "eslint:rax-ts": "cd examples/rax-ts && eslint **/*.tsx",
     "eslint:react": "cd examples/react && eslint **/*.jsx",
-    "eslint:react-ts": "cd examples/react-ts && eslint **/*.tsx"    
+    "eslint:react-ts": "cd examples/react-ts && eslint **/*.tsx"
   },
   "dependencies": {
+    "@applint/commitlint-config": "^0.1.0-beta.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "deepmerge": "^4.2.2",
@@ -23,6 +24,7 @@
     "eslint-plugin-jsx-plus": "^0.1.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
     "require-all": "^3.0.0"
   },
   "devDependencies": {
