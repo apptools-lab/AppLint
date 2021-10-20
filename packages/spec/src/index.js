@@ -27,3 +27,12 @@ const commitlint = requireAll({
 exports.getCommitlintConfig = function (rule, customConfig) {
   return getConfig(commitlint, rule, customConfig);
 };
+
+// prettier
+const prettier = requireAll({
+  dirname: path.resolve(__dirname, 'prettier'),
+});
+
+exports.getPrettierConfig = function (rule, customConfig) {
+  return getConfig(prettier, rule, customConfig);
+};
