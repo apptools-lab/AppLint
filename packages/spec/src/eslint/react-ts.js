@@ -1,5 +1,5 @@
 module.exports = {
   extends: [
-    require.resolve('eslint-config-applint/typescript/react'),
+    require.resolve('@applint/eslint-config/typescript/react'),
   ],
 };

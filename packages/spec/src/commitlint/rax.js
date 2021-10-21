@@ -1,4 +1,3 @@
-// commitlint config for rax project
 module.exports = {
-  extends: 'ali',
+  extends: '@applint/commitlint-config',
 };

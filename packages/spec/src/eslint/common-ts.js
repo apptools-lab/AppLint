@@ -1,5 +1,5 @@
 module.exports = {
   extends: [
-    require.resolve('eslint-config-applint/typescript'),
+    require.resolve('@applint/eslint-config/typescript'),
   ],
 };

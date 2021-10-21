@@ -1,6 +1,6 @@
 {
   "name": "@applint/stylelint-config",
-  "version": "0.1.0-beta.0",
+  "version": "0.1.0-beta.1",
   "description": "Stylelint Shareable Config for Alibaba Tao Technology F2E.",
   "main": "index.js",
   "scripts": {
@@ -19,13 +19,12 @@
     "stylelint-config"
   ],
   "peerDependencies": {
-    "stylelint": ">=11.0.0"
-  },
-  "dependencies": {
-    "stylelint-scss": "^3.18.0"
+    "stylelint": ">=11.0.0",
+    "stylelint-scss": ">=3.18.0"
   },
   "devDependencies": {
-    "stylelint": "^13.7.0"
+    "stylelint": "^13.7.0",
+    "stylelint-scss": "^3.18.0"
   },
   "license": "MIT"
 }
