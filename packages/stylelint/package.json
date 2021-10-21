@@ -1,0 +1,31 @@
+{
+  "name": "@applint/stylelint-config",
+  "version": "0.1.0-beta.0",
+  "description": "Stylelint Shareable Config for Alibaba Tao Technology F2E.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apptools-lab/applint"
+  },
+  "bugs": {
+    "url": "https://github.com/apptools-lab/applint/issues"
+  },
+  "homepage": "https://github.com/apptools-lab/applint",
+  "keywords": [
+    "stylelint",
+    "stylelint-config"
+  ],
+  "peerDependencies": {
+    "stylelint": ">=11.0.0"
+  },
+  "dependencies": {
+    "stylelint-scss": "^3.18.0"
+  },
+  "devDependencies": {
+    "stylelint": "^13.7.0"
+  },
+  "license": "MIT"
+}
