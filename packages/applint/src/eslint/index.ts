@@ -27,6 +27,8 @@ export async function runESLint({ directory, ruleKey, fixError, files }: Params)
 
   const eslint = new ESLint({
     cache: false,
+    // If user add extends or plugins, should find plugin form target directory
+    resolvePluginsRelativeTo: customConfig.extends || customConfig.plugins ? directory : path.dirname(require.resolve('@applint/spec')),
     baseConfig: deepmerge(getESLintConfig(ruleKey), customConfig),
     cwd: directory,
     fix: fixError,
