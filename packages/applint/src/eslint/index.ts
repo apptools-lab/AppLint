@@ -20,7 +20,7 @@ interface Params {
   files: FileInfo[];
 }
 
-const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue|package\.json)$/;
+const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
 export async function runESLint({ directory, ruleKey, fixError, files }: Params) {
   const customConfig: any = getCustomESLintConfig(directory, ruleKey) || {};
