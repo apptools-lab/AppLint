@@ -1,6 +1,6 @@
 import fse from 'fs-extra';
 import path from 'path';
-import runTransform from '..';
+import { runTransforms } from '..';
 jest.setTimeout(200000)
 const tmpDir = path.join(__dirname, 'tmp');
 const packageJsonPath = path.join(tmpDir, 'package.json');
@@ -49,9 +49,9 @@ afterAll(() => {
 })
 
 describe('run transform', () => {
-  // await runTransform({ cwd: tmpDir, mode: 'fix', rules: { "lint-config-to-spec": "warn" } });
+  // await runTransform({ cwd: tmpDir, mode: 'fix', rules: { "lint-config-to-iceworks-spec": "warn" } });
   test('fix mode', async () => {
-    await runTransform({ cwd: tmpDir, mode: 'fix', rules: { "lint-config-to-spec": "warn" } });
+    await runTransforms({ cwd: tmpDir, dry: true, transforms: { "lint-config-to-iceworks-spec": "warn" } });
     expect('a').toBe('a')
   })
 })

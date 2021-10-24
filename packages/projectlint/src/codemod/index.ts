@@ -3,26 +3,28 @@ import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
 import allRules from './rules';
+import { Rule, RunTransformParams } from './types';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
-export default async function runTransform({ cwd, rules, mode, jscodeshiftArgs = [] }: Params) {
+export async function runTransforms({ cwd, transforms, dry = false, jscodeshiftArgs = [] }: RunTransformParams) {
   const files = getFiles(cwd);
-  const transformOptions  = await getTransformOptions(cwd);
-  let args = mode === 'check' ? ['--dry'] : [];
+
+  const transformOptions = await getTransformOptions(cwd);
+ 
+  let args = dry ? ['--dry'] : [];
   args = args.concat(files);
   args = args.concat(jscodeshiftArgs);
   args = args.concat(transformOptions);
 
-  const results = await transform({ rules, args, mode });
+  const results = await runTransformsByWorkers({ transforms, args, dry });
   return results.filter((result) => result);
 }
 
-async function transform({ rules, args, mode }: Pick<Params, 'mode' | 'rules'> & { args: string[] }) {
+async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransformParams, 'dry' | 'transforms'> & { args: string[] }) {
   const allRuleKeys = Object.keys(allRules);
 
- 
-  const workers = Object.entries(rules).map(([ruleName, severity]) => {
+  const workers = Object.entries(transforms).map(([ruleName, severity]) => {
     return new Promise((resolve) => {
       if (!allRuleKeys.includes(ruleName)) {
         // if user set transform isn't in our config
@@ -51,7 +53,7 @@ async function transform({ rules, args, mode }: Pick<Params, 'mode' | 'rules'> &
         output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 
         if (
-          mode === 'fix' ||
+          !dry ||
           // check mode return can run codemods to fix project
           // when jscodeshift running ok and show changed count
           (/ok\n/.test(output) && !/\n0 ok\n/.test(output))
@@ -59,7 +61,7 @@ async function transform({ rules, args, mode }: Pick<Params, 'mode' | 'rules'> &
           resolve({
             transform: ruleName,
             docs: `https://github.com/apptools-lab/codemod/tree/master/transforms/docs/${ruleName}.md`,
-            mode,
+            dry,
             ...transformConfig,
             output,
           });

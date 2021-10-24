@@ -24,8 +24,8 @@ transform 入参会增加 projectType（rax,react,vue）、projectFramework(rax-
 codemod  
 ├─ transforms  
 | ├─ docs  
-│ | └─ lint-config-to-spec.md  
-│ └─ lint-config-to-spec.js  
+│ | └─ lint-config-to-iceworks-spec.md  
+│ └─ lint-config-to-iceworks-spec.js  
 ├─ config.json
 └─ package.json
 ```

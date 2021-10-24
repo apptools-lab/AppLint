@@ -1,3 +1,5 @@
+import { Rule } from './types';
+
 const config: Record<string, Rule> = {
   "plugin-rax-component-to-component": {
     "title": "Rax 组件工程升级",
@@ -11,7 +13,7 @@ const config: Record<string, Rule> = {
     "npm_deprecate": "build-plugin-rax-component"
   },
 
-  "lint-config-to-spec": {
+  "lint-config-to-iceworks-spec": {
     "title": "遵循阿里巴巴前端规范，并接入 @iceworks/spec 的最佳实践",
     "title_en": "Follow Alibaba FED lint rules, and use @iceworks/spec best practices",
     "message": "遵循阿里巴巴前端规范，并更新 rax, ice 和 react 项目中的 eslint / stylelint / prettier 配置。",

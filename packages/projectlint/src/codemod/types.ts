@@ -1,7 +1,4 @@
-
-type TransformMode = 'check' | 'fix';
-
-type Rule = {
+export type Rule = {
   title: string;
   title_en: string;
   message: string;
@@ -13,16 +10,28 @@ type Rule = {
   transform?: string;
 }
 
-type Params = {
+export type RunTransformParams = {
   cwd: string;
   /**
    * examples:
     config = {
       "plugin-rax-component-to-component": "error",
-      "lint-config-to-spec": "warn",
+      "lint-config-to-iceworks-spec": "warn",
     };
    */
-  rules: Record<string, string>;
-  mode: TransformMode;
+  transforms: Record<string, string>;
+  dry?: boolean;
   jscodeshiftArgs?: string[];
+}
+
+export interface CodemodResult extends Rule {
+  dry: boolean;
+
+  output: string;
+}
+
+export interface Result {
+  codemod: CodemodResult[];
+
+  [rule: string]: any;
 }

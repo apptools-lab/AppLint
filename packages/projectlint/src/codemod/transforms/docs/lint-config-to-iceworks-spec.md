@@ -9,7 +9,7 @@
 
 若您的项目依赖中没有 `@iceworks/spec` 时，建议运行此 CodeMod
 
-### 修改 package.json 依赖
+## 修改 package.json 依赖
 
 1. 安装 @iceworks/spec 及 lint 相关工具库（eslint，stylelint 及 prettier）。
 2. 删除 eslint 及 stylelint 原先的配置和插件。（不同版本的插件和配置会影响 lint 工具的运行，@iceworks/spec 已内置相关依赖，您无需关注）。
@@ -33,7 +33,7 @@
 }
 ```
 
-### 修改 lint 配置
+## 修改 lint 配置
 
 1. 增加 lint ignore 相关文件。
 2. 保留您的 lint 配置，并更新使用 `@iceworks/spec`。
