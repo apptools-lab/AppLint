@@ -28,13 +28,13 @@ Return:
 Example:
 
 ```javascript
-import { runTransforms } from "@applint/projectlint";
+import { runTransforms } from '@applint/projectlint';
 
-const cwd = "/xxx/xx";
+const cwd = '/xxx/xx';
 
 const transforms = {
-  "plugin-rax-component-to-component": "error",
-  "lint-config-to-spec": "warn",
+  'plugin-rax-component-to-component': 'error',
+  'lint-config-to-iceworks-spec': 'warn',
 };
 
 runTransforms(cwd, transforms, true);

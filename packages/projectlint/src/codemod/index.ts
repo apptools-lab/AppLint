@@ -7,7 +7,7 @@ import { Rule, RunTransformParams } from './types';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
-export async function runTransforms({ cwd, transforms, dry = false, jscodeshiftArgs = [] }: RunTransformParams) {
+export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftArgs = [] }: RunTransformParams) {
   const files = getFiles(cwd);
 
   const transformOptions = await getTransformOptions(cwd);
@@ -77,6 +77,7 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
 }
 
 function getFiles(cwd: string) {
+  // TODO: get the .gitignore file to exclude file
   const files = glob.sync(
     '**/*', 
     { 
