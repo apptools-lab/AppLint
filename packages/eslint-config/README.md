@@ -1,6 +1,6 @@
 # @applint/eslint-config
 
-Shareable config for eslint.
+Alibaba Tao Technology shareable config for ESLint.
 
 ## Install
 

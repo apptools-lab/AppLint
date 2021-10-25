@@ -2,9 +2,6 @@
   "name": "@applint/projectlint",
   "version": "0.1.0-beta.0",
   "main": "./dist/index.js",
-  "bin": {
-    "projectlint-codemod": "./bin/projectlint-codemod.js"
-  },
   "scripts": {
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "npm run build",

@@ -1,6 +1,6 @@
 # @applint/commitlint-config
 
-Shareable commitlint config enforcing conventional commits. Fork from [commitlint-config-ali](https://www.npmjs.com/package/commitlint-config-ali).
+Alibaba Tao Technology shareable commitlint config enforcing conventional commits. Fork from [commitlint-config-ali](https://www.npmjs.com/package/commitlint-config-ali).
 
 ## Install
 

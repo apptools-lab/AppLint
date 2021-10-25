@@ -60,7 +60,7 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
         ) {
           resolve({
             transform: ruleName,
-            docs: `https://github.com/apptools-lab/codemod/tree/master/transforms/docs/${ruleName}.md`,
+            docs: `https://github.com/apptools-lab/applint/tree/main/transforms/docs/${ruleName}.md`,
             dry,
             ...transformConfig,
             output,

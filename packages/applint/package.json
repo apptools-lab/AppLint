@@ -1,6 +1,7 @@
 {
   "name": "@applint/applint",
   "version": "0.1.0-beta.3",
+  "description": "Provide Node API of ESLint, codemod and so on ",
   "main": "dist/index.js",
   "files": [
     "dist"

@@ -1,33 +1,33 @@
 # @applint/projectlint
 
-
-Lint tool on project level for [rax](https://rax.js.org/), [ice](https://ice.work/) and react project.
+Lint tool on project level for [Rax](https://rax.js.org/), [ICE](https://ice.work/) and React projects.
 
 ## Install
 
 ```bash
-$ npm i @applint/projectlint --save-dev
+npm i @applint/projectlint --save-dev
 ```
 
 ## Usage
 
-### runTransform()
+### runTransforms()
 
-You can use the `runTransform` method to run codemod.
+You can use the `runTransforms` method to run codemod.
 
 Options:
 
-- cwd: string, the target directory path
-- config: object, the project-lint configuration.
-- mode: 'check' | '', pre-check or fix the target source code. default: false.
+- cwd: `string`, the target directory path
+- config: `object`, the project-lint configuration
+- dry: `boolean`, whether or not dry-run codemod. default: `true`
+- jscodeshiftArgs: `string[]`, default is `[]`
 
 Return:
 
-- result: IResult (see interface), run project-lint result.
+- result: `TransformResult[]` (see interface), the codemod transform result.
 
 Example:
 
-```javascript
+```js
 import { runTransforms } from '@applint/projectlint';
 
 const cwd = '/xxx/xx';
@@ -37,7 +37,8 @@ const transforms = {
   'lint-config-to-iceworks-spec': 'warn',
 };
 
-runTransforms(cwd, transforms, true);
+const result = runTransforms(cwd, transforms, true);
+console.log('run transforms result', result);
 ```
 
 #### Interface
@@ -45,7 +46,7 @@ runTransforms(cwd, transforms, true);
 IResult:
 
 ```typescript
-interface ICodemodResult {
+interface TransformResult {
   /**
    * transform key, see `Included Transforms`
    */
@@ -69,7 +70,7 @@ interface ICodemodResult {
   /**
    * 0: advice 1: warning 2: error
    */
-  severity: 0 | 1 | 2;
+  severity: number;
   /**
    * whether dry run codemod or not
    */
@@ -87,14 +88,6 @@ interface ICodemodResult {
    */
   npm_deprecate?: string;
 }
-
-interface IResult {
-  /**
-   * codemod result.
-   */
-  codemod: ICodemodResult[];
-  [rule: string]: any;
-}
 ```
 
 ## Included Transforms
@@ -103,6 +96,10 @@ interface IResult {
 
 Update `plugin-rax-component` to `plugin-component`. [docs](./transforms/docs/plugin-rax-component-to-component.md)
 
-### 2. `lint-config-to-spec`
+### 2. `lint-config-to-iceworks-spec`
 
-Follow Alibaba FED lint rules, and use `@applint/spec` best practices. [docs](./transforms/docs/lint-config-to-spec.md)
+Follow Alibaba FED lint rules, and use `@iceworks/spec` best practices. [docs](./transforms/docs/lint-config-to-iceworks-spec.md)
+
+### 3. `lint-config-to-applint-spec`
+
+Use `@applint/spec` best practices. [docs](./transforms/docs/lint-config-to-applint-spec.md)
