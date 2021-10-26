@@ -168,9 +168,12 @@ export default function(fileInfo: FileInfo, api: API, options: Options) {
           fs.writeFileSync(path.join(dir, generateFiles.configFile), ejs.render(generateFiles.configFileTemplate, { ruleKey, eslintRuleKey, customConfig }), 'utf8');
         }
       });
+
       return JSON.stringify(packageJSON, null, 2);
     }
+
     return null;
   }
+
   return null;
 }

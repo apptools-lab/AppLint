@@ -8,7 +8,7 @@
 
 ## 2. 入参说明
 
-transform 入参会增加 projectType（rax,react,vue）、projectFramework(rax-app,icejs) 及 projectLanguageType(js,ts)。
+transform 入参会增加 projectType（rax, react, vue）、projectFramework(rax-app, icejs) 及 projectLanguageType(js, ts)。
 
 ## 3. 文档说明
 
@@ -26,18 +26,17 @@ codemod
 | ├─ docs  
 │ | └─ lint-config-to-iceworks-spec.md  
 │ └─ lint-config-to-iceworks-spec.js  
-├─ config.json
-└─ package.json
+└─ config.ts
 ```
 
 check 方法命中的 codemod 后，查询对应 codemod 说明配置，获取此条 codemod 信息。
 
 目前通用 codemod 会保存在本仓库，与 icejs 相关 codemod 保存在 [icejs-codemod 仓库](https://github.com/ice-lab/icejs-codemod) 下，与 rax 相关 codemod 保存在 [rax-codemod 仓库](https://github.com/raxjs/rax-app/tree/master/packages/codemod)下，我们通过 config.json 文件进行指定。
 
-config.json 说明配置文件示例如下：
+rules.ts 说明配置文件示例如下：
 
-```json
-{
+```ts
+export default {
   "plugin-rax-component-to-component": {
     "title": "Rax 组件工程升级",
     "message": "从 plugin-rax-component 升级到 plugin-component",
