@@ -105,7 +105,7 @@ module.exports = {
     }],
 
     // 禁止使用多个连续空行来填充代码
-    'no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
+    'no-multiple-empty-lines': ['error', { max: 2, maxBOF: 1 }],
 
     // 禁止在空格 () 中增加空格
     'space-in-parens': ['error', 'never'],
@@ -190,14 +190,6 @@ module.exports = {
     // 大括号换行风格：one true brace style 风格，且单行代码块可不换行
     'brace-style': ['error', '1tbs', {
       allowSingleLine: true,
-    }],
-
-    // 多个 import 的内容应该用多行以及缩进来表示
-    'object-curly-newline': ['error', {
-      ObjectExpression: { minProperties: 4, multiline: true, consistent: true },
-      ObjectPattern: { minProperties: 4, multiline: true, consistent: true },
-      ImportDeclaration: { minProperties: 4, multiline: true, consistent: true },
-      ExportDeclaration: { minProperties: 4, multiline: true, consistent: true },
     }],
 
     // 避免不必要的三元表达式
