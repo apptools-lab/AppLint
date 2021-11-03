@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "declaration": true,
-    "sourceMap": false, 
+    "sourceMap": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -14,5 +14,9 @@
     "allowJs": true,
     "lib": ["ES2018",],
     "types": ["jest", "jscodeshift", "node"],
-  }
+  },
+  "exclude": [
+    "scripts",
+    "dist"
+  ]
 }

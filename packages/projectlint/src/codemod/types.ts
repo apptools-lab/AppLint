@@ -4,7 +4,7 @@ export type Rule = {
   message: string;
   message_en: string;
   severity: string;
-  npm_deprecate: string;
+  npm_deprecate?: string;
   docs?: string;
   package?: string;
   transform?: string;

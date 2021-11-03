@@ -10,12 +10,14 @@ const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftArgs = [] }: RunTransformParams) {
   const files = getFiles(cwd);
 
-  const transformOptions = await getTransformOptions(cwd);
+  const defaultTransformOptions = await getDefaultTransformOptions(cwd);
  
   let args = dry ? ['--dry'] : [];
   args = args.concat(files);
   args = args.concat(jscodeshiftArgs);
-  args = args.concat(transformOptions);
+  args = args.concat(defaultTransformOptions);
+  args = args.concat('--parser=tsx'); // --parser=babel|babylon|flow|ts|tsx
+  args = args.concat('--extensions=tsx,ts,jsx,js,json');
 
   const results = await runTransformsByWorkers({ transforms, args, dry });
   return results.filter((result) => result);
@@ -77,7 +79,7 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
 }
 
 function getFiles(cwd: string) {
-  // TODO: get the .gitignore file to exclude file
+  // TODO: get the .gitignore file to exclude more file
   const files = glob.sync(
     '**/*', 
     { 
@@ -96,12 +98,12 @@ function getTransformFile(key: string, transformConfig: Rule & { severity: strin
     const packageDir = path.dirname(require.resolve(`${transformConfig.package}/package.json`));
     transformFile = path.join(packageDir, transformConfig.transform);
   } else {
-    transformFile = require.resolve(path.join(__dirname, './transforms/', `${key}.js`));
+    transformFile = require.resolve(path.join(__dirname, './transforms/', key));
   }
   return transformFile;
 }
 
-async function getTransformOptions(cwd: string) {
+async function getDefaultTransformOptions(cwd: string) {
   const transformOptions = [
     `--projectType=${await getProjectType(cwd, true)}`,
     `--projectFramework=${await getProjectFramework(cwd)}`,
