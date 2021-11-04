@@ -1,3 +1,10 @@
+export enum Severity {
+  off = 'off',
+  warn = 'warn',
+  recommendation = 'recommendation',
+  error = 'error',
+}
+
 export type Rule = {
   title: string;
   title_en: string;
@@ -24,14 +31,7 @@ export type RunTransformParams = {
   jscodeshiftArgs?: string[];
 }
 
-export interface CodemodResult extends Rule {
+export interface TransformResult extends Rule {
   dry: boolean;
-
   output: string;
-}
-
-export interface Result {
-  codemod: CodemodResult[];
-
-  [rule: string]: any;
 }

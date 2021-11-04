@@ -51,12 +51,14 @@ export async function runESLint({ directory, ruleKey, fixError, files }: Params)
 function getTargetFiles(files: FileInfo[], directory: string) {
   const ig = getIg(directory);
 
-  const targetFiles: string[] = files.filter((file: FileInfo) => {
-    return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
-  }).map((file: FileInfo) => {
-    // Use absolute path
-    return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
-  });
+  const targetFiles: string[] = 
+    files.filter((file: FileInfo) => {
+        return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
+      })
+      .map((file: FileInfo) => {
+        // Use absolute path
+        return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
+      });
 
   return targetFiles;
 }

@@ -3,11 +3,13 @@ import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
 import allRules from './rules';
-import { Rule, RunTransformParams } from './types';
+import type { Rule, RunTransformParams, TransformResult } from './types';
+
+export * from './types';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
-export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftArgs = [] }: RunTransformParams) {
+export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftArgs = [] }: RunTransformParams): Promise<TransformResult[]> {
   const files = getFiles(cwd);
 
   const defaultTransformOptions = await getDefaultTransformOptions(cwd);
@@ -23,7 +25,7 @@ export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftAr
   return results.filter((result) => result);
 }
 
-async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransformParams, 'dry' | 'transforms'> & { args: string[] }) {
+async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransformParams, 'dry' | 'transforms'> & { args: string[] }): Promise<TransformResult[]> {
   const allRuleKeys = Object.keys(allRules);
 
   const workers = Object.entries(transforms).map(([ruleName, severity]) => {
@@ -54,12 +56,9 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
         // Remove all colors/styles from strings https://stackoverflow.com/questions/25245716/remove-all-ansi-colors-styles-from-strings
         output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 
-        if (
-          !dry ||
-          // check mode return can run codemods to fix project
-          // when jscodeshift running ok and show changed count
-          (/ok\n/.test(output) && !/\n0 ok\n/.test(output))
-        ) {
+        // check mode return can run codemods to fix project
+        // when jscodeshift running ok and show changed count
+        if (/ok\n/.test(output) && !/\n0 ok\n/.test(output)) {
           resolve({
             transform: ruleName,
             docs: `https://github.com/apptools-lab/applint/tree/main/transforms/docs/${ruleName}.md`,
@@ -75,7 +74,7 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
 
   const results = await Promise.all(workers);
 
-  return results;
+  return results as TransformResult[];
 }
 
 function getFiles(cwd: string) {
