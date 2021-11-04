@@ -1,4 +1,4 @@
-# @applint/applintr
+# @applint/applint
 
 ## 0.1.0
 

@@ -60,10 +60,9 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
         // when jscodeshift running ok and show changed count
         if (/ok\n/.test(output) && !/\n0 ok\n/.test(output)) {
           resolve({
-            transform: ruleName,
-            docs: `https://github.com/apptools-lab/applint/tree/main/transforms/docs/${ruleName}.md`,
-            dry,
             ...transformConfig,
+            transform: ruleName,
+            dry,
             output,
           });
         }
