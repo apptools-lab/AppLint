@@ -8,7 +8,7 @@ Lint tool on project level for [Rax](https://rax.js.org/), [ICE](https://ice.wor
 npm i @applint/projectlint --save-dev
 ```
 
-## Usage
+## API
 
 ### runTransforms()
 
@@ -23,27 +23,25 @@ Options:
 
 Return:
 
-- result: `TransformResult[]` (see interface), the codemod transform result.
+- result: `TransformResult[]` (see interface)
 
 Example:
 
 ```js
 import { runTransforms } from '@applint/projectlint';
 
-const cwd = '/xxx/xx';
+const cwd = '/workspace/demo';
 
 const transforms = {
   'plugin-rax-component-to-component': 'error',
   'lint-config-to-iceworks-spec': 'warn',
 };
 
-const result = runTransforms(cwd, transforms, true);
+const result = runTransforms(cwd, transforms, false);
 console.log('run transforms result', result);
 ```
 
 #### Interface
-
-IResult:
 
 ```typescript
 interface TransformResult {
@@ -98,8 +96,8 @@ Update `plugin-rax-component` to `plugin-component`. [docs](./transforms/docs/pl
 
 ### 2. `lint-config-to-iceworks-spec`
 
-Follow Alibaba FED lint rules, and use `@iceworks/spec` best practices. [docs](./transforms/docs/lint-config-to-iceworks-spec.md)
+Follow Alibaba FED lint rules and use `@iceworks/spec` best practices. [docs](./transforms/docs/lint-config-to-iceworks-spec.md)
 
 ### 3. `lint-config-to-applint-spec`
 
-Use `@applint/spec` best practices. [docs](./transforms/docs/lint-config-to-applint-spec.md)
+Follow Alibaba Tao Technology lint rules and use `@applint/spec` best practices. [docs](./transforms/docs/lint-config-to-applint-spec.md)
