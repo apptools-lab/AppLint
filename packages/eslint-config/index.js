@@ -13,7 +13,7 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       globalReturn: false,
-      impliedStrict: true
+      impliedStrict: true,
     },
   },
 

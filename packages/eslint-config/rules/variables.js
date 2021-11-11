@@ -37,5 +37,5 @@ module.exports = {
 
     // 不要将变量初始化成 undefined
     'no-undef-init': 'error',
-  }
+  },
 };

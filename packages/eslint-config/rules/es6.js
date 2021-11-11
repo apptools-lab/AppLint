@@ -1,14 +1,14 @@
 module.exports = {
   env: {
-    es6: true
+    es6: true,
   },
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
       generators: false,
-      objectLiteralDuplicateProperties: false
-    }
+      objectLiteralDuplicateProperties: false,
+    },
   },
   rules: {
     // generator 函数的 * 号前面无空格，后面有一个空格
@@ -18,13 +18,13 @@ module.exports = {
 
     // 禁止修改 const 声明的变量
     'no-const-assign': 'warn',
-    
+
     // 使用 const 或 let 声明变量，不要使用 var
     'no-var': 'error',
-    
+
     // 使用 const 来进行变量引用的声明，如果要重新赋值变量，使用 let 而不是使用 var
     'prefer-const': [
-      'error',
+      'warn',
       {
         destructuring: 'any',
         ignoreReadBeforeAssign: true,
@@ -36,7 +36,7 @@ module.exports = {
 
     // 从同一个位置引用同一个路径的内容
     'no-duplicate-imports': 'warn',
-    
+
     // 字符串拼接优先使用模板字符串
     'prefer-template': 'error',
     'template-curly-spacing': 'error',
@@ -81,7 +81,7 @@ module.exports = {
       },
     ],
 
-     // 使用对象和数组的解构
+    // 使用对象和数组的解构
     'prefer-destructuring': [
       'error',
       {
@@ -101,5 +101,5 @@ module.exports = {
 
     // 剩余和扩展操作符与操作对象间不应有空格
     'rest-spread-spacing': ['error', 'never'],
-  }
-}
+  },
+};

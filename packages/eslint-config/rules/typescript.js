@@ -80,7 +80,7 @@ module.exports = {
     // 禁止调用 any 类型的变量上的方法
     '@typescript-eslint/no-unsafe-call': 'off',
 
-    //禁止获取 any 类型的变量中的属性     
+    // 禁止获取 any 类型的变量中的属性
     '@typescript-eslint/no-unsafe-member-access': 'off',
 
     // 禁止函数的返回值的类型是 any
@@ -107,7 +107,10 @@ module.exports = {
     '@typescript-eslint/no-implied-eval': 'warn',
 
     // 禁止出现丢失精度的数字
-    '@typescript-eslint/no-loss-of-precision': 'off', 
+    '@typescript-eslint/no-loss-of-precision': 'off',
+
+    // 禁止使用指定的类型
+    '@typescript-eslint/ban-types': 'off',
 
     // 禁止出现未使用的变量
     '@typescript-eslint/no-unused-vars': 'warn',
@@ -115,6 +118,9 @@ module.exports = {
     //  async 函数中必须存在 await 语句
     'require-await': 'off',
     '@typescript-eslint/require-await': 'off',
+
+    // 使用 const 来进行变量引用的声明，如果要重新赋值变量，使用 let 而不是使用 var
+    'prefer-const': 'warn',
   },
   overrides: [
     {
@@ -133,4 +139,4 @@ module.exports = {
       },
     },
   ],
-}
+};

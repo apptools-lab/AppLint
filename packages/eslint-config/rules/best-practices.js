@@ -59,5 +59,5 @@ module.exports = {
 
     // 将立即执行函数表达式（IIFE）用小括号包裹
     'wrap-iife': ['error', 'any', { functionPrototypeMethods: false }],
-  }
-}
+  },
+};

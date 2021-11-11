@@ -2,7 +2,7 @@ module.exports = {
   plugins: ['react', 'react-hooks'],
   extends: [
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
   ],
   rules: {
     // 防止 React 组件定义中缺少 displayName
@@ -51,22 +51,25 @@ module.exports = {
     'react/jsx-no-comment-textnodes': 'warn',
 
     //  禁止使用未声明的组件
-    'react/jsx-no-undef': 'warn'
+    'react/jsx-no-undef': 'warn',
+
+    // 禁止出现重复的 props
+    'react/jsx-no-duplicate-props': 'warn',
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.json']
-      }
+        extensions: ['.js', '.jsx', '.json'],
+      },
     },
     react: {
       pragma: 'React',
       version: 'detect',
     },
-  }
-}
+  },
+};

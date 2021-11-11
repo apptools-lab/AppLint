@@ -54,7 +54,7 @@ module.exports = {
         asyncArrow: 'always',
       },
     ],
- 
+
     // 在注释中 // 或 /* 使用一致的空格
     'spaced-comment': [
       'error',
@@ -97,8 +97,8 @@ module.exports = {
 
     // 禁止用空行来填充块语句
     'padded-blocks': ['error', {
-      blocks: 'never', 
-      classes: 'never', 
+      blocks: 'never',
+      classes: 'never',
       switches: 'never',
     }, {
       allowSingleLineBlocks: true,
@@ -118,7 +118,7 @@ module.exports = {
 
     // 用逗号分隔的多行结构，始终加上最后一个逗号（单行不用）
     'comma-dangle': ['error', 'always-multiline'],
-  
+
     // 对象属性名优先不实用单引号，除非包含不合法的字符
     'quote-props': ['error', 'as-needed', {
       keywords: false, unnecessary: true, numbers: false,
@@ -129,7 +129,7 @@ module.exports = {
 
     // 不要使用 new Array() 和 Array() 创建数组，除非为了构造某一长度的空数组。
     'no-array-constructor': 'warn',
-  
+
     // 禁止使用链式(chain variable assignments)赋值
     'no-multi-assign': ['warn'],
 
@@ -239,5 +239,5 @@ module.exports = {
 
     // 模板字符串的 tag 后面无空格
     'template-tag-spacing': ['error', 'never'],
-  }
-}
+  },
+};

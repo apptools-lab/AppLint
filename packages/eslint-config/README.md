@@ -16,7 +16,7 @@ npm install --save-dev @applint/eslint-config eslint @typescript-eslint/eslint-p
 Create `.eslintrc.js` and extend the @applint/eslint-config:
 
 ```js
-// commitlint.config.js
+// .eslintrc.js
 module.exports = {
   extends: ['@applint/eslint-config'],
 };
