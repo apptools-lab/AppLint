@@ -2,10 +2,11 @@ import { getProjectFramework, getProjectLanguageType, getProjectType } from '@ap
 import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
-import allRules from './rules';
-import type { Rule, RunTransformParams, TransformResult } from './types';
+import { rules } from './rules';
+import { Rule, RunTransformParams, TransformResult, Severity } from './types';
 
 export * from './types';
+export { getRules as getTransformRules } from './rules';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
@@ -13,7 +14,7 @@ export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftAr
   const files = getFiles(cwd);
 
   const defaultTransformOptions = await getDefaultTransformOptions(cwd);
- 
+
   let args = dry ? ['--dry'] : [];
   args = args.concat(files);
   args = args.concat(jscodeshiftArgs);
@@ -26,16 +27,17 @@ export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftAr
 }
 
 async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransformParams, 'dry' | 'transforms'> & { args: string[] }): Promise<TransformResult[]> {
-  const allRuleKeys = Object.keys(allRules);
+  const ruleKeys = Object.keys(rules);
 
   const workers = Object.entries(transforms).map(([ruleName, severity]) => {
     return new Promise((resolve) => {
-      if (!allRuleKeys.includes(ruleName)) {
-        // if user set transform isn't in our config
+      if (!ruleKeys.includes(ruleName) || severity === Severity.off) {
+        // 1. if user set transform isn't in our config
+        // 2. severity is 'off'
         resolve(null);
       }
       const transformConfig = {
-        ...allRules[ruleName],
+        ...rules[ruleName],
         severity,
       };
       const transformFile = getTransformFile(ruleName, transformConfig);
