@@ -2,22 +2,22 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   settings: {
-    // Apply special parsing for TypeScript files
+    // 增加 ts 文件后缀以支持 parser
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.d.ts'],
     },
-    // Append 'ts' extensions to 'import/resolver' setting
+    // 增加 ts 后缀
     'import/resolver': {
       node: {
         extensions: ['.mjs', '.js', '.ts', '.json'],
       },
     },
-    // Append 'ts' extensions to 'import/extensions' setting
+    // 增加 ts 后缀
     'import/extensions': ['.js', '.ts', '.mjs'],
   },
   parserOptions: {
     project: './tsconfig.json', // default project config
-    createDefaultProgram: true, // 兼容未在 tsconfig.json 中 provided 的文件
+    createDefaultProgram: true, // 兼容未在 tsconfig.json 中包含的文件
     extraFileExtensions: ['.vue'],
   },
   extends: ['plugin:@typescript-eslint/recommended'],
@@ -121,6 +121,54 @@ module.exports = {
 
     // 使用 const 来进行变量引用的声明，如果要重新赋值变量，使用 let 而不是使用 var
     'prefer-const': 'warn',
+
+    /**
+     * 缩进为两个空格
+     * @link https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/indent.md
+     */
+    indent: 'off',
+    '@typescript-eslint/indent': [
+      'error',
+      2,
+      {
+        SwitchCase: 1,
+        VariableDeclarator: 1,
+        outerIIFEBody: 1,
+        // MemberExpression: null,
+        FunctionDeclaration: {
+          parameters: 1,
+          body: 1,
+        },
+        FunctionExpression: {
+          parameters: 1,
+          body: 1,
+        },
+        CallExpression: {
+          arguments: 1,
+        },
+        ArrayExpression: 1,
+        ObjectExpression: 1,
+        ImportDeclaration: 1,
+        flatTernaryExpressions: false,
+        // list derived from https://github.com/benjamn/ast-types/blob/HEAD/def/jsx.js
+        ignoredNodes: [
+          'JSXElement',
+          'JSXElement > *',
+          'JSXAttribute',
+          'JSXIdentifier',
+          'JSXNamespacedName',
+          'JSXMemberExpression',
+          'JSXSpreadAttribute',
+          'JSXExpressionContainer',
+          'JSXOpeningElement',
+          'JSXClosingElement',
+          'JSXText',
+          'JSXEmptyExpression',
+          'JSXSpreadChild',
+        ],
+        ignoreComments: false,
+      },
+    ],
   },
   overrides: [
     {
