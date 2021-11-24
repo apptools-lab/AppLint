@@ -40,7 +40,8 @@ export default {
   "lint-config-to-iceworks-spec": {
     "title": "升级 @iceworks/spec",
     "message": "从 @ice/spec 升级到 @iceworks/spec",
-    "severity": 'warn',
+    "type": "normal",
+    "severity": 1,
     "npm-deprecate": "build-plugin-rax-component"
   },
   "plugin-rax-component-to-component": {
@@ -48,7 +49,8 @@ export default {
     "title_en": "Rax component project upgrade",
     "message": "从 plugin-rax-component 升级到 plugin-component",
     "message_en": "upgrade from plugin-rax-component to plugin-component",
-    "severity": 'warn',
+    "type": "normal",
+    "severity": 2,
     "docs": "https://rax.js.org/docs/guide/com-migration",
     "package": "rax-codemod",
     "transform": "lib/transforms/components/plugin-rax-component-to-component.js",
@@ -59,9 +61,10 @@ export default {
 
 键值为 transform 名称，字段说明：
 
-- severity: 其值为 `warn | recommendation | error` 的 codemod 会在用户启动 VS Code 插件时给予提示。
-- npm-deprecate：非必须，配置命中对应 codemod 后用户编辑到对应 npm 包时会有删除线提示。
-- package: 非必需，用来指定第三方 codemod 依赖包。
-- transform: 非必需，用来指定 transform 在第三方依赖包的具体路径。
+- type: `'normal' | 'performance'`，`performance` 是性能优化类型的 codemod，`normal` 是普通类型的 codemod
+- severity: 其值为 `0 | 1 | 2`
+- npm-deprecate：非必须，配置命中对应 codemod 后用户编辑到对应 npm 包时会有删除线提示
+- package: 非必需，用来指定第三方 codemod 依赖包
+- transform: 非必需，用来指定 transform 在第三方依赖包的具体路径
 
 **注意：增加 transform 后，务必补充对应配置和文档！**

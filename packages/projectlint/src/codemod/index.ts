@@ -2,6 +2,7 @@ import { getProjectFramework, getProjectLanguageType, getProjectType } from '@ap
 import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
+import fs from 'fs';
 import { rules } from './rules';
 import { Rule, RunTransformParams, TransformResult, Severity } from './types';
 
@@ -19,7 +20,7 @@ export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftAr
   args = args.concat(files);
   args = args.concat(jscodeshiftArgs);
   args = args.concat(defaultTransformOptions);
-  args = args.concat('--parser=tsx'); // --parser=babel|babylon|flow|ts|tsx
+  args = args.concat('--parser=tsx'); // --parser = babel | babylon | flow | ts | tsx
   args = args.concat('--extensions=tsx,ts,jsx,js,json');
 
   const results = await runTransformsByWorkers({ transforms, args, dry });
@@ -79,12 +80,18 @@ async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransfo
 }
 
 function getFiles(cwd: string) {
-  // TODO: get the .gitignore file to exclude more file
+  let ignore = ['**/node_modules/**'];
+
+  const ignoreConfigFilePath = path.join(cwd, '.eslintignore');
+  if (fs.existsSync(ignoreConfigFilePath)) {
+    ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item))
+  }
+
   const files = glob.sync(
     '**/*', 
     { 
       cwd, 
-      ignore: ['**/node_modules/**'], 
+      ignore, 
       nodir: true, 
       realpath: true 
     }
@@ -92,7 +99,7 @@ function getFiles(cwd: string) {
   return files;
 }
 
-function getTransformFile(key: string, transformConfig: Rule & { severity: string }) {
+function getTransformFile(key: string, transformConfig: Rule & { severity: number }) {
   let transformFile = '';
   if (transformConfig.package && transformConfig.transform) {
     const packageDir = path.dirname(require.resolve(`${transformConfig.package}/package.json`));

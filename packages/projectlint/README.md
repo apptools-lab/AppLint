@@ -66,9 +66,13 @@ interface TransformResult {
    */
   message_en: string;
   /**
-   * 0: advice 1: warning 2: error
+   * 0: off 1: warn 2: error
    */
   severity: number;
+  /**
+   * codemod type
+   */
+  type: 'normal' | 'performance';
   /**
    * whether dry run codemod or not
    */

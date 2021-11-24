@@ -1,8 +1,7 @@
 export enum Severity {
-  off = 'off',
-  warn = 'warn',
-  recommendation = 'recommendation',
-  error = 'error',
+  off,
+  warn,
+  error,
 }
 
 export type Rule = {
@@ -10,7 +9,8 @@ export type Rule = {
   title_en: string;
   message: string;
   message_en: string;
-  severity: string;
+  severity: number;
+  type: 'performance' | 'normal';
   npm_deprecate?: string;
   docs?: string;
   package?: string;
@@ -26,7 +26,7 @@ export type RunTransformParams = {
       "lint-config-to-iceworks-spec": "warn",
     };
    */
-  transforms: Record<string, string>;
+  transforms: Record<string, number>;
   dry?: boolean;
   jscodeshiftArgs?: string[];
 }
