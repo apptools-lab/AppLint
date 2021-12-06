@@ -10,7 +10,7 @@ export type Rule = {
   message: string;
   message_en: string;
   severity: number;
-  type: 'performance' | 'normal';
+  tags?: string[];
   npm_deprecate?: string;
   docs?: string;
   package?: string;

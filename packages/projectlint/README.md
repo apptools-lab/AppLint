@@ -70,9 +70,9 @@ interface TransformResult {
    */
   severity: number;
   /**
-   * codemod type
+   * codemod tag, e.g.: `tags: ['performance']`
    */
-  type: 'normal' | 'performance';
+  tags: string[];
   /**
    * whether dry run codemod or not
    */

@@ -59,10 +59,10 @@ export default {
 }
 ```
 
-键值为 transform 名称，字段说明：
+key 为 transform 名称，value 下的字段说明如下：
 
-- type: `'normal' | 'performance'`，`performance` 是性能优化类型的 codemod，`normal` 是普通类型的 codemod
 - severity: 其值为 `0 | 1 | 2`
+- tags: 非必须，当前 codemod 的类型，比如 `['performance']` 代表当前 codemod 是性能优化相关的
 - npm-deprecate：非必须，配置命中对应 codemod 后用户编辑到对应 npm 包时会有删除线提示
 - package: 非必需，用来指定第三方 codemod 依赖包
 - transform: 非必需，用来指定 transform 在第三方依赖包的具体路径
