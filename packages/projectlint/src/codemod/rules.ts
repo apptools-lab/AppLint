@@ -61,7 +61,7 @@ const normalRules: Record<string, Rule> = {
     'title_en': 'Rax project upgrade',
     message: 'rax-app 从 2.x 升级到 3.x',
     'message_en': 'rax-app upgrade from 2.x to 3.x',
-    severity: Severity.warn,
+    severity: Severity.off,
     type: 'normal',
     docs: 'https://github.com/raxjs/rax-app/blob/master/packages/codemod/README.md',
     package: 'rax-codemod',
