@@ -17,5 +17,17 @@ module.exports = {
 
     // 禁止在正则表达式中出现多个连续空格
     'no-regex-spaces': 'error',
+
+    // 保障线上代码不存在 debugger 语句，避免浏览器因触发调试而停止执行
+    'no-debugger': 'warn',
+
+    // 禁止将全局对象当作函数进行调用
+    'no-obj-calls': 'warn',
+
+    // 在对象中不要使用重复的属性名称
+    'no-dupe-keys': 'warn',
+
+    // 禁止在 in 语句中的使用 ! 取反左侧运算符，降低运算符优先级的错误率
+    'no-negated-in-lhs': 'warn',
   },
 };

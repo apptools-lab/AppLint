@@ -224,7 +224,8 @@ module.exports = {
     // 分号必须写在行尾
     'semi-style': ['error', 'last'],
 
-    // 一元操作符两侧无空格，包括 -、+、--、++、!、!!
+    // nonwords: 一元操作符两侧无空格，例如： -、+、--、++、!、!!
+    // words: - 单词类一元操作符两侧有空格，例如：new、delete、typeof、void、yield
     'space-unary-ops': [
       'error',
       {
@@ -239,5 +240,36 @@ module.exports = {
 
     // 模板字符串的 tag 后面无空格
     'template-tag-spacing': ['error', 'never'],
+
+    // tab 和 space 不要混合使用，保持风格一致
+    'no-mixed-spaces-and-tabs': 'warn',
+
+    // 代码长度最大不超过 120 个字符
+    'max-len': [
+      'warn',
+      120,
+      2,
+      {
+        ignoreUrls: true,
+        ignoreComments: false,
+        ignoreRegExpLiterals: true,
+        ignoreStrings: true,
+        ignoreTemplateLiterals: true,
+      },
+    ],
+
+    // 避免单个字符命名，保障命名能描述实际含义
+    'id-length': 'warn',
+
+    // 使用小驼峰命名风格
+    camelcase: ['warn', { properties: 'never', ignoreDestructuring: false }],
+
+    // 使用大驼峰 (PascalCase) 来命名构造器函数或类
+    'new-cap': ['warn', {
+      newIsCap: true,
+      newIsCapExceptions: [],
+      capIsNew: false,
+      capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
+    }],
   },
 };

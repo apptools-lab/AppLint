@@ -2,6 +2,7 @@ module.exports = {
   rules: {
     // 禁止使用 eval
     'no-eval': 'warn',
+    'no-implied-eval': 'warn',
 
     // 禁止使用 Function 构造函数创建函数
     'no-new-func': 'warn',
@@ -21,9 +22,6 @@ module.exports = {
 
     // 禁止使用不必要的转义字符
     'no-useless-escape': 'warn',
-
-    // 用括号包裹立即执行的函数标识(IIFE)
-    'wrap-iife': ['error', 'outside', { functionPrototypeMethods: false }],
 
     // 禁止使用重复的参数名称
     'no-dupe-args': 'warn',
@@ -59,5 +57,12 @@ module.exports = {
 
     // 将立即执行函数表达式（IIFE）用小括号包裹
     'wrap-iife': ['error', 'any', { functionPrototypeMethods: false }],
+
+    // 不推荐使用 label 语句
+    'no-labels': ['warn', { allowLoop: false, allowSwitch: false }],
+
+
+    // 使用严格相等运算符
+    eqeqeq: ['warn', 'always', { null: 'ignore' }],
   },
 };
