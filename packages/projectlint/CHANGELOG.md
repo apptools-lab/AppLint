@@ -2,4 +2,4 @@
 
 ## 0.1.0
 
-- feat: init codemod transform API
+- feat: init codemod `runTransforms` API

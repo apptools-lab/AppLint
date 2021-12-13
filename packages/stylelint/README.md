@@ -1,19 +1,19 @@
 # @applint/stylelint-config
 
-Alibaba Tao Technology shareable config for stylelint. Fork from [stylelint-config-ali](https://www.npmjs.com/package/stylelint-config-ali).
+阿里巴巴淘系前端 Stylelint 可共享配置。参考 [stylelint-config-ali](https://www.npmjs.com/package/stylelint-config-ali)。
 
-## Install
+## 安装
 
 ```bash
 npm install stylelint stylelint-scss --save-dev
 ```
 
-## Usage
+## 使用
 
-Create a `.stylelintrc.js` and extend the @applint/stylelint-config:
+创建一个 `.stylelintrc.js` 文件加入以下配置：
 
 ```js
-// commitlint.config.js
+// .stylelintrc.js
 module.exports = {
   extends: ['@applint/stylelint-config'],
 };

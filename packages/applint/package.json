@@ -1,7 +1,7 @@
 {
   "name": "@applint/applint",
   "version": "0.1.0",
-  "description": "Provide Node API of ESLint, Stylelint and so on.",
+  "description": "提供 ESLint、Stylelint 检查和修复的 Node API。",
   "main": "dist/index.js",
   "files": [
     "dist"

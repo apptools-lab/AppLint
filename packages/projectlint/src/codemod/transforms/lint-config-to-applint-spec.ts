@@ -111,7 +111,7 @@ export default function(fileInfo: FileInfo, api: API, options: Options) {
     // if @applint/spec not exists, then run.
     if (!devDependencies['@applint/spec']) {
       Object.assign(scripts, SCRIPT_TEMPLATE);
-      devDependencies['@applint/spec'] = '^0.1.0-beta.0';
+      devDependencies['@applint/spec'] = 'latest';
 
       Object.keys(LIB_CONFIGS).forEach((key) => {
         const libConfig = LIB_CONFIGS[key];

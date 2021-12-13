@@ -1,31 +1,50 @@
 # @applint/projectlint
 
-Lint tool on project level for [Rax](https://rax.js.org/), [ICE](https://ice.work/) and React projects.
+提供项目级别检测和修复 Node API，目前包括 Codemod 检查和修复、项目依赖检查（冗余包和风险包）、项目 bundle 体积大小检查，对齐 [@applint/applint](https://www.npmjs.com/package/@applint/applint) 功能。
 
-## Install
+## 安装
 
 ```bash
 npm i @applint/projectlint --save-dev
 ```
 
-## API
+## 特性
 
-### runTransforms()
+### Codemod
 
-You can use the `runTransforms` method to run codemod.
+#### API
 
-Options:
+##### runTransforms
 
-- cwd: `string`, the target directory path
-- config: `object`, the project-lint configuration
-- dry: `boolean`, whether or not dry-run codemod. default: `true`
-- jscodeshiftArgs: `string[]`, default is `[]`
+选项：
 
-Return:
+- cwd: `string`, 运行 Codemod 的项目根路径
+- dry: `boolean`, 是否进行 Codemod dry-run，默认值是 `true`
+- jscodeshiftArgs: `string[]`, jscodeshift 配置，默认值是 `[]`
 
-- result: `TransformResult[]` (see interface)
+返回值：
 
-Example:
+result: `TransformResult[]`
+
+```typescript
+interface TransformResult {
+  // 规则名称
+  transform: string;
+  title: string;
+  title_en: string;
+  message: string;
+  message_en: string;
+  // 0: off 1: warn 2: error
+  severity: number;
+  tags: string[];
+  dry: boolean;
+  docs: string;
+  output: string;
+  npm_deprecate?: string;
+}
+```
+
+例子：
 
 ```js
 import { runTransforms } from '@applint/projectlint';
@@ -41,67 +60,16 @@ const result = runTransforms(cwd, transforms, false);
 console.log('run transforms result', result);
 ```
 
-#### Interface
-
-```typescript
-interface TransformResult {
-  /**
-   * transform key, see `Included Transforms`
-   */
-  transform: string;
-  /**
-   * transform description title
-   */
-  title: string;
-  /**
-   * transform description English title
-   */
-  title_en: string;
-  /**
-   * transform description message
-   */
-  message: string;
-  /**
-   * transform description English message
-   */
-  message_en: string;
-  /**
-   * 0: off 1: warn 2: error
-   */
-  severity: number;
-  /**
-   * codemod tag, e.g.: `tags: ['performance']`
-   */
-  tags: string[];
-  /**
-   * whether dry run codemod or not
-   */
-  dry: boolean;
-  /**
-   * docs url
-   */
-  docs: string;
-  /**
-   * jscodeshift CLI output
-   */
-  output: string;
-  /**
-   * same as https://docs.npmjs.com/cli/v7/commands/npm-deprecate/ 
-   */
-  npm_deprecate?: string;
-}
-```
-
-## Included Transforms
+#### Codemod 列表
 
 ### 1. `plugin-rax-component-to-component`
 
-Update `plugin-rax-component` to `plugin-component`. [docs](./transforms/docs/plugin-rax-component-to-component.md)
+更新 `build-plugin-rax-component` 到 `build-plugin-component`。[文档](./transforms/docs/plugin-rax-component-to-component.md)
 
 ### 2. `lint-config-to-iceworks-spec`
 
-Follow Alibaba FED lint rules and use `@iceworks/spec` best practices. [docs](./transforms/docs/lint-config-to-iceworks-spec.md)
+遵循阿里巴巴前端规范并使用 `@iceworks/spec` 最佳实践。[文档](./transforms/docs/lint-config-to-iceworks-spec.md)
 
 ### 3. `lint-config-to-applint-spec`
 
-Follow Alibaba Tao Technology lint rules and use `@applint/spec` best practices. [docs](./transforms/docs/lint-config-to-applint-spec.md)
+遵循阿里巴巴淘系前端规范并使用 `@applint/spec` 最佳实践。[文档](./transforms/docs/lint-config-to-applint-spec.md)

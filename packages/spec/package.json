@@ -1,7 +1,7 @@
 {
   "name": "@applint/spec",
   "version": "0.1.0",
-  "description": "Easy to use eslint/stylelint/prettier/commitlint in rax, ice and react project.",
+  "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
   "main": "src/index.js",
   "files": [
     "src"
@@ -25,9 +25,9 @@
     "stylelint:react": "cd examples/react && stylelint ./**/*.{css,less,scss}"
   },
   "dependencies": {
-    "@applint/commitlint-config": "^0.1.0-beta.0",
-    "@applint/eslint-config": "^0.1.0-beta.0",
-    "@applint/stylelint-config": "^0.1.0-beta.0",
+    "@applint/commitlint-config": "^0.1.0",
+    "@applint/eslint-config": "^0.1.0",
+    "@applint/stylelint-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "deepmerge": "^4.2.2",
     "eslint-plugin-import": "^2.25.2",

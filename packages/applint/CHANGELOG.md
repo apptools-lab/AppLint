@@ -2,4 +2,4 @@
 
 ## 0.1.0
 
-- feat: Fix ESLint error Node API.
+- feat: add `runESLint` Node API for check and fix ESLint errors.

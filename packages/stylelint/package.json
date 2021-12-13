@@ -1,7 +1,7 @@
 {
   "name": "@applint/stylelint-config",
   "version": "0.1.0",
-  "description": "Stylelint Shareable Config for Alibaba Tao Technology F2E.",
+  "description": "阿里巴巴淘系前端 Stylelint 可共享配置。",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

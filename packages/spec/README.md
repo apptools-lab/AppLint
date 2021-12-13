@@ -1,59 +1,49 @@
 # @applint/spec
 
-Easy to use eslint(support TypeScript) / stylelint / prettier / commitlint in rax, ice and react project. And spec means specification.
+在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则，规则阿里巴巴淘系前端规范保持一致。
 
-## Install
+## 安装
 
 ```bash
-npm i --save-dev @iceworks/spec eslint stylelint prettier @commitlint/cli husky
+npm i --save-dev @applint/spec eslint stylelint prettier @commitlint/cli husky
 ```
 
-> PS: You don't need to install other eslint plugins and parsers.
+> 注意: 你不需要安装任何其他 Lint 插件或者插件集，@applint/spec 中已包含这部分依赖。
 
-## Usage
+## 使用
 
 ### ESLint
 
-#### 1. Create configuration file
-
-First create a `.eslintrc.js` file in your project root directory.
-
-#### 2. Update config
+在项目根目录下创建 `.eslintrc.js` 文件，并加入以下配置：
 
 ```js
+// .eslintrc.js
 const { getESLintConfig } = require('@applint/spec');
 
-// getESLintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?);
+// getESLintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?: object);
 module.exports = getESLintConfig('react');
 ```
 
-ESLint rules base on [@applint/eslint-config](https://github.com/apptools-lab/AppLint/tree/main/packages/eslint-config).
+ESLint 规则基于 [@applint/eslint-config](https://www.npmjs.com/package/@applint/eslint-config)。
 
 ### Stylelint
 
-#### 1. Create configuration file
-
-First create a `.stylelintrc.js` file in your project root directory.
-
-#### 2. Update config
+在项目根目录下创建 `.stylelintrc.js`，并加入以下配置：
 
 ```js
 // .stylelintrc.js
 const { getStylelintConfig } = require('@applint/spec');
 
-// getStylelintConfig(rule: 'common' | 'rax' | 'react',  customConfig?);
+// getStylelintConfig(rule: 'common' | 'rax' | 'react',  customConfig?: object);
 module.exports = getStylelintConfig('react');
 ```
 
-Stylelint rules base on [@applint/stylelint-config](https://github.com/apptools-lab/AppLint/tree/main/packages/stylelint-config).
+Stylelint 规则基于 [@applint/stylelint-config](https://www.npmjs.com/package/@applint/stylelint-config)。
 
 ### Prettier
 
-#### 1. Create configuration file
+在项目根目录下创建 `.prettierrc.js`，并加入以下配置：
 
-First create a `.prettierrc.js` file in your project root directory.
-
-#### 2. Update config
 
 ```js
 // .prettierrc.js
@@ -63,15 +53,11 @@ const { getPrettierConfig } = require('@applint/spec');
 module.exports = getPrettierConfig('react');
 ```
 
-Prettier rules base on [rules](https://github.com/apptools-lab/AppLint/tree/main/packages/spec/src/prettier).
+规则基于 [@applint/prettier-config](https://github.com/apptools-lab/AppLint/tree/main/packages/spec/src/prettier)。
 
 ### Commitlint
 
-#### 1. Create configuration file
-
-First create a `.commitlintrc.js` file in your project root directory.
-
-#### 2. Update config
+在项目根目录下创建 `.commitlintrc.js`，并加入以下配置：
 
 ```js
 // .commitlintrc.js
@@ -81,12 +67,8 @@ const { getCommitlintConfig } = require('@applint/spec');
 module.exports = getCommitlintConfig('react');
 ```
 
-Commitlint rules base on [@applint/commitlint-config](https://github.com/apptools-lab/AppLint/tree/main/packages/commitlint-config).
+Commitlint 规则基于 [@applint/commitlint-config](https://github.com/apptools-lab/AppLint/tree/main/packages/commitlint-config)。
 
-#### Git hooks
+#### Git Hooks
 
-To lint commits before they are created you can use Husky's Git hook.
-
-Install in your project `npm install husky --save-dev` or `yarn add -D husky`.
-
-After that, we recommend you to see [husky docs](https://www.npmjs.com/package/husky), then create "`commit-msg`" and "`pre-commit`" config.
+推荐查看 [husky 文档](https://www.npmjs.com/package/husky)了解如何创建 "`commit-msg`" 和 "`pre-commit`" 文档。

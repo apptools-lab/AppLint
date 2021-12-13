@@ -1,6 +1,6 @@
 {
   "name": "@applint/eslint-config",
-  "description": "ESLint Shareable Config for Alibaba Tao Technology F2E.",
+  "description": "阿里巴巴淘系前端 ESLint 可共享配置。",
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
