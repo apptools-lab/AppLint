@@ -2,4 +2,4 @@
 
 ## 0.1.0
 
-- feat: add commitlint config.
+- feat: init commitlint config.

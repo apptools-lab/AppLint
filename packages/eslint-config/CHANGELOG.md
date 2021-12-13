@@ -2,4 +2,4 @@
 
 ## 0.1.0
 
-- feat: add eslint config.
+- feat: init ESLint config.
