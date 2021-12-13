@@ -8,7 +8,7 @@ module.exports = {
     'no-new-func': 'warn',
 
     // 优先使用 . 访问对象的属性
-    'dot-notation': ['error', {
+    'dot-notation': ['warn', {
       allowKeywords: true,
     }],
 
