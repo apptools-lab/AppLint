@@ -1,9 +1,9 @@
-// Use @iceworks/spec update lint configs
-const fs = require('fs');
-const path = require('path');
-const ejs = require('ejs');
+import fs from 'fs';
+import path from 'path';
+import ejs from 'ejs';
+import type { API, FileInfo, Options } from 'jscodeshift';
 
-const LIB_CONFIG = {
+const LIB_CONFIG: Record<string, any> = {
   eslint: {
     processPackageJson: {
       recommendedVersion: '^7.22.0',
@@ -79,7 +79,7 @@ const SCRIPT_TEMPLATE = {
   lint: 'npm run eslint && npm run stylelint',
 };
 
-module.exports = (fileInfo, api, options) => {
+module.exports = (fileInfo: FileInfo, api: API, options: Options) => {
   const j = api.jscodeshift;
   const dir = path.dirname(fileInfo.path);
   const basename = path.basename(fileInfo.path);
@@ -88,7 +88,7 @@ module.exports = (fileInfo, api, options) => {
 
   let ruleKey = '';
   let eslintRuleKey = '';
-  let customConfig;
+  let customConfig: any;
 
   // 'unknown' | 'rax' | 'react' | 'vue';
   if (projectType === 'unknown') {
@@ -130,7 +130,7 @@ module.exports = (fileInfo, api, options) => {
 
         // 2. process original config
         if (processOriginalConfig) {
-          let originalConfig;
+          let originalConfig: any;
           // Only process js and json config file
           const jsConfigFile = path.join(dir, `${processOriginalConfig.configFileName}.js`);
           const jsonConfigFile = path.join(dir, `${processOriginalConfig.configFileName}.json`);
@@ -141,6 +141,7 @@ module.exports = (fileInfo, api, options) => {
             let isFirstLevelObject = true;
             j(source).find(j.ObjectExpression).forEach((p) => {
               if (!isFirstLevelObject) return;
+              // @ts-ignore
               const { start, end } = p.node;
               // eslint-disable-next-line
               originalConfig = eval(`(${source.substring(start, end)})`);
@@ -153,7 +154,7 @@ module.exports = (fileInfo, api, options) => {
 
           // Set new custom config
           if (originalConfig) {
-            processOriginalConfig.removeConfigKeys.forEach((k) => {
+            processOriginalConfig.removeConfigKeys.forEach((k: string) => {
               delete originalConfig[k];
             });
             customConfig = originalConfig;
