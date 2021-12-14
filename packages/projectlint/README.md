@@ -47,7 +47,7 @@ interface TransformResult {
 例子：
 
 ```js
-import { runTransforms } from '@applint/projectlint';
+import ProjectLint from '@applint/projectlint';
 
 const cwd = '/workspace/demo';
 
@@ -55,8 +55,8 @@ const transforms = {
   'plugin-rax-component-to-component': 'error',
   'lint-config-to-iceworks-spec': 'warn',
 };
-
-const result = runTransforms(cwd, transforms, false);
+const projectLint = new ProjectLint({ cwd, transforms });
+const result = projectLint.scan();
 console.log('run transforms result', result);
 ```
 

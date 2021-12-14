@@ -1,12 +1,11 @@
-const { runTransforms } = require('../dist')
+const ProjectLint = require('../dist').default
 
 const args = process.argv.slice(2);
-const [cwd, transform, dry = 'true'] = args;
+const [cwd, transforms] = args;
 
-runTransforms({
-  cwd,
-  transforms: { [transform]: 'error' },
-  dry: JSON.parse(dry)
-})
-.then((res) => console.log('res', res))
-.catch((error) => console.log(error))
+const projectLint = new ProjectLint({ cwd, transforms: { 'snapshot': 1, picture: 1 } });
+
+(async function () {
+  const result = await projectLint.scan();
+  console.log('projectLint scan result: ', result);
+})()

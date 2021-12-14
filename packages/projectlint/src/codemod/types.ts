@@ -1,10 +1,10 @@
-export enum Severity {
+export enum CodemodSeverity {
   off,
   warn,
   error,
 }
 
-export type Rule = {
+export type CodemodRule = {
   title: string;
   title_en: string;
   message: string;
@@ -17,7 +17,7 @@ export type Rule = {
   transform?: string;
 }
 
-export type RunTransformParams = {
+export type CodemodTransformParams = {
   cwd: string;
   /**
    * examples:
@@ -27,11 +27,10 @@ export type RunTransformParams = {
     };
    */
   transforms: Record<string, number>;
-  dry?: boolean;
   jscodeshiftArgs?: string[];
 }
 
-export interface TransformResult extends Rule {
+export interface CodemodTransformResult extends CodemodRule {
   dry: boolean;
   output: string;
 }

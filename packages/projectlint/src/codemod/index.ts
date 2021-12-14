@@ -4,118 +4,137 @@ import path from 'path';
 import execa from 'execa';
 import fs from 'fs';
 import { rules } from './rules';
-import { Rule, RunTransformParams, TransformResult, Severity } from './types';
+import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
+import ProjectLinterImpl from '../ProjectLinterImpl';
 
 export * from './types';
-export { getRules as getTransformRules } from './rules';
+export { getRules as getCodemodTransformRules } from './rules';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
-export async function runTransforms({ cwd, transforms, dry = true, jscodeshiftArgs = [] }: RunTransformParams): Promise<TransformResult[]> {
-  const files = getFiles(cwd);
+class Codemod implements ProjectLinterImpl {
+  cwd: string;
 
-  const defaultTransformOptions = await getDefaultTransformOptions(cwd);
+  transforms: Record<string, number>;
 
-  let args = dry ? ['--dry'] : [];
-  args = args.concat(files);
-  args = args.concat(jscodeshiftArgs);
-  args = args.concat(defaultTransformOptions);
-  args = args.concat('--parser=tsx'); // --parser = babel | babylon | flow | ts | tsx
-  args = args.concat('--extensions=tsx,ts,jsx,js,json');
+  jscodeshiftArgs?: string[];
 
-  const results = await runTransformsByWorkers({ transforms, args, dry });
-  return results.filter((result) => result);
-}
+  args: any[];
 
-async function runTransformsByWorkers({ transforms, args, dry }: Pick<RunTransformParams, 'dry' | 'transforms'> & { args: string[] }): Promise<TransformResult[]> {
-  const ruleKeys = Object.keys(rules);
+  constructor({ cwd, transforms, jscodeshiftArgs = [] }: CodemodTransformParams) {
+    this.cwd = cwd;
+    this.transforms = transforms;
+    this.jscodeshiftArgs = jscodeshiftArgs;
 
-  const workers = Object.entries(transforms).map(([ruleName, severity]) => {
-    return new Promise((resolve) => {
-      if (!ruleKeys.includes(ruleName) || severity === Severity.off) {
-        // 1. if user set transform isn't in our config
-        // 2. severity is 'off'
-        resolve(null);
-      }
-      const transformConfig = {
-        ...rules[ruleName],
-        severity,
-      };
-      const transformFile = getTransformFile(ruleName, transformConfig);
-      args = args.concat(['--transform', transformFile]);
+    const files = this.getFiles(cwd);
+    // init jscodeshift args
+    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json'];
+  }
 
-      let output = '';
+  public async scan() {
+    const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
+    const args = [...this.args, ...defaultTransformOptions];
+    return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: false });
+  }
 
-      const childProcess = execa(jscodeshiftExecutable, args);
+  public async fix() {
+    const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
+    const args = [...this.args, '--dry', ...defaultTransformOptions];
+    return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: true });
+  }
 
-      if (childProcess.stdout) {
-        childProcess.stdout.pipe(process.stdout);
-        childProcess.stdout.on('data', (data) => {
-          output += data.toString();
-        });
-      }
+  private async runTransformsByWorkers(
+    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean }
+  ): Promise<CodemodTransformResult[]> {
+    const ruleKeys = Object.keys(rules);
+    const workers = Object.entries(transforms).map(([ruleName, severity]) => {
+      return new Promise((resolve) => {
+        if (!ruleKeys.includes(ruleName) || severity === CodemodSeverity.off) {
+          // 1. if user set transform isn't in our config
+          // 2. severity is 'off'
+          resolve(null);
+        }
+        const transformConfig = {
+          ...rules[ruleName],
+          severity,
+        };
+        const transformFile = this.getTransformFile(ruleName, transformConfig);
+        args = args.concat(['--transform', transformFile]);
 
-      childProcess.on('exit', () => {
-        // Remove all colors/styles from strings https://stackoverflow.com/questions/25245716/remove-all-ansi-colors-styles-from-strings
-        output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+        let output = '';
 
-        // check mode return can run codemods to fix project
-        // when jscodeshift running ok and show changed count
-        if (/ok\n/.test(output) && !/\n0 ok\n/.test(output)) {
-          resolve({
-            ...transformConfig,
-            transform: ruleName,
-            dry,
-            output,
+        const childProcess = execa(jscodeshiftExecutable, args);
+
+        if (childProcess.stdout) {
+          childProcess.stdout.pipe(process.stdout);
+          childProcess.stdout.on('data', (data) => {
+            output += data.toString();
           });
         }
-        resolve(null);
-      });
+
+        childProcess.on('exit', () => {
+          // Remove all colors/styles from strings https://stackoverflow.com/questions/25245716/remove-all-ansi-colors-styles-from-strings
+          output = output.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
+          // check mode return can run codemods to fix project
+          // when jscodeshift running ok and show changed count
+          if (/ok\n/.test(output) && !/\n0 ok\n/.test(output)) {
+            resolve({
+              ...transformConfig,
+              transform: ruleName,
+              dry,
+              output,
+            });
+          }
+          resolve(null);
+        });
+      })
     })
-  })
+    const results = await Promise.all(workers);
 
-  const results = await Promise.all(workers);
-
-  return results as TransformResult[];
-}
-
-function getFiles(cwd: string) {
-  let ignore = ['**/node_modules/**'];
-
-  const ignoreConfigFilePath = path.join(cwd, '.eslintignore');
-  if (fs.existsSync(ignoreConfigFilePath)) {
-    ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item))
+    return (results.filter((result => result))) as CodemodTransformResult[];
   }
 
-  const files = glob.sync(
-    '**/*', 
-    { 
-      cwd, 
-      ignore, 
-      nodir: true, 
-      realpath: true 
+  private getFiles(cwd: string) {
+    let ignore = ['**/node_modules/**'];
+
+    const ignoreConfigFilePath = path.join(cwd, '.eslintignore');
+    if (fs.existsSync(ignoreConfigFilePath)) {
+      ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item))
     }
-  );
-  return files;
-}
 
-function getTransformFile(key: string, transformConfig: Rule & { severity: number }) {
-  let transformFile = '';
-  if (transformConfig.package && transformConfig.transform) {
-    const packageDir = path.dirname(require.resolve(`${transformConfig.package}/package.json`));
-    transformFile = path.join(packageDir, transformConfig.transform);
-  } else {
-    transformFile = require.resolve(path.join(__dirname, './transforms/', key));
+    const files = glob.sync(
+      '**/*', 
+      { 
+        cwd, 
+        ignore, 
+        nodir: true, 
+        realpath: true 
+      }
+    );
+    return files;
   }
-  return transformFile;
+
+  private async getDefaultTransformOptions(cwd: string) {
+    const transformOptions = [
+      `--projectType=${await getProjectType(cwd, true)}`,
+      `--projectFramework=${await getProjectFramework(cwd)}`,
+      `--projectLanguageType=${await getProjectLanguageType(cwd)}`,
+    ]; 
+
+    return transformOptions;
+  }
+
+  private getTransformFile(key: string, transformConfig: CodemodRule & { severity: number }) {
+    let transformFile = '';
+    if (transformConfig.package && transformConfig.transform) {
+      const packageDir = path.dirname(require.resolve(`${transformConfig.package}/package.json`));
+      transformFile = path.join(packageDir, transformConfig.transform);
+    } else {
+      transformFile = require.resolve(path.join(__dirname, './transforms/', key));
+    }
+    return transformFile;
+  }
 }
 
-async function getDefaultTransformOptions(cwd: string) {
-  const transformOptions = [
-    `--projectType=${await getProjectType(cwd, true)}`,
-    `--projectFramework=${await getProjectFramework(cwd)}`,
-    `--projectLanguageType=${await getProjectLanguageType(cwd)}`,
-  ]; 
-
-  return transformOptions;
-}
+export default Codemod;
