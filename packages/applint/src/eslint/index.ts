@@ -23,7 +23,7 @@ interface Params {
 
 const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
-export default class ESLint implements LinterImpl {
+export class ESLint implements LinterImpl {
   customConfig: Record<string, any>;
   
   targetFiles: string[];

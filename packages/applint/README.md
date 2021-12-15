@@ -7,7 +7,7 @@
 ### 扫描或修复 JS 代码 Lint 问题
 
 ```ts
-import ESLint from '@applint/applint/dist/eslint';
+import { ESLint } from '@applint/applint';
 
 const directory = '/code';
 const ruleKey = "react-ts";
