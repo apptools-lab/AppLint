@@ -1,6 +1,53 @@
 {
   "name": "@applint/spec",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "version": "0.1.0",
+  "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apptools-lab/applint"
+  },
+  "bugs": {
+    "url": "https://github.com/apptools-lab/applint/issues"
+  },
+  "homepage": "https://github.com/apptools-lab/applint",
+  "scripts": {
+    "eslint:common": "cd examples/common && eslint **/*.js",
+    "eslint:rax": "cd examples/rax && eslint **/*.jsx",
+    "eslint:rax-ts": "cd examples/rax-ts && eslint **/*.tsx",
+    "eslint:react": "cd examples/react && eslint **/*.jsx",
+    "eslint:react-ts": "cd examples/react-ts && eslint **/*.tsx",
+    "stylelint:rax": "cd examples/rax && stylelint ./**/*.{css,less,scss}",
+    "stylelint:react": "cd examples/react && stylelint ./**/*.{css,less,scss}"
+  },
+  "dependencies": {
+    "@applint/commitlint-config": "^0.1.0",
+    "@applint/eslint-config": "^0.1.0",
+    "@applint/stylelint-config": "^0.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "deepmerge": "^4.2.2",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-jsx-plus": "^0.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "require-all": "^3.0.0",
+    "stylelint-scss": "^3.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "rax": "^1.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "stylelint": "^8.3.0",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "eslint": ">=7.0.0",
+    "stylelint": ">=8.0.0"
+  }
 }

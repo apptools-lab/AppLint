@@ -1,6 +1,39 @@
 {
   "name": "@applint/projectlint",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0-beta.12",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc -w",
+    "test-codemod": "node scripts/test-codemod.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@ali/perf-codemod": "^0.0.1",
+    "@appworks/project-utils": "^0.1.0",
+    "ejs": "^3.1.6",
+    "execa": "^5.1.1",
+    "glob": "^7.1.7",
+    "icejs-codemod": "^0.1.2",
+    "jscodeshift": "^0.11.0",
+    "rax-codemod": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.0",
+    "@types/execa": "^2.0.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^7.1.4",
+    "@types/jest": "^27.0.2",
+    "@types/jscodeshift": "^0.11.2",
+    "@types/node": "^16.11.4",
+    "fs-extra": "^10.0.0",
+    "typescript": "^4.4.4"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "license": "MIT"
 }

@@ -1,0 +1,30 @@
+{
+  "name": "@applint/stylelint-config",
+  "version": "0.1.0",
+  "description": "阿里巴巴淘系前端 Stylelint 可共享配置。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apptools-lab/applint"
+  },
+  "bugs": {
+    "url": "https://github.com/apptools-lab/applint/issues"
+  },
+  "homepage": "https://github.com/apptools-lab/applint",
+  "keywords": [
+    "stylelint",
+    "stylelint-config"
+  ],
+  "peerDependencies": {
+    "stylelint": ">=11.0.0",
+    "stylelint-scss": ">=3.18.0"
+  },
+  "devDependencies": {
+    "stylelint": "^13.7.0",
+    "stylelint-scss": "^3.18.0"
+  },
+  "license": "MIT"
+}
