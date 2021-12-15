@@ -1,7 +1,7 @@
 export enum CodemodSeverity {
-  off,
-  warn,
-  error,
+  off = 0,
+  warn = 1,
+  error = 2,
 }
 
 export type CodemodRule = {
@@ -19,13 +19,6 @@ export type CodemodRule = {
 
 export type CodemodTransformParams = {
   cwd: string;
-  /**
-   * examples:
-    config = {
-      "plugin-rax-component-to-component": "error",
-      "lint-config-to-iceworks-spec": "warn",
-    };
-   */
   transforms: Record<string, number>;
   jscodeshiftArgs?: string[];
 }

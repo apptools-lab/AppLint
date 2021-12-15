@@ -6,24 +6,27 @@ import fs from 'fs';
 import { rules } from './rules';
 import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
 import ProjectLinterImpl from '../ProjectLinterImpl';
+import { getRules } from './rules';
 
 export * from './types';
-export { getRules as getCodemodTransformRules } from './rules';
 
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
+type Transforms = Record<string, number>;
 class Codemod implements ProjectLinterImpl {
   cwd: string;
 
-  transforms: Record<string, number>;
+  transforms: Transforms;
 
   jscodeshiftArgs?: string[];
 
   args: any[];
 
   constructor({ cwd, transforms, jscodeshiftArgs = [] }: CodemodTransformParams) {
+    const allTransforms = this.getAllCodemodTransforms();
+
     this.cwd = cwd;
-    this.transforms = transforms;
+    this.transforms = transforms || allTransforms;
     this.jscodeshiftArgs = jscodeshiftArgs;
 
     const files = this.getFiles(cwd);
@@ -42,6 +45,17 @@ class Codemod implements ProjectLinterImpl {
     const args = [...this.args, ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: true });
   }
+
+  private getAllCodemodTransforms() {
+  const transformRules = getRules();
+  const codemodTransforms: Record<string, number> = {};
+
+  Object.keys(transformRules).forEach((transformRule) => {
+    codemodTransforms[transformRule] = transformRules[transformRule].severity;
+  });
+
+  return codemodTransforms;
+}
 
   private async runTransformsByWorkers(
     { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean }

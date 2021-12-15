@@ -7,7 +7,7 @@ export type ProjectLintResult = Record<string, any>;
 
 type ProjectLintOptions = {
   cwd: string;
-  transforms: Record<string, CodemodSeverity>
+  transforms: Record<string, number>;
 };
 type ProjectLinters = Record<string, any>;
 
