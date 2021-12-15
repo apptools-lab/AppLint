@@ -24,32 +24,41 @@ interface Params {
 const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
 export default class ESLint implements LinterImpl {
-  eslint: ESLintBase;
-
   customConfig: Record<string, any>;
   
   targetFiles: string[];
 
+  ruleKey: string;
+
+  directory: string;
+
   constructor({ directory, ruleKey, files }: Params) {
     const customConfig = getCustomESLintConfig(directory, ruleKey) || {};
+    const targetFiles = this.getTargetFiles(files, directory);
+
+    this.ruleKey = ruleKey;
+    this.customConfig = customConfig;
+    this.targetFiles = targetFiles;
+    this.directory = directory;
+  }
+
+  private initESLintInstance(fix: boolean) {
     const eslint = new ESLintBase({
       cache: false,
       // If user add extends or plugins, should find plugin form target directory
-      resolvePluginsRelativeTo: customConfig.extends || customConfig.plugins ? directory : path.dirname(require.resolve('@applint/spec')),
-      baseConfig: deepmerge(getESLintConfig(ruleKey), customConfig),
-      cwd: directory,
+      resolvePluginsRelativeTo: this.customConfig.extends || this.customConfig.plugins ? this.directory : path.dirname(require.resolve('@applint/spec')),
+      baseConfig: deepmerge(getESLintConfig(this.ruleKey), this.customConfig),
+      cwd: this.directory,
+      fix,
       useEslintrc: false
     })
-  
-    const targetFiles = this.getTargetFiles(files, directory);
 
-    this.eslint = eslint;
-    this.customConfig = customConfig;
-    this.targetFiles = targetFiles;
+    return eslint;
   }
 
   public async scan() {
-    const data = await this.eslint.lintFiles(this.targetFiles);
+    const eslint = this.initESLintInstance(false);
+    const data = await eslint.lintFiles(this.targetFiles);
 
     return {
       data,
@@ -58,13 +67,13 @@ export default class ESLint implements LinterImpl {
   }
 
   public async fix() {
-    const { data, customConfig } = await this.scan();
-
-    ESLintBase.outputFixes(data);
+    const eslint = this.initESLintInstance(true);
+    const data = await eslint.lintFiles(this.targetFiles);
+    await ESLintBase.outputFixes(data);
 
     return {
       data,
-      customConfig,
+      customConfig: this.customConfig,
     }
   }
 

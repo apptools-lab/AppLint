@@ -33,13 +33,13 @@ class Codemod implements ProjectLinterImpl {
 
   public async scan() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
-    const args = [...this.args, ...defaultTransformOptions];
+    const args = [...this.args, '--dry', ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: false });
   }
 
   public async fix() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
-    const args = [...this.args, '--dry', ...defaultTransformOptions];
+    const args = [...this.args, ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: true });
   }
 
