@@ -10,5 +10,8 @@
     "setup": "yarn",
     "eslint": "eslint --ext .js,.ts ./",
     "eslint:fix": "eslint --fix --ext  .js,.ts ./"
+  },
+  "devDependencies": {
+    "husky": "^7.0.0"
   }
 }
