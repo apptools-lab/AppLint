@@ -47,18 +47,18 @@ class Codemod implements ProjectLinterImpl {
   }
 
   private getAllCodemodTransforms() {
-  const transformRules = getRules();
-  const codemodTransforms: Record<string, number> = {};
+    const transformRules = getRules();
+    const codemodTransforms: Record<string, number> = {};
 
-  Object.keys(transformRules).forEach((transformRule) => {
-    codemodTransforms[transformRule] = transformRules[transformRule].severity;
-  });
+    Object.keys(transformRules).forEach((transformRule) => {
+      codemodTransforms[transformRule] = transformRules[transformRule].severity;
+    });
 
-  return codemodTransforms;
-}
+    return codemodTransforms;
+  }
 
   private async runTransformsByWorkers(
-    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean }
+    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean },
   ): Promise<CodemodTransformResult[]> {
     const ruleKeys = Object.keys(rules);
     const workers = Object.entries(transforms).map(([ruleName, severity]) => {
@@ -102,8 +102,8 @@ class Codemod implements ProjectLinterImpl {
           }
           resolve(null);
         });
-      })
-    })
+      });
+    });
     const results = await Promise.all(workers);
 
     return (results.filter((result => result))) as CodemodTransformResult[];
@@ -114,17 +114,17 @@ class Codemod implements ProjectLinterImpl {
 
     const ignoreConfigFilePath = path.join(cwd, '.eslintignore');
     if (fs.existsSync(ignoreConfigFilePath)) {
-      ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item))
+      ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item));
     }
 
     const files = glob.sync(
-      '**/*', 
-      { 
-        cwd, 
-        ignore, 
-        nodir: true, 
-        realpath: true 
-      }
+      '**/*',
+      {
+        cwd,
+        ignore,
+        nodir: true,
+        realpath: true,
+      },
     );
     return files;
   }
@@ -134,7 +134,7 @@ class Codemod implements ProjectLinterImpl {
       `--projectType=${await getProjectType(cwd, true)}`,
       `--projectFramework=${await getProjectFramework(cwd)}`,
       `--projectLanguageType=${await getProjectLanguageType(cwd)}`,
-    ]; 
+    ];
 
     return transformOptions;
   }

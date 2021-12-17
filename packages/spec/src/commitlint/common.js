@@ -1,3 +1,3 @@
 module.exports = {
-  extends: '@applint/commitlint-config'
-}
+  extends: '@applint/commitlint-config',
+};

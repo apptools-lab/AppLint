@@ -25,7 +25,7 @@ const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
 export class ESLint implements LinterImpl {
   customConfig: Record<string, any>;
-  
+
   targetFiles: string[];
 
   ruleKey: string;
@@ -50,8 +50,8 @@ export class ESLint implements LinterImpl {
       baseConfig: deepmerge(getESLintConfig(this.ruleKey), this.customConfig),
       cwd: this.directory,
       fix,
-      useEslintrc: false
-    })
+      useEslintrc: false,
+    });
 
     return eslint;
   }
@@ -63,7 +63,7 @@ export class ESLint implements LinterImpl {
     return {
       data,
       customConfig: this.customConfig,
-    }
+    };
   }
 
   public async fix() {
@@ -74,16 +74,16 @@ export class ESLint implements LinterImpl {
     return {
       data,
       customConfig: this.customConfig,
-    }
+    };
   }
 
   private getTargetFiles(files: FileInfo[], directory: string) {
     const ig = this.getIg(directory);
 
-    const targetFiles: string[] = 
+    const targetFiles: string[] =
       files.filter((file: FileInfo) => {
-          return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
-        })
+        return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
+      })
         .map((file: FileInfo) => {
           // Use absolute path
           return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;

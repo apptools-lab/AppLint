@@ -9,7 +9,6 @@ module.exports = function (config) {
     const buildConfigFilePath = path.join(process.cwd(), 'build.json');
 
     if (fs.existsSync(buildConfigFilePath)) {
-
       const buildConfig = JSON5.parse(fs.readFileSync(buildConfigFilePath, 'utf8'));
 
       const isCompileTime = (target) => (

@@ -57,7 +57,7 @@ const LIB_CONFIGS: Record<string, any> = {
         'module.exports = getPrettierConfig(\'<%= ruleKey %>\'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, \'  \') %><% } %>);\n',
     },
   },
-}
+};
 
 const IGNORE_FILE_TEMPLATE = `node_modules/
 lib/
@@ -79,7 +79,7 @@ const SCRIPT_TEMPLATE = {
   lint: 'npm run eslint && npm run stylelint',
 };
 
-export default function(fileInfo: FileInfo, api: API, options: Options) {
+export default function (fileInfo: FileInfo, api: API, options: Options) {
   const j = api.jscodeshift;
   const { path: filePath, source } = fileInfo;
   const dir = path.dirname(filePath);
@@ -91,7 +91,7 @@ export default function(fileInfo: FileInfo, api: API, options: Options) {
   let eslintRuleKey = '';
   let customConfig: any;
 
-    // 'unknown' | 'rax' | 'react' | 'vue';
+  // 'unknown' | 'rax' | 'react' | 'vue';
   if (projectType === 'unknown') {
     ruleKey = 'common';
   } else {

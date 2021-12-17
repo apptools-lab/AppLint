@@ -1,6 +1,6 @@
-const getRaxEslintConfig = require('../getRaxEslintConfig');
+const getRaxESlintConfig = require('../getRaxESlintConfig');
 
-module.exports = getRaxEslintConfig({
+module.exports = getRaxESlintConfig({
   extends: [
     require.resolve('@applint/eslint-config/rax'),
   ],

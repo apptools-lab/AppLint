@@ -1,12 +1,14 @@
 {
   "name": "applint",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
   "license": "MIT",
   "scripts": {
-    "setup": "yarn"
+    "setup": "yarn",
+    "eslint": "eslint --ext .js,.ts ./",
+    "eslint:fix": "eslint --fix --ext  .js,.ts ./"
   }
 }
