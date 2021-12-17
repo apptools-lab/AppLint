@@ -3,10 +3,9 @@ import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
 import fs from 'fs';
-import { rules } from './rules';
+import { rules, getRules } from './rules';
 import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
 import ProjectLinterImpl from '../ProjectLinterImpl';
-import { getRules } from './rules';
 
 export * from './types';
 
