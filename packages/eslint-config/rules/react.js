@@ -55,6 +55,15 @@ module.exports = {
 
     // 禁止出现重复的 props
     'react/jsx-no-duplicate-props': 'warn',
+
+    // 防止 react 被标记为未使用
+    'react/jsx-uses-react': 'warn',
+
+    // 防止 JSX 中使用的变量被标记为未使用
+    'react/jsx-uses-vars': 'warn',
+
+    // hooks 调用规则
+    'react-hooks/rules-of-hooks': 'warn',
   },
   parserOptions: {
     ecmaFeatures: {
