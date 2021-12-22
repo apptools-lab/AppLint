@@ -1,6 +1,6 @@
 {
   "name": "@applint/projectlint",
-  "version": "0.1.1-beta.4",
+  "version": "0.1.1",
   "main": "./dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",
