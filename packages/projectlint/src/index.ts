@@ -1,4 +1,4 @@
-import Codemod, { CodemodSeverity } from './codemod';
+import Codemod from './codemod';
 import ProjectLinterImpl from './ProjectLinterImpl';
 
 export * from './codemod';

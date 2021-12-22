@@ -24,7 +24,7 @@ module.exports = {
 
     // 使用 const 来进行变量引用的声明，如果要重新赋值变量，使用 let 而不是使用 var
     'prefer-const': [
-      'warn',
+      'off',
       {
         destructuring: 'any',
         ignoreReadBeforeAssign: true,

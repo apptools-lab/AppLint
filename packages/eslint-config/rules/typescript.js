@@ -120,7 +120,7 @@ module.exports = {
     '@typescript-eslint/require-await': 'off',
 
     // 使用 const 来进行变量引用的声明，如果要重新赋值变量，使用 let 而不是使用 var
-    'prefer-const': 'warn',
+    'prefer-const': 'off',
 
     /**
      * 缩进为两个空格
@@ -169,6 +169,10 @@ module.exports = {
         ignoreComments: false,
       },
     ],
+
+    // 强制使用分号
+    semi: 'off',
+    '@typescript-eslint/semi': ['error'],
   },
   overrides: [
     {

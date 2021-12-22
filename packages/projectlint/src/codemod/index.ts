@@ -3,10 +3,9 @@ import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
 import fs from 'fs';
-import { rules } from './rules';
+import { rules, getRules } from './rules';
 import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
 import ProjectLinterImpl from '../ProjectLinterImpl';
-import { getRules } from './rules';
 
 export * from './types';
 
@@ -31,7 +30,7 @@ class Codemod implements ProjectLinterImpl {
 
     const files = this.getFiles(cwd);
     // init jscodeshift args
-    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json'];
+    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
   }
 
   public async scan() {
@@ -47,18 +46,18 @@ class Codemod implements ProjectLinterImpl {
   }
 
   private getAllCodemodTransforms() {
-  const transformRules = getRules();
-  const codemodTransforms: Record<string, number> = {};
+    const transformRules = getRules();
+    const codemodTransforms: Record<string, number> = {};
 
-  Object.keys(transformRules).forEach((transformRule) => {
-    codemodTransforms[transformRule] = transformRules[transformRule].severity;
-  });
+    Object.keys(transformRules).forEach((transformRule) => {
+      codemodTransforms[transformRule] = transformRules[transformRule].severity;
+    });
 
-  return codemodTransforms;
-}
+    return codemodTransforms;
+  }
 
   private async runTransformsByWorkers(
-    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean }
+    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean },
   ): Promise<CodemodTransformResult[]> {
     const ruleKeys = Object.keys(rules);
     const workers = Object.entries(transforms).map(([ruleName, severity]) => {
@@ -102,8 +101,8 @@ class Codemod implements ProjectLinterImpl {
           }
           resolve(null);
         });
-      })
-    })
+      });
+    });
     const results = await Promise.all(workers);
 
     return (results.filter((result => result))) as CodemodTransformResult[];
@@ -114,17 +113,17 @@ class Codemod implements ProjectLinterImpl {
 
     const ignoreConfigFilePath = path.join(cwd, '.eslintignore');
     if (fs.existsSync(ignoreConfigFilePath)) {
-      ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item))
+      ignore = ignore.concat(fs.readFileSync(ignoreConfigFilePath, 'utf-8').split('\n').filter(item => item));
     }
 
     const files = glob.sync(
-      '**/*', 
-      { 
-        cwd, 
-        ignore, 
-        nodir: true, 
-        realpath: true 
-      }
+      '**/*',
+      {
+        cwd,
+        ignore,
+        nodir: true,
+        realpath: true,
+      },
     );
     return files;
   }
@@ -134,7 +133,7 @@ class Codemod implements ProjectLinterImpl {
       `--projectType=${await getProjectType(cwd, true)}`,
       `--projectFramework=${await getProjectFramework(cwd)}`,
       `--projectLanguageType=${await getProjectLanguageType(cwd)}`,
-    ]; 
+    ];
 
     return transformOptions;
   }
