@@ -8,7 +8,7 @@ module.exports = {
     'no-new-func': 'warn',
 
     // 优先使用 . 访问对象的属性
-    'dot-notation': ['warn', {
+    'dot-notation': ['off', {
       allowKeywords: true,
     }],
 
@@ -61,8 +61,7 @@ module.exports = {
     // 不推荐使用 label 语句
     'no-labels': ['warn', { allowLoop: false, allowSwitch: false }],
 
-
     // 使用严格相等运算符
-    eqeqeq: ['warn', 'always', { null: 'ignore' }],
+    eqeqeq: ['off', 'always', { null: 'ignore' }],
   },
 };
