@@ -8,12 +8,13 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@types/babel__traverse": "^7.14.2",
     "@types/eslint": "^7.28.1",
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@applint/projectlint": "0.1.0",
-    "@applint/spec": "0.1.0",
+    "@applint/projectlint": "^0.1.0",
+    "@applint/spec": "^0.1.0",
     "@babel/parser": "^7.15.8",
     "@babel/traverse": "^7.15.4",
     "deepmerge": "^4.2.2",
