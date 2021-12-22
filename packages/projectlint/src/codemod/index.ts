@@ -30,7 +30,7 @@ class Codemod implements ProjectLinterImpl {
 
     const files = this.getFiles(cwd);
     // init jscodeshift args
-    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json'];
+    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
   }
 
   public async scan() {
