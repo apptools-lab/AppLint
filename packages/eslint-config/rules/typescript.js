@@ -169,6 +169,10 @@ module.exports = {
         ignoreComments: false,
       },
     ],
+
+    // 强制使用分号
+    semi: 'off',
+    '@typescript-eslint/semi': ['error'],
   },
   overrides: [
     {

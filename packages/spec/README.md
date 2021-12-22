@@ -34,7 +34,7 @@ ESLint 规则基于 [@applint/eslint-config](https://www.npmjs.com/package/@appl
 // .stylelintrc.js
 const { getStylelintConfig } = require('@applint/spec');
 
-// getStylelintConfig(rule: 'common' | 'rax' | 'react',  customConfig?: object);
+// getStylelintConfig(rule: 'common' | 'common-ts' | 'rax' | 'react',  customConfig?: object);
 module.exports = getStylelintConfig('react');
 ```
 

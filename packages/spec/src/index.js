@@ -1,6 +1,6 @@
 const path = require('path');
 const requireAll = require('require-all');
-const deepmerge = require('deepmerge')
+const deepmerge = require('deepmerge');
 
 function getConfig(configs, rule, userConfig) {
   if (!configs[rule]) {
@@ -13,7 +13,7 @@ function getConfig(configs, rule, userConfig) {
 // ESLint
 const eslint = requireAll({
   dirname: path.resolve(__dirname, 'eslint'),
-})
+});
 exports.getESLintConfig = function (rule, userConfig) {
   return getConfig(eslint, rule, userConfig);
 };

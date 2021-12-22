@@ -15,13 +15,13 @@ export type CodemodRule = {
   docs?: string;
   package?: string;
   transform?: string;
-}
+};
 
 export type CodemodTransformParams = {
   cwd: string;
   transforms: Record<string, number>;
   jscodeshiftArgs?: string[];
-}
+};
 
 export interface CodemodTransformResult extends CodemodRule {
   dry: boolean;

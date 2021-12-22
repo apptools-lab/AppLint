@@ -1,5 +1,5 @@
 module.exports = {
   extends: [
-    require.resolve('@applint/eslint-config')
-  ]
-}
+    require.resolve('@applint/eslint-config'),
+  ],
+};
