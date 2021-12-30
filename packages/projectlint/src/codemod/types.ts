@@ -21,6 +21,7 @@ export type CodemodTransformParams = {
   cwd: string;
   transforms: Record<string, number>;
   jscodeshiftArgs?: string[];
+  customTransformRules?: Record<string, CodemodRule>;
 };
 
 export interface CodemodTransformResult extends CodemodRule {
