@@ -1,4 +1,4 @@
-import Codemod from './codemod';
+import Codemod, { CodemodRule } from './codemod';
 import ProjectLinterImpl from './ProjectLinterImpl';
 
 export * from './codemod';
@@ -8,7 +8,9 @@ export type ProjectLintResult = Record<string, any>;
 type ProjectLintOptions = {
   cwd: string;
   transforms: Record<string, number>;
+  customTransformRules?: Record<string, CodemodRule>;
 };
+
 type ProjectLinters = Record<string, any>;
 
 interface ProjectLintImpl {

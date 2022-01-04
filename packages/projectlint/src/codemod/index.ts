@@ -3,7 +3,7 @@ import glob from 'glob';
 import path from 'path';
 import execa from 'execa';
 import fs from 'fs';
-import { rules, getRules } from './rules';
+import { rules } from './rules';
 import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
 import ProjectLinterImpl from '../ProjectLinterImpl';
 
@@ -12,22 +12,23 @@ export * from './types';
 const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 
 type Transforms = Record<string, number>;
+
 class Codemod implements ProjectLinterImpl {
   cwd: string;
 
   transforms: Transforms;
 
+  transformRules: Record<string, CodemodRule>;
+
   jscodeshiftArgs?: string[];
 
   args: any[];
 
-  constructor({ cwd, transforms, jscodeshiftArgs = [] }: CodemodTransformParams) {
-    const allTransforms = this.getAllCodemodTransforms();
-
+  constructor({ cwd, transforms, jscodeshiftArgs = [], customTransformRules = {} }: CodemodTransformParams) {
+    this.transformRules = { ...rules, ...customTransformRules };
     this.cwd = cwd;
-    this.transforms = transforms || allTransforms;
     this.jscodeshiftArgs = jscodeshiftArgs;
-
+    this.transforms = transforms || this.getAllCodemodTransforms();
     const files = this.getFiles(cwd);
     // init jscodeshift args
     this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
@@ -46,11 +47,10 @@ class Codemod implements ProjectLinterImpl {
   }
 
   private getAllCodemodTransforms() {
-    const transformRules = getRules();
     const codemodTransforms: Record<string, number> = {};
 
-    Object.keys(transformRules).forEach((transformRule) => {
-      codemodTransforms[transformRule] = transformRules[transformRule].severity;
+    Object.keys(this.transformRules).forEach((transformRule) => {
+      codemodTransforms[transformRule] = this.transformRules[transformRule].severity;
     });
 
     return codemodTransforms;
@@ -59,7 +59,7 @@ class Codemod implements ProjectLinterImpl {
   private async runTransformsByWorkers(
     { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean },
   ): Promise<CodemodTransformResult[]> {
-    const ruleKeys = Object.keys(rules);
+    const ruleKeys = Object.keys(this.transformRules);
     const workers = Object.entries(transforms).map(([ruleName, severity]) => {
       return new Promise((resolve) => {
         if (!ruleKeys.includes(ruleName) || severity === CodemodSeverity.off) {
@@ -68,7 +68,7 @@ class Codemod implements ProjectLinterImpl {
           resolve(null);
         }
         const transformConfig = {
-          ...rules[ruleName],
+          ...this.transformRules[ruleName],
           severity,
         };
         const transformFile = this.getTransformFile(ruleName, transformConfig);
