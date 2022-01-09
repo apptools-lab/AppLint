@@ -1,13 +1,14 @@
 # @applint/eslint-config
 
-阿里巴巴淘系前端 ESLint 可共享配置。
+阿里巴巴大淘宝前端 ESLint 可共享配置。
 
 ## 安装
 
 ```bash
+# 方式一
 npx install-peerdeps --dev @applint/eslint-config
 
-# or
+# 方式二
 npm install --save-dev @applint/eslint-config eslint @typescript-eslint/eslint-plugin eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-jsx-plus eslint-plugin-react eslint-plugin-react-hooks
 ```
 
@@ -18,6 +19,13 @@ npm install --save-dev @applint/eslint-config eslint @typescript-eslint/eslint-p
 ```js
 // .eslintrc.js
 module.exports = {
-  extends: ['@applint/eslint-config'],
+  extends: [
+    '@applint/eslint-config'                      // JS 项目
+    // '@applint/eslint-config/typescript'        // TS 项目
+    // '@applint/eslint-config/react'             // React 项目
+    // '@applint/eslint-config/typescript/react'  // React-TS 
+    // '@applint/eslint-config/rax'               // Rax 项目
+    // '@applint/eslint-config/typescript/rax'    // Rax-TS 项目
+  ],
 };
 ```
