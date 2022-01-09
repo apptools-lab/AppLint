@@ -12,7 +12,7 @@ module.exports = function (config) {
       const buildConfig = JSON5.parse(fs.readFileSync(buildConfigFilePath, 'utf8'));
 
       const isCompileTime = (target) => (
-        buildConfig.targets && buildConfig.targets.find((t) => t === target) &&
+        buildConfig.targets && buildConfig.targets.find((buildConfigTarget) => buildConfigTarget === target) &&
         buildConfig[target] && buildConfig[target].buildType === 'compile'
       );
 
@@ -28,8 +28,8 @@ module.exports = function (config) {
         config.rules = deepmerge(config.rules || {}, configs.recommended.rules);
       }
     }
-  } catch (e) {
-    console.log('Add specific rules for rax compile-time miniapp failed!', e);
+  } catch (error) {
+    console.log('Add specific rules for rax compile-time miniapp failed!', error);
   }
   return config;
 };

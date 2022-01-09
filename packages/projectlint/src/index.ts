@@ -5,11 +5,11 @@ export * from './codemod';
 
 export type ProjectLintResult = Record<string, any>;
 
-type ProjectLintOptions = {
+interface ProjectLintOptions {
   cwd: string;
   transforms: Record<string, number>;
   customTransformRules?: Record<string, CodemodRule>;
-};
+}
 
 type ProjectLinters = Record<string, any>;
 
@@ -27,7 +27,7 @@ export class ProjectLint implements ProjectLintImpl {
     this.options = options;
   }
 
-  public async scan() {
+  async scan() {
     const projectLintResult = {} as ProjectLintResult;
     for (const key in ProjectLint.projectLinters) {
       const ProjectLinter = ProjectLint.projectLinters[key];
@@ -39,7 +39,7 @@ export class ProjectLint implements ProjectLintImpl {
     return projectLintResult;
   }
 
-  public async fix() {
+  async fix() {
     const projectLintResult = {} as ProjectLintResult;
     for (const key in ProjectLint.projectLinters) {
       const ProjectLinter = ProjectLint.projectLinters[key];

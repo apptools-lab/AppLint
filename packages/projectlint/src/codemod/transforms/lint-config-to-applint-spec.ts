@@ -80,7 +80,7 @@ const SCRIPT_TEMPLATE = {
 };
 
 export default function (fileInfo: FileInfo, api: API, options: Options) {
-  const j = api.jscodeshift;
+  const { jscodeshift } = api;
   const { path: filePath, source } = fileInfo;
   const dir = path.dirname(filePath);
   const basename = path.basename(filePath);
@@ -121,9 +121,9 @@ export default function (fileInfo: FileInfo, api: API, options: Options) {
         if (processPackageJson) {
           devDependencies[key] = processPackageJson.recommendedVersion;
           if (processPackageJson.removePackagesReg) {
-            Object.keys(devDependencies).forEach((k) => {
-              if (processPackageJson.removePackagesReg.test(k)) {
-                delete devDependencies[k];
+            Object.keys(devDependencies).forEach((key) => {
+              if (processPackageJson.removePackagesReg.test(key)) {
+                delete devDependencies[key];
               }
             });
           }
@@ -140,10 +140,10 @@ export default function (fileInfo: FileInfo, api: API, options: Options) {
             const source = fs.readFileSync(jsConfigFile, 'utf-8');
             // Only find fist level object
             let isFirstLevelObject = true;
-            j(source).find(j.ObjectExpression).forEach((p) => {
+            jscodeshift(source).find(jscodeshift.ObjectExpression).forEach((astPath) => {
               if (!isFirstLevelObject) return;
-              // @ts-ignore
-              const { start, end } = p.node;
+              // @ts-expect-error: astPath has no ts type
+              const { start, end } = astPath.node;
               // eslint-disable-next-line
               originalConfig = eval(`(${source.substring(start, end)})`);
               isFirstLevelObject = false;
@@ -155,8 +155,8 @@ export default function (fileInfo: FileInfo, api: API, options: Options) {
 
           // Set new custom config
           if (originalConfig) {
-            processOriginalConfig.removeConfigKeys.forEach((k: string) => {
-              delete originalConfig[k];
+            processOriginalConfig.removeConfigKeys.forEach((key: string) => {
+              delete originalConfig[key];
             });
             customConfig = originalConfig;
           }

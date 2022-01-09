@@ -34,13 +34,13 @@ class Codemod implements ProjectLinterImpl {
     this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
   }
 
-  public async scan() {
+  async scan() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
     const args = [...this.args, '--dry', ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: false });
   }
 
-  public async fix() {
+  async fix() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
     const args = [...this.args, ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: true });
@@ -57,10 +57,10 @@ class Codemod implements ProjectLinterImpl {
   }
 
   private async runTransformsByWorkers(
-    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[], dry: boolean },
+    { transforms, args, dry }: Pick<CodemodTransformParams, 'transforms'> & { args: string[]; dry: boolean },
   ): Promise<CodemodTransformResult[]> {
     const ruleKeys = Object.keys(this.transformRules);
-    const workers = Object.entries(transforms).map(([ruleName, severity]) => {
+    const workers = Object.entries(transforms).map(async ([ruleName, severity]) => {
       return new Promise((resolve) => {
         if (!ruleKeys.includes(ruleName) || severity === CodemodSeverity.off) {
           // 1. if user set transform isn't in our config

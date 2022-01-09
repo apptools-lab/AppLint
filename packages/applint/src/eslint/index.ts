@@ -56,7 +56,7 @@ export class ESLint implements LinterImpl {
     return eslint;
   }
 
-  public async scan() {
+  async scan() {
     const eslint = this.initESLintInstance(false);
     const data = await eslint.lintFiles(this.targetFiles);
 
@@ -66,7 +66,7 @@ export class ESLint implements LinterImpl {
     };
   }
 
-  public async fix() {
+  async fix() {
     const eslint = this.initESLintInstance(true);
     const data = await eslint.lintFiles(this.targetFiles);
     await ESLintBase.outputFixes(data);
