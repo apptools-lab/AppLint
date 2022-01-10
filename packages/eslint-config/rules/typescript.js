@@ -36,10 +36,6 @@ module.exports = {
     'func-call-spacing': 'off',
     '@typescript-eslint/func-call-spacing': 'error',
 
-    // 大括号内部两侧有空格，并增加对「对象类型」的支持
-    // 'object-curly-spacing': 'off',
-    // '@typescript-eslint/object-curly-spacing': 'error',
-
     // 逗号前面没空格，后面有空格
     'comma-spacing': 'off',
     '@typescript-eslint/comma-spacing': 'error',
@@ -124,8 +120,7 @@ module.exports = {
 
     // 设置类的成员的可访问性，public 可省略
     '@typescript-eslint/explicit-member-accessibility': [
-      'error',
-      { accessibility: 'no-public' },
+      'warn',
     ],
 
     // 对于枚举成员值，只允许使用普通字符串、数字、null、正则，而不允许变量复制、模板字符串等需要计算的操作
@@ -138,7 +133,7 @@ module.exports = {
     '@typescript-eslint/promise-function-async': 'error',
 
     // 约束使用 import type {} 进行类型的导入
-    '@typescript-eslint/consistent-type-imports': 'off',
+    '@typescript-eslint/consistent-type-imports': 'error',
 
     // 不允许对同一模块重复导入，类型可重复导入
     'no-duplicate-imports': 'off',
@@ -151,7 +146,7 @@ module.exports = {
     '@typescript-eslint/method-signature-style': 'error',
 
     // 不允许定义空的接口，允许单继承下的空接口
-    '@typescript-eslint/no-empty-interface': 'error',
+    '@typescript-eslint/no-empty-interface': 'warn',
 
     // 对于对象类型，优先使用 interface 定义
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
@@ -168,7 +163,7 @@ module.exports = {
     // 首选非空断言而不是显式类型转换
     '@typescript-eslint/non-nullable-type-assertion-style': 'error',
 
-    //  使用 as 进行类型断言而不是 <>
+    // 使用 as 进行类型断言而不是 <>
     '@typescript-eslint/consistent-type-assertions': 'warn',
 
     // 禁止使用 tslint:<rule-flag> 等相关注释，tslint 已经不再维护了

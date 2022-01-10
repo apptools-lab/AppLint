@@ -1,5 +1,6 @@
-import Codemod, { CodemodRule } from './codemod';
-import ProjectLinterImpl from './ProjectLinterImpl';
+import type { CodemodRule } from './codemod';
+import Codemod from './codemod';
+import type ProjectLinterImpl from './ProjectLinterImpl';
 
 export * from './codemod';
 
@@ -21,13 +22,13 @@ interface ProjectLintImpl {
 export class ProjectLint implements ProjectLintImpl {
   private static projectLinters = {} as ProjectLinters;
 
-  options: ProjectLintOptions;
+  private options: ProjectLintOptions;
 
-  constructor(options: ProjectLintOptions) {
+  public constructor(options: ProjectLintOptions) {
     this.options = options;
   }
 
-  async scan() {
+  public async scan() {
     const projectLintResult = {} as ProjectLintResult;
     for (const key in ProjectLint.projectLinters) {
       const ProjectLinter = ProjectLint.projectLinters[key];
@@ -39,7 +40,7 @@ export class ProjectLint implements ProjectLintImpl {
     return projectLintResult;
   }
 
-  async fix() {
+  public async fix() {
     const projectLintResult = {} as ProjectLintResult;
     for (const key in ProjectLint.projectLinters) {
       const ProjectLinter = ProjectLint.projectLinters[key];
@@ -53,7 +54,7 @@ export class ProjectLint implements ProjectLintImpl {
     return projectLintResult;
   }
 
-  static registry(key: string, projectLinter: any) {
+  public static registry(key: string, projectLinter: any) {
     this.projectLinters[key] = projectLinter;
   }
 }

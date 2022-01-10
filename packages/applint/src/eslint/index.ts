@@ -4,7 +4,7 @@ import getCustomESLintConfig from './getCustomESLintConfig';
 import deepmerge from 'deepmerge';
 import path from 'path';
 import ignore from 'ignore';
-import LinterImpl from '../LinterImpl';
+import type LinterImpl from '../LinterImpl';
 
 const { getESLintConfig } = require('@applint/spec');
 
@@ -24,15 +24,15 @@ interface Params {
 const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
 export class ESLint implements LinterImpl {
-  customConfig: Record<string, any>;
+  private customConfig: Record<string, any>;
 
-  targetFiles: string[];
+  private targetFiles: string[];
 
-  ruleKey: string;
+  private ruleKey: string;
 
-  directory: string;
+  private directory: string;
 
-  constructor({ directory, ruleKey, files }: Params) {
+  public constructor({ directory, ruleKey, files }: Params) {
     const customConfig = getCustomESLintConfig(directory, ruleKey) || {};
     const targetFiles = this.getTargetFiles(files, directory);
 
@@ -56,7 +56,7 @@ export class ESLint implements LinterImpl {
     return eslint;
   }
 
-  async scan() {
+  public async scan() {
     const eslint = this.initESLintInstance(false);
     const data = await eslint.lintFiles(this.targetFiles);
 
@@ -66,7 +66,7 @@ export class ESLint implements LinterImpl {
     };
   }
 
-  async fix() {
+  public async fix() {
     const eslint = this.initESLintInstance(true);
     const data = await eslint.lintFiles(this.targetFiles);
     await ESLintBase.outputFixes(data);

@@ -4,8 +4,9 @@ import path from 'path';
 import execa from 'execa';
 import fs from 'fs';
 import { rules } from './rules';
-import { CodemodRule, CodemodTransformParams, CodemodTransformResult, CodemodSeverity } from './types';
-import ProjectLinterImpl from '../ProjectLinterImpl';
+import type { CodemodRule, CodemodTransformParams, CodemodTransformResult } from './types';
+import { CodemodSeverity } from './types';
+import type ProjectLinterImpl from '../ProjectLinterImpl';
 
 export * from './types';
 
@@ -14,17 +15,17 @@ const jscodeshiftExecutable = require.resolve('jscodeshift/bin/jscodeshift');
 type Transforms = Record<string, number>;
 
 class Codemod implements ProjectLinterImpl {
-  cwd: string;
+  private cwd: string;
 
-  transforms: Transforms;
+  private transforms: Transforms;
 
-  transformRules: Record<string, CodemodRule>;
+  private transformRules: Record<string, CodemodRule>;
 
-  jscodeshiftArgs?: string[];
+  private jscodeshiftArgs?: string[];
 
-  args: any[];
+  private args: any[];
 
-  constructor({ cwd, transforms, jscodeshiftArgs = [], customTransformRules = {} }: CodemodTransformParams) {
+  public constructor({ cwd, transforms, jscodeshiftArgs = [], customTransformRules = {} }: CodemodTransformParams) {
     this.transformRules = { ...rules, ...customTransformRules };
     this.cwd = cwd;
     this.jscodeshiftArgs = jscodeshiftArgs;
@@ -34,13 +35,13 @@ class Codemod implements ProjectLinterImpl {
     this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
   }
 
-  async scan() {
+  public async scan() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
     const args = [...this.args, '--dry', ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: false });
   }
 
-  async fix() {
+  public async fix() {
     const defaultTransformOptions = await this.getDefaultTransformOptions(this.cwd);
     const args = [...this.args, ...defaultTransformOptions];
     return await this.runTransformsByWorkers({ transforms: this.transforms, args, dry: true });

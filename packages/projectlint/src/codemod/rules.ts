@@ -1,4 +1,5 @@
-import { CodemodRule, CodemodSeverity } from './types';
+import type { CodemodRule } from './types';
+import { CodemodSeverity } from './types';
 
 // inner codemod transform rules
 export const rules: Record<string, CodemodRule> = {
