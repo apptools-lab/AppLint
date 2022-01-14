@@ -1,18 +1,19 @@
-const fs = require('fs');
-const path = require('path');
-const JSON5 = require('json5');
-const deepmerge = require('deepmerge');
+import type { Linter } from 'eslint';
+import fs from 'fs';
+import path from 'path';
+import JSON5 from 'json5';
+import deepmerge from 'deepmerge';
 
 // Add specific rules for rax compile-time miniapp
-module.exports = function (config) {
+export default function (config: Linter.Config) {
   try {
     const buildConfigFilePath = path.join(process.cwd(), 'build.json');
 
     if (fs.existsSync(buildConfigFilePath)) {
       const buildConfig = JSON5.parse(fs.readFileSync(buildConfigFilePath, 'utf8'));
 
-      const isCompileTime = (target) => (
-        buildConfig.targets && buildConfig.targets.find((buildConfigTarget) => buildConfigTarget === target) &&
+      const isCompileTime = (target: string) => (
+        buildConfig.targets && buildConfig.targets.find((buildConfigTarget: string) => buildConfigTarget === target) &&
         buildConfig[target] && buildConfig[target].buildType === 'compile'
       );
 
@@ -32,4 +33,4 @@ module.exports = function (config) {
     console.log('Add specific rules for rax compile-time miniapp failed!', error);
   }
   return config;
-};
+}

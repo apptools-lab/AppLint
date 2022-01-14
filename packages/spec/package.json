@@ -1,10 +1,10 @@
 {
   "name": "@applint/spec",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "files": [
-    "src"
+    "dist"
   ],
   "license": "MIT",
   "repository": {
@@ -22,7 +22,10 @@
     "eslint:react": "cd examples/react && eslint **/*.jsx",
     "eslint:react-ts": "cd examples/react-ts && eslint **/*.tsx",
     "stylelint:rax": "cd examples/rax && stylelint ./**/*.{css,less,scss}",
-    "stylelint:react": "cd examples/react && stylelint ./**/*.{css,less,scss}"
+    "stylelint:react": "cd examples/react && stylelint ./**/*.{css,less,scss}",
+    "build": "rm -rf dist && tsc",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc -w"
   },
   "dependencies": {
     "@applint/commitlint-config": "^0.1.0",
@@ -39,11 +42,16 @@
     "stylelint-scss": "^3.18.0"
   },
   "devDependencies": {
+    "@commitlint/types": "^16.0.0",
+    "@types/eslint": "^8.2.2",
+    "@types/prettier": "^2.4.3",
+    "@types/require-all": "^3.0.3",
     "eslint": "^8.6.0",
+    "prettier": "^2.5.1",
     "rax": "^1.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "stylelint": "^8.3.0",
+    "stylelint": "^14.2.0",
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
