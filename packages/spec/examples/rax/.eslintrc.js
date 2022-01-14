@@ -1,3 +1,3 @@
-const { getESLintConfig } = require('../../src');
+const { getESLintConfig } = require('../../dist');
 
 module.exports = getESLintConfig('rax');
