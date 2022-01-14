@@ -1,69 +1,67 @@
 module.exports = {
   plugins: ['react', 'react-hooks'],
-  extends: [
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-  ],
+
   rules: {
-    // 防止 React 组件定义中缺少 displayName
-    'react/display-name': ['off', { ignoreTranspilerName: false }],
+    /**
+     *  React 规则
+     * @link https://github.com/yannickcr/eslint-plugin-react
+     */
+    // JSX 语法使用两个空格缩进
+    'react/jsx-indent': ['error', 2],
+    'react/jsx-indent-props': ['error', 2],
 
-    // 禁止将 children 作为属性名
-    'react/no-children-prop': 'warn',
+    // JSX 属性大括号内部两侧无空格
+    'react/jsx-curly-spacing': 'error',
 
-    // 禁止在有子节点的组件或 DOM 元素中使用 dangerouslySetInnerHTML 属性
-    'react/no-danger-with-children': 'warn',
+    // JSX 属性的等号两边不加空格
+    'react/jsx-equals-spacing': 'error',
 
-    // 禁止使用已经废弃的方法
-    'react/no-deprecated': 'warn',
+    // JSX 行内属性之间只有一个空格
+    'react/jsx-props-no-multi-spaces': 'error',
 
-    // 禁止直接使用 this.state 改变状态
-    'react/no-direct-mutation-state': 'warn',
+    // 检查 JSX 元素中的开始和结束标签的空格
+    // 1. 闭合斜线左边不允许有空格 </，闭合斜线右边不允许有空格 />
+    // 2. 自闭合标签中闭合斜线左边有空格，右边无空格 <xx />
+    // 3. 开始标签前不允许有空格 <a>
+    'react/jsx-tag-spacing': 'error',
 
-    // 不要使用 findDOMNode，严格模式下已经弃用
-    'react/no-find-dom-node': 'warn',
+    // 当大括号中的JSX 属性和表达式占用多行时，则大括号需要换行，如果是单行，则不需要换行
+    'react/jsx-curly-newline': 'error',
 
-    // isMounted 已被废弃
-    'react/no-is-mounted': 'warn',
+    // 标签有多个属性且换行，每个属性都独占一行
+    'react/jsx-max-props-per-line': ['error', { maximum: 1, when: 'multiline' }],
 
-    // 禁止使用 ReactDOM.render 的返回值
-    'react/no-render-return-value': 'warn',
+    // 如果JSX标签占用多行并且有多个属性，则第一个属性应始终放在新行上
+    'react/jsx-first-prop-new-line': 'error',
 
-    // 使用 ref 回调函数或 React.createRef()，不要使用字符串
-    'react/no-string-refs': 'warn',
+    // 如果 JSX 标签是多行的，则需要用小括号包裹，并且小括号需要换行
+    'react/jsx-wrap-multilines': 'error',
 
-    // 标签中禁止出现无意义字符，比如 > " } '
-    'react/no-unescaped-entities': 'warn',
+    // 没有子组件的标签需要写成自闭合标签
+    'react/self-closing-comp': 'error',
 
-    // prop 需要 propTypes 验证类型
-    'react/prop-types': 'warn',
+    // 标签属性写成多行时，结束标签另起一行，并且结束标签和开始标签对齐
+    'react/jsx-closing-bracket-location': 'error',
 
-    // 防止 JSX 中未引入 React
-    'react/react-in-jsx-scope': 'off',
+    // 生命周期方法不应该使用箭头函数，而是原型上的方法
+    'react/no-arrow-function-lifecycle': 'error',
 
-    // render 方法必须要有返回值
-    'react/require-render-return': 'warn',
+    // 组件 props 值为 true 时，可以忽略其值
+    'react/jsx-boolean-value': 'error',
 
-    // JSX 语法检查数组和迭代器的 key
-    'react/jsx-key': 'warn',
+    // 防止使用未知的 DOM 属性。在 JSX 中，所有的 DOM 属性和属性都应该使用 CAMELCASE，与标准的 DOM API 保持一致。
+    'react/no-unknown-property': 'error',
 
-    // JSX 语句的文本节点中不要使用注释字符串（例如，以//或/ *开头）
-    'react/jsx-no-comment-textnodes': 'warn',
-
-    //  禁止使用未声明的组件
-    'react/jsx-no-undef': 'warn',
-
-    // 禁止出现重复的 props
-    'react/jsx-no-duplicate-props': 'warn',
-
-    // 防止 react 被标记为未使用
-    'react/jsx-uses-react': 'warn',
-
-    // 防止 JSX 中使用的变量被标记为未使用
-    'react/jsx-uses-vars': 'warn',
-
+    /**
+     * React Hooks 规则
+     * @link https://www.npmjs.com/package/eslint-plugin-react-hooks
+     * @link https://reactjs.org/docs/hooks-rules.html
+     */
     // hooks 调用规则
     'react-hooks/rules-of-hooks': 'warn',
+
+    // useEffect 及类似 Hooks 需要声明其所有依赖
+    'react-hooks/exhaustive-deps': 'warn',
   },
   parserOptions: {
     ecmaFeatures: {
