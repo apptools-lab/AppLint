@@ -9,39 +9,36 @@ import type { Options as PrettierConfig } from 'prettier';
 type RuleKey = 'common' | 'common-ts' | 'react' | 'react-ts' | 'rax' | 'rax-ts';
 
 // ESLint
-const eslint = requireAll({
-  dirname: path.resolve(__dirname, 'eslint'),
-});
-export function getESLintConfig(rule: RuleKey, userConfig: Linter.Config = {}) {
-  if (!eslint[rule]) {
-    throw new Error(`Rule '${rule}' not Support!`);
-  }
-  return deepmerge(eslint[rule].default, userConfig);
+export function getESLintConfig(rule: RuleKey, userConfig: Linter.Config = {}): Linter.Config {
+  const eslint = requireAll({
+    dirname: path.resolve(__dirname, 'eslint'),
+  });
+  return deepmerge(eslint[rule]?.default || {}, userConfig);
+}
+
+// stylelint
+// Note: rule param is to compatible with @iceworks/spec
+export function getStylelintConfig(rule: RuleKey, userConfig: StylelintConfig = {}): StylelintConfig {
+  const stylelint = requireAll({
+    dirname: path.resolve(__dirname, 'stylelint'),
+  });
+  return deepmerge(stylelint.index.default, userConfig);
 }
 
 // commitlint
-const commitlint = requireAll({
-  dirname: path.resolve(__dirname, 'commitlint'),
-});
 // Note: rule param is to compatible with @iceworks/spec
-export function getCommitlintConfig(rule: RuleKey, userConfig: CommitlintUserConfig = {}) {
+export function getCommitlintConfig(rule: RuleKey, userConfig: CommitlintUserConfig = {}): CommitlintUserConfig {
+  const commitlint = requireAll({
+    dirname: path.resolve(__dirname, 'commitlint'),
+  });
   return deepmerge(commitlint.index.default, userConfig);
 }
 
 // prettier
-const prettier = requireAll({
-  dirname: path.resolve(__dirname, 'prettier'),
-});
 // Note: rule param is to compatible with @iceworks/spec
-export function getPrettierConfig(rule: RuleKey, userConfig: PrettierConfig = {}) {
+export function getPrettierConfig(rule: RuleKey, userConfig: PrettierConfig = {}): PrettierConfig {
+  const prettier = requireAll({
+    dirname: path.resolve(__dirname, 'prettier'),
+  });
   return deepmerge(prettier.index.default, userConfig);
-}
-
-// stylelint
-const stylelint = requireAll({
-  dirname: path.resolve(__dirname, 'stylelint'),
-});
-// Note: rule param is to compatible with @iceworks/spec
-export function getStylelintConfig(rule: RuleKey, userConfig: StylelintConfig = {}) {
-  return deepmerge(stylelint.index.default, userConfig);
 }

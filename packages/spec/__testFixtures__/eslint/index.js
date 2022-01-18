@@ -1,0 +1,1 @@
+const obj2 = { foo:42 };

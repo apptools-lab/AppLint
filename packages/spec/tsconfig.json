@@ -4,6 +4,7 @@
     "module": "commonjs",
     "rootDir": "src",
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "outDir": "dist",
     "declaration": true,
     "sourceMap": false, 
@@ -13,5 +14,9 @@
     "allowJs": true,
     "lib": ["ESNext"]
   },
-  "exclude": ["examples"]
+  "exclude": [
+    "examples",
+    "__tests__",
+    "__testFixtures__"
+  ]
 }
