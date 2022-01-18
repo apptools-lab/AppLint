@@ -20,7 +20,7 @@ npm i --save-dev @applint/spec eslint stylelint prettier @commitlint/cli husky
 // .eslintrc.js
 const { getESLintConfig } = require('@applint/spec');
 
-// getESLintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?: object);
+// getESLintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?: Linter.Config);
 module.exports = getESLintConfig('react');
 ```
 
@@ -34,7 +34,7 @@ ESLint 规则基于 [@applint/eslint-config](https://www.npmjs.com/package/@appl
 // .stylelintrc.js
 const { getStylelintConfig } = require('@applint/spec');
 
-// getStylelintConfig(rule: 'common' | 'common-ts' | 'rax' | 'react',  customConfig?: object);
+// getStylelintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts',  customConfig?: StylelintConfig);
 module.exports = getStylelintConfig('react');
 ```
 
@@ -49,7 +49,7 @@ Stylelint 规则基于 [@applint/stylelint-config](https://www.npmjs.com/package
 // .prettierrc.js
 const { getPrettierConfig } = require('@applint/spec');
 
-// getPrettierConfig(rule: 'common' |'rax' | 'react', customConfig?);
+// getPrettierConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?: PrettierConfig);
 module.exports = getPrettierConfig('react');
 ```
 
@@ -63,7 +63,7 @@ module.exports = getPrettierConfig('react');
 // .commitlintrc.js
 const { getCommitlintConfig } = require('@applint/spec');
 
-// getCommitlintConfig(rule: 'common' | 'rax' | 'react', customConfig?);
+// getCommitlintConfig(rule: 'common' | 'rax' | 'rax-ts' | 'react' | 'react-ts', customConfig?: CommitlintUserConfig);
 module.exports = getCommitlintConfig('react');
 ```
 
