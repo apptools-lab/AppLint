@@ -6,6 +6,7 @@ const prettierConfig: Options = {
   semi: true,
   singleQuote: true,
   trailingComma: 'all',
+  parser: 'babel',
 };
 
 export default prettierConfig;
