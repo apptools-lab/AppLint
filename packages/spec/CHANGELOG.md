@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-- refactor: code language from js to ts
+- refactor: transform language from JS to TS
 
 ## 0.1.0
 
