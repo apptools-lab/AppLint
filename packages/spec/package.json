@@ -16,13 +16,6 @@
   },
   "homepage": "https://github.com/apptools-lab/applint",
   "scripts": {
-    "eslint:common": "cd examples/common && eslint **/*.js",
-    "eslint:rax": "cd examples/rax && eslint **/*.jsx",
-    "eslint:rax-ts": "cd examples/rax-ts && eslint **/*.tsx",
-    "eslint:react": "cd examples/react && eslint **/*.jsx",
-    "eslint:react-ts": "cd examples/react-ts && eslint **/*.tsx",
-    "stylelint:rax": "cd examples/rax && stylelint ./**/*.{css,less,scss}",
-    "stylelint:react": "cd examples/react && stylelint ./**/*.{css,less,scss}",
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "npm run build",
     "watch": "tsc -w",
@@ -66,15 +59,6 @@
     "eslint": ">=6.8.0",
     "prettier": ">=2.0.0",
     "stylelint": ">=8.0.0"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "<rootDir>/dist/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/__testFixtures__/"
-    ]
   },
   "engines": {
     "node": ">=12.0.0"

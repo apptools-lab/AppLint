@@ -8,9 +8,20 @@
   "scripts": {
     "setup": "yarn",
     "eslint": "eslint --ext .js,.ts ./",
-    "eslint:fix": "eslint --fix --ext  .js,.ts ./"
+    "eslint:fix": "eslint --fix --ext  .js,.ts ./",
+    "clean": "rimraf packages/*/dist",
+    "build": "npm run clean && tsc --build ./tsconfig.json",
+    "watch": "npm run clean && tsc --build ./tsconfig.json --watch",
+    "test": "jest --ci --forceExit",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "husky": "^7.0.0"
+    "@types/jest": "^27.4.0",
+    "husky": "^7.0.0",
+    "jest": "^27.4.7",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   }
 }

@@ -4,6 +4,8 @@ import prettier from 'prettier';
 import { getPrettierConfig } from '../dist';
 import type { RuleKey } from '../dist';
 
+const testFixturesDir = path.join(__dirname, '..', '__testFixtures__');
+
 describe('getPrettierConfig API', () => {
   test('common', async () => {
     const result = await getPrettierResult('common');
@@ -38,7 +40,7 @@ describe('getPrettierConfig API', () => {
 
 async function getPrettierResult(rule: RuleKey) {
   const prettierConfig = getPrettierConfig(rule);
-  const source = await fs.readFile(path.resolve('__testFixtures__/prettier/index.js'), 'utf-8');
+  const source = await fs.readFile(path.join(testFixturesDir, 'prettier/index.js'), 'utf-8');
   const result = await prettier.check(source, prettierConfig);
   return result;
 }
