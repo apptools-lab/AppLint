@@ -9,12 +9,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Set branch name
         run: echo >>$GITHUB_ENV BRANCH_NAME=${GITHUB_REF#refs/heads/}
-      
+
       - name: Echo branch name
         run: echo ${BRANCH_NAME}
       
       - name: Setup Node
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v1
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
