@@ -6,8 +6,8 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Set branch name
-        uses: actions/checkout@v2
         run: echo >>$GITHUB_ENV BRANCH_NAME=${GITHUB_REF#refs/heads/}
       - name: Echo branch name
         run: echo ${BRANCH_NAME}
