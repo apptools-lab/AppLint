@@ -17,3 +17,6 @@ packages/**/dist/
 
 # tmp
 **/tmp/
+
+# test
+coverage/

@@ -1,7 +1,7 @@
 {
   "name": "@applint/eslint-config",
   "description": "阿里巴巴淘系前端 ESLint 可共享配置。",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "keywords": [

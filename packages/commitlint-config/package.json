@@ -1,11 +1,8 @@
 {
   "name": "@applint/commitlint-config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "阿里巴巴淘系前端 Commitlint 可共享配置。",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/apptools-lab/applint"

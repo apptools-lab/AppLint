@@ -1,15 +1,16 @@
-import Codemod, { CodemodRule } from './codemod';
-import ProjectLinterImpl from './ProjectLinterImpl';
+import type { CodemodRule } from './codemod';
+import Codemod from './codemod';
+import type ProjectLinterImpl from './ProjectLinterImpl';
 
 export * from './codemod';
 
 export type ProjectLintResult = Record<string, any>;
 
-type ProjectLintOptions = {
+interface ProjectLintOptions {
   cwd: string;
   transforms: Record<string, number>;
   customTransformRules?: Record<string, CodemodRule>;
-};
+}
 
 type ProjectLinters = Record<string, any>;
 
@@ -21,9 +22,9 @@ interface ProjectLintImpl {
 export class ProjectLint implements ProjectLintImpl {
   private static projectLinters = {} as ProjectLinters;
 
-  options: ProjectLintOptions;
+  private options: ProjectLintOptions;
 
-  constructor(options: ProjectLintOptions) {
+  public constructor(options: ProjectLintOptions) {
     this.options = options;
   }
 
@@ -53,7 +54,7 @@ export class ProjectLint implements ProjectLintImpl {
     return projectLintResult;
   }
 
-  static registry(key: string, projectLinter: any) {
+  public static registry(key: string, projectLinter: any) {
     this.projectLinters[key] = projectLinter;
   }
 }
