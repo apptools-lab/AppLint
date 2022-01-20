@@ -44,7 +44,7 @@
     "@types/jest": "^27.4.0",
     "@types/prettier": "^2.4.3",
     "@types/require-all": "^3.0.3",
-    "eslint": "^8.0.0",
+    "eslint": "^8.7.0",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
     "rax": "^1.2.2",
