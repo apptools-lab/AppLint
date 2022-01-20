@@ -2,7 +2,7 @@
 
 ## 0.1.1
 
-- feat: bump `@applint/spec` version to 0.2.0
+- feat: bump `@applint/spec` version to 1.0.0
 
 ## 0.1.0
 
