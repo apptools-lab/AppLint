@@ -1,3 +1,3 @@
 const { getESLintConfig } = require('@applint/spec');
 
-module.exports = getESLintConfig('common');
+module.exports = getESLintConfig('common-ts');
