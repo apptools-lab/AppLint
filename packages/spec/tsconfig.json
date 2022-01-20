@@ -1,11 +1,13 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "esNext",
-    "target": "es2015",
-    "outDir": "build",
-    "jsx": "preserve",
-    "jsxFactory": "createElement",
-    "moduleResolution": "node",
-    "baseUrl": "."
-  }
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "examples",
+    "__tests__",
+    "__testFixtures__",
+    "jest.config.js"
+  ]
 }
