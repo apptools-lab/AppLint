@@ -6,7 +6,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "setup": "yarn",
+    "setup": "yarn install",
     "eslint": "eslint --ext .js,.ts ./",
     "eslint:fix": "eslint --fix --ext  .js,.ts ./",
     "clean": "rimraf packages/*/dist",
@@ -17,7 +17,8 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
-    "eslint": "^7.32.0",
+    "enhanced-resolve": "^5.8.3",
+    "eslint": "^8.0.0",
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "rimraf": "^3.0.2",
