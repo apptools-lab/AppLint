@@ -1,6 +1,6 @@
 {
   "name": "@applint/applint",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "提供 ESLint、Stylelint 检查和修复的 Node API。",
   "main": "dist/index.js",
   "files": [
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@applint/projectlint": "^0.1.0",
-    "@applint/spec": "^0.1.0",
+    "@applint/spec": "^0.2.0",
     "@babel/parser": "^7.15.8",
     "@babel/traverse": "^7.15.4",
     "deepmerge": "^4.2.2",

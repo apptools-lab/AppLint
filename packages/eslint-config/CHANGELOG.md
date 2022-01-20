@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.0
+
+- feat: use Taobao ESLint spec, including React and TypeScript rules
+
 ## 0.1.1
 
 - fix: set `dot-notation` off

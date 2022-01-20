@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.3
+
+- feat: bump `@iceworks/spec` version
+
 ## 0.1.2
 
 - feat: support pass custom codemod transform rules
