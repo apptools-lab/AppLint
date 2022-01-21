@@ -21,20 +21,22 @@ module.exports = {
 
 ## 目录
 
-- [缩进](#缩进)
-- [分号](#分号)
-- [空格](#空格)
-- [换行](#换行)
-- [属性和属性值](#属性和属性值)
-- [选择器](#选择器)
-- [@规则](#@规则)
-- [函数](#函数)
+- [编码风格](#编码风格)
+  - [缩进](#1-缩进)
+  - [分号](#2-分号)
+  - [空格](#3-空格)
+  - [换行](#4-换行)
+- [语言特性](#语言特性)
+  - [属性和属性值](#1-属性和属性值)
+  - [选择器](#2-选择器)
+  - [@规则](#3-@规则)
+  - [函数](#4-函数)
 
 ## 编码规范
 
-## 编码风格
+### 编码风格
 
-### 1. 缩进
+#### 1. 缩进
 
 **1.1 统一使用2个空格缩进。stylelint: [indentation](https://stylelint.io/user-guide/rules/indentation)**
 
@@ -50,9 +52,10 @@ a {
 }
 ```
 
-### 2. 分号
+#### 2. 分号
 
 **2.1 所有声明都应该以分号结尾，不能省略。stylelint: [declaration-block-trailing-semicolon](https://stylelint.io/user-guide/rules/declaration-block-trailing-semicolon)**
+
 虽然 CSS 语法中最后一条声明的分号是可选的，但是使用分号可以增加代码的一致性和易用性。
 
 ```css
@@ -89,7 +92,7 @@ a {
 }
 ```
 
-### 3. 空格
+#### 3. 空格
 
 **3.1 函数的逗号之后必须有一个空格，逗号前没有空格。stylelint: [function-comma-space-after](https://stylelint.io/user-guide/rules/list/function-comma-space-after), [function-comma-space-before](https://stylelint.io/user-guide/rules/list/function-comma-space-before)**
 
@@ -243,7 +246,7 @@ a>b { color: pink; }
 a + b { color: pink; }
 ```
 
-### 4. 换行
+#### 4. 换行
 
 **4.1 在块的右括号后要求有换行。stylelint: [block-closing-brace-newline-after](https://stylelint.io/user-guide/rules/list/block-closing-brace-newline-after/)**
 
@@ -370,9 +373,9 @@ a {
 }
 ```
 
-## 语言特性
+### 语言特性
 
-### 1. 属性和属性值
+#### 1. 属性和属性值
 
 **1.1 不允许属性存在冗余值。stylelint: [shorthand-property-no-redundant-values](https://stylelint.io/user-guide/rules/list/shorthand-property-no-redundant-values/)**
 在 CSS 中，以下属性的值可以使用简写，可以使代码更简洁：
@@ -550,7 +553,7 @@ a {
 @media (width > 10em) {}
 ```
 
-### 2. 选择器
+#### 2. 选择器
 
 **2.1 伪类选择器使用小写字母。stylelint: [selector-pseudo-class-case](https://stylelint.io/user-guide/rules/list/selector-pseudo-class-case/)**
 
@@ -592,7 +595,7 @@ li {}
 a {}
 ```
 
-### 3. @规则
+#### 3. @规则
 
 **3.1 `@` 规则使用小写字母。stylelint: [at-rule-name-case](https://stylelint.io/user-guide/rules/list/at-rule-name-case/)**
 
@@ -606,7 +609,7 @@ a {}
 @media (min-width: 50em) {}
 ```
 
-### 4. 函数
+#### 4. 函数
 
 **4.1 函数名是小写字母。stylelint: [function-name-case](https://stylelint.io/user-guide/rules/list/function-name-case/)**
 
