@@ -1,6 +1,6 @@
 # @applint/stylelint-config
 
-遵循[阿里巴巴大淘宝前端 CSS 编码规范](/css-spec.md) 的 Stylelint 可共享配置。
+遵循 [阿里巴巴大淘宝前端 CSS 编码规范](/packages/stylelint-config/docs/css.md) 的 Stylelint 可共享配置。
 
 ## 安装
 
