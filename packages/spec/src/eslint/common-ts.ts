@@ -1,9 +1,7 @@
 import type { Linter } from 'eslint';
 
-const commonTypeScriptESLintConfig: Linter.Config = {
-  extends: [
-    '@applint/eslint-config/typescript',
-  ],
+const commonESLintTSConfig: Linter.Config = {
+  extends: ['@applint/eslint-config/typescript'],
 };
 
-export default commonTypeScriptESLintConfig;
+export default commonESLintTSConfig;
