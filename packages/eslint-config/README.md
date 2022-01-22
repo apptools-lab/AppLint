@@ -34,6 +34,6 @@ module.exports = {
 
 ## 编码规范
 
-- [JavaScript 编码规范](/packages/eslint-config/JavaScript.md)
-- [TypeScript 编码规范](/packages/eslint-config/TypeScript.md)
-- [React 编码规范](/packages/eslint-config/React.md)
+- [JavaScript 编码规范](/packages/eslint-config/docs/JavaScript.md)
+- [TypeScript 编码规范](/packages/eslint-config/docs/TypeScript.md)
+- [React 编码规范](/packages/eslint-config/docs/React.md)
