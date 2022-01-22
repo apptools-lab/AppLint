@@ -1,5 +1,9 @@
 # @applint/stylelint-config
 
+## 1.0.1
+
+- docs: add CSS rules
+
 ## 1.0.0
 
 - feat: use Taobao Stylelint spec

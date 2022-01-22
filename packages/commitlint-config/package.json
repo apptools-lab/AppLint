@@ -1,7 +1,7 @@
 {
   "name": "@applint/commitlint-config",
   "version": "1.0.0",
-  "description": "阿里巴巴淘系前端 Commitlint 可共享配置。",
+  "description": "阿里巴巴大淘宝前端 Commitlint 可共享配置。",
   "main": "index.js",
   "repository": {
     "type": "git",

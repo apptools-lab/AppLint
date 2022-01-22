@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+
+- docs: add JavaScript、TypeScript、React rules
+
 ## 1.0.0
 
 - feat: use Taobao ESLint spec, including React and TypeScript rules
