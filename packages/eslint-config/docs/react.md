@@ -385,7 +385,7 @@ function useHookWithHook() {
 }
 ```
 
-## 2 副作用依赖
+### 2 副作用依赖
 
 **2.1 `useEffect` 及[类似 Hooks](https://github.com/facebook/react/blob/3c1a7ac87c5b4903aa0de02d11bd9ec2590ad598/packages/eslint-plugin-react-hooks/src/ExhaustiveDeps.js#L1518) 需要声明所有依赖。Ref: [exhaustive-deps](https://github.com/facebook/react/issues/14920)**
 
