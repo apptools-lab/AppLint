@@ -1,6 +1,6 @@
 # @applint/eslint-config
 
-阿里巴巴大淘宝前端 ESLint 可共享配置。
+遵循 阿里巴巴大淘宝前端 JavaScript、TypeScript、React 编码规范的 ESLint 可共享配置。
 
 ## 快速开始
 
