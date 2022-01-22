@@ -1,12 +1,12 @@
 import { ESLint as ESLintBase } from 'eslint';
 import fse from 'fs-extra';
-import getCustomESLintConfig from './getCustomESLintConfig';
+import type { RuleKey } from '@applint/spec';
+import { getESLintConfig } from '@applint/spec';
 import deepmerge from 'deepmerge';
 import path from 'path';
 import ignore from 'ignore';
+import getCustomESLintConfig from './getCustomESLintConfig';
 import type LinterImpl from '../LinterImpl';
-
-const { getESLintConfig } = require('@applint/spec');
 
 interface FileInfo {
   path: string;
@@ -17,7 +17,7 @@ interface FileInfo {
 
 interface Params {
   directory: string;
-  ruleKey: string;
+  ruleKey: RuleKey;
   files: FileInfo[];
 }
 
@@ -28,7 +28,7 @@ export class ESLint implements LinterImpl {
 
   private targetFiles: string[];
 
-  private ruleKey: string;
+  private ruleKey: RuleKey;
 
   private directory: string;
 
@@ -46,7 +46,10 @@ export class ESLint implements LinterImpl {
     const eslint = new ESLintBase({
       cache: false,
       // If user add extends or plugins, should find plugin form target directory
-      resolvePluginsRelativeTo: this.customConfig.extends || this.customConfig.plugins ? this.directory : path.dirname(require.resolve('@applint/spec')),
+      resolvePluginsRelativeTo:
+        this.customConfig.extends || this.customConfig.plugins
+          ? this.directory
+          : path.dirname(require.resolve('@applint/spec')),
       baseConfig: deepmerge(getESLintConfig(this.ruleKey), this.customConfig),
       cwd: this.directory,
       fix,
@@ -80,14 +83,17 @@ export class ESLint implements LinterImpl {
   private getTargetFiles(files: FileInfo[], directory: string) {
     const ig = this.getIg(directory);
 
-    const targetFiles: string[] =
-      files.filter((file: FileInfo) => {
-        return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
+    const targetFiles: string[] = files
+      .filter((file: FileInfo) => {
+        return (
+          SUPPORT_FILE_REG.test(file.path) &&
+          !ig.ignores(file.path.replace(path.join(directory, '/'), ''))
+        );
       })
-        .map((file: FileInfo) => {
-          // Use absolute path
-          return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
-        });
+      .map((file: FileInfo) => {
+        // Use absolute path
+        return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
+      });
 
     return targetFiles;
   }

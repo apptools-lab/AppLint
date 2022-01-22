@@ -1,2 +1,2 @@
 export * from './eslint';
-export * from './projectLint';
+export * from './projectlint';

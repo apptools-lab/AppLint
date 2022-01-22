@@ -6,7 +6,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "setup": "yarn install",
+    "setup": "yarn install && npm run build",
     "eslint": "eslint --ext .js,.ts ./",
     "eslint:fix": "eslint --fix --ext  .js,.ts ./",
     "clean": "rimraf packages/*/dist",
