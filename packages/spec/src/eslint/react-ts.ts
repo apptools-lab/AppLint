@@ -1,7 +1,7 @@
 import type { Linter } from 'eslint';
 
-const reactESLintTSConfig: Linter.Config = {
+const reactTypeScriptESLintConfig: Linter.Config = {
   extends: ['@applint/eslint-config/typescript/react'],
 };
 
-export default reactESLintTSConfig;
+export default reactTypeScriptESLintConfig;

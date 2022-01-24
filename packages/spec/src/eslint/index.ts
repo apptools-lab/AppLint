@@ -1,15 +1,15 @@
 import commonESLintConfig from './common';
-import commonESLintTSConfig from './common-ts';
+import commonTypeScriptESLintConfig from './common-ts';
 import raxESLintConfig from './rax';
-import raxESLintTSConfig from './rax-ts';
+import raxTypeScriptESLintConfig from './rax-ts';
 import reactESLintConfig from './react';
-import reactESLintTSConfig from './react-ts';
+import reactTypeScriptESLintConfig from './react-ts';
 
 export default {
   common: commonESLintConfig,
-  'common-ts': commonESLintTSConfig,
+  'common-ts': commonTypeScriptESLintConfig,
   rax: raxESLintConfig,
-  'rax-ts': raxESLintTSConfig,
+  'rax-ts': raxTypeScriptESLintConfig,
   react: reactESLintConfig,
-  'react-ts': reactESLintTSConfig,
+  'react-ts': reactTypeScriptESLintConfig,
 };
