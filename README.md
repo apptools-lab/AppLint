@@ -12,7 +12,7 @@ AppLint 是大淘宝前端最佳实践检查方案。通过统一代码规范、
 | :----------------------------------------------------------- | :----------------------------------------- | :----------------------------------------------------------- |
 | 《JavaScript 编码规范》<br />《TypeScript 编码规范》<br />《React 编码规范》<br />《Rax 编码规范》<br /> | [ESLint](http://eslint.org/)               | [@applint/eslint-config](https://www.npmjs.com/package/@applint/eslint-config) |
 | 《CSS 编码规范》                                             | [Stylelint](https://stylelint.io/)         | [@applint/stylelint-config](https://www.npmjs.com/package/@applint/stylelint-config) |
-| 《Git 规范》                                                 | [commitlint](https://commitlint.js.org/#/) | [@applint/commitlint-config](https://www.npmjs.com/package/@applint/commitlint-config) |
+| 《Git 提交规范》                                                 | [commitlint](https://commitlint.js.org/#/) | [@applint/commitlint-config](https://www.npmjs.com/package/@applint/commitlint-config) |
 
 为了降低 Lint 工具的使用成本，我们封装了 [@applint/spec](https://www.npmjs.com/package/@applint/spec) 这个 npm 包，方便开发者快速接入 Lint 规则到项目中。
 
