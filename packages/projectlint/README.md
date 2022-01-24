@@ -72,4 +72,4 @@ console.log('run transforms result', result);
 
 ### 3. `lint-config-to-applint-spec`
 
-遵循阿里巴巴淘系前端规范并使用 `@applint/spec` 最佳实践。[文档](./transforms/docs/lint-config-to-applint-spec.md)
+遵循阿里巴巴大淘宝前端规范并使用 `@applint/spec` 最佳实践。[文档](./transforms/docs/lint-config-to-applint-spec.md)

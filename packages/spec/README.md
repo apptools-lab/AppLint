@@ -1,6 +1,6 @@
 # @applint/spec
 
-在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则，规则阿里巴巴淘系前端规范保持一致。
+在 ICE、Rax、React 项目中更简单接入 ESLint(支持 TypeScript) / Stylelint / Prettier / Commitlint 规则，规则阿里巴巴大淘宝前端规范保持一致。
 
 ## 安装
 
@@ -43,7 +43,6 @@ Stylelint 规则基于 [@applint/stylelint-config](https://www.npmjs.com/package
 ### Prettier
 
 在项目根目录下创建 `.prettierrc.js`，并加入以下配置：
-
 
 ```js
 // .prettierrc.js
