@@ -6,8 +6,6 @@ import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import type { FileInfo, LinterParams } from './types';
 
-const SUPPORT_FILE_REG = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
-
 export default abstract class Linter {
   public files: FileInfo[];
   public ruleKey: RuleKey;
