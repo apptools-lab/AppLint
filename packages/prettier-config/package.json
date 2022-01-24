@@ -1,0 +1,32 @@
+{
+  "name": "@applint/prettier-config",
+  "version": "1.0.0",
+  "description": "阿里巴巴大淘宝前端 Prettier 可共享配置。",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apptools-lab/applint"
+  },
+  "bugs": {
+    "url": "https://github.com/apptools-lab/applint/issues"
+  },
+  "homepage": "https://github.com/apptools-lab/applint",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "watch": "npm run clean && tsc -w",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/prettier": "^2.4.3",
+    "prettier": "^2.5.1",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "prettier": ">=2.0.0"
+  }
+}
