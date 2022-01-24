@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import { ESLint } from 'eslint';
-import chalk = require('chalk');
+import chalk from 'chalk';
 
 const GIT_DIFF = 'git diff --cached --diff-filter=ACMR --name-only';
 

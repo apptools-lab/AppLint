@@ -9,7 +9,7 @@
     "setup": "yarn install && npm run build",
     "eslint": "eslint --ext .js,.ts ./",
     "eslint:fix": "eslint --fix --ext  .js,.ts ./",
-    "eslint:diff": "ts-node ./scripts/eslint-diff.ts",
+    "eslint:diff": "ts-node --project tsconfig.base.json ./scripts/eslint-diff.ts",
     "clean": "rimraf packages/*/dist",
     "build": "npm run clean && tsc --build ./tsconfig.json",
     "watch": "npm run clean && tsc --build ./tsconfig.json --watch",
