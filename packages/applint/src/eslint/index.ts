@@ -46,7 +46,10 @@ export class ESLint implements LinterImpl {
     const eslint = new ESLintBase({
       cache: false,
       // If user add extends or plugins, should find plugin form target directory
-      resolvePluginsRelativeTo: this.customConfig.extends || this.customConfig.plugins ? this.directory : path.dirname(require.resolve('@applint/spec')),
+      resolvePluginsRelativeTo:
+        this.customConfig.extends || this.customConfig.plugins
+          ? this.directory
+          : path.dirname(require.resolve('@applint/spec')),
       baseConfig: deepmerge(getESLintConfig(this.ruleKey), this.customConfig),
       cwd: this.directory,
       fix,
@@ -66,9 +69,13 @@ export class ESLint implements LinterImpl {
     };
   }
 
-  public async fix() {
+  public async fix(onlyError = true) {
     const eslint = this.initESLintInstance(true);
-    const data = await eslint.lintFiles(this.targetFiles);
+    let data = await eslint.lintFiles(this.targetFiles);
+    if (onlyError) {
+      // 移除 warning 的 lint 信息，只保留 error，这样就能只修复 error 的代码
+      data = ESLintBase.getErrorResults(data);
+    }
     await ESLintBase.outputFixes(data);
 
     return {
@@ -80,14 +87,17 @@ export class ESLint implements LinterImpl {
   private getTargetFiles(files: FileInfo[], directory: string) {
     const ig = this.getIg(directory);
 
-    const targetFiles: string[] =
-      files.filter((file: FileInfo) => {
-        return SUPPORT_FILE_REG.test(file.path) && !ig.ignores(file.path.replace(path.join(directory, '/'), ''));
+    const targetFiles: string[] = files
+      .filter((file: FileInfo) => {
+        return (
+          SUPPORT_FILE_REG.test(file.path) &&
+          !ig.ignores(file.path.replace(path.join(directory, '/'), ''))
+        );
       })
-        .map((file: FileInfo) => {
-          // Use absolute path
-          return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
-        });
+      .map((file: FileInfo) => {
+        // Use absolute path
+        return file.path.startsWith('.') ? path.join(process.cwd(), file.path) : file.path;
+      });
 
     return targetFiles;
   }
