@@ -2,8 +2,8 @@ import stylelint from 'stylelint';
 import type { Config as StylelintConfig, LinterOptions } from 'stylelint';
 import { getStylelintConfig } from '@applint/spec';
 import deepmerge from 'deepmerge';
-import Linter from '../Linter';
-import type { LinterParams } from '../types';
+import Linter from './Linter';
+import type { LinterParams } from './types';
 
 const configFilename = '.stylelintrc.js';
 const ignoreFilename = '.stylelintignore';
@@ -21,6 +21,7 @@ export default class Stylelint extends Linter {
     const defaultConfig = getStylelintConfig(this.ruleKey);
     const customConfig = this.getCustomConfig(configFilename, apiName);
     this.customConfig = customConfig;
+    // TODO: in AppLint CI, only check defaultConfig
     this.config = deepmerge(defaultConfig, customConfig);
 
     this.defaultOptions = {

@@ -46,7 +46,8 @@ export default abstract class Linter {
   }
 
   public getCustomConfig(configFileName: string, apiName: string) {
-    let config;
+    // TODO: update TS types
+    let config: any;
     const configFilePath = path.join(this.directory, configFileName);
 
     if (fse.existsSync(configFilePath)) {
@@ -72,6 +73,7 @@ export default abstract class Linter {
     return config || {};
   }
 
+  // TODO: update types to Promise<Result>
   public abstract scan(): Promise<any>;
 
   public abstract fix(): Promise<any>;
