@@ -72,7 +72,6 @@ export default abstract class Linter<Config, Result> {
     return config as Config;
   }
 
-  // TODO: update types to Promise<Result>
   public abstract scan(): Promise<{ data: Result; customConfig: Config }>;
 
   public abstract fix(): Promise<{ data: Result; customConfig: Config }>;
