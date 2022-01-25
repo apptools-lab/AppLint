@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0
+
+- chore: `export default ProjectLint` instead of `export ProjectLint`
+
 ## 0.1.3
 
 - feat: bump `@iceworks/spec` version

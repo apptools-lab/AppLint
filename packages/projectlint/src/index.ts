@@ -19,7 +19,7 @@ interface ProjectLintImpl {
   fix: () => Promise<ProjectLintResult>;
 }
 
-export class ProjectLint implements ProjectLintImpl {
+export default class ProjectLint implements ProjectLintImpl {
   private static projectLinters = {} as ProjectLinters;
 
   private options: ProjectLintOptions;
