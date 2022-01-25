@@ -20,7 +20,7 @@ export default class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResul
   public constructor(params: LinterParams) {
     super(params);
 
-    const defaultConfig = getESLintConfig(this.ruleKey);
+    const defaultConfig = getESLintConfig(this.ruleKey) as ESLinter.Config;
     let customConfig = this.getCustomConfig(configFilename, apiName);
     customConfig = this.addParserOptionsToCustomConfig(customConfig);
     this.customConfig = customConfig;
