@@ -22,15 +22,15 @@ describe('ESLint', () => {
 
   test('scan', async () => {
     const { data } = await eslint.scan();
-    expect(data.length).toBe(1);
-    expect(data[0].errorCount).toBe(1);
-    expect(data[0].fixableErrorCount).toBe(1);
+    expect(data.length).toBe(2);
+    expect(data[1].errorCount).toBe(1);
+    expect(data[1].fixableErrorCount).toBe(1);
   });
 
   test('fix', async () => {
     const { data } = await eslint.fix();
-    expect(data.length).toBe(1);
-    expect(data[0].errorCount).toBe(0);
-    expect(data[0].fixableErrorCount).toBe(0);
+    expect(data.length).toBe(2);
+    expect(data[1].errorCount).toBe(0);
+    expect(data[1].fixableErrorCount).toBe(0);
   });
 });

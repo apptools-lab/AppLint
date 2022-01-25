@@ -10,7 +10,7 @@ const ignoreFilename = '.stylelintignore';
 const apiName = 'getStylelintConfig';
 const supportiveFileRegExp = /(\.css|\.less|\.scss|\.sass)$/;
 
-export default class Stylelint extends Linter<StylelintConfig, LinterResult> {
+export class Stylelint extends Linter<StylelintConfig, LinterResult> {
   private config: StylelintConfig;
   private customConfig: StylelintConfig;
   private defaultOptions: LinterOptions;

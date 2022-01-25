@@ -12,7 +12,7 @@ const ignoreFilename = '.eslintignore';
 const apiName = 'getESLintConfig';
 const supportiveFileRegExp = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
-export default class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
+export class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
   private config: ESLinter.Config;
   private customConfig: ESLinter.Config;
   private targetFiles: string[];
@@ -20,7 +20,7 @@ export default class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResul
   public constructor(params: LinterParams) {
     super(params);
 
-    const defaultConfig = getESLintConfig(this.ruleKey) as ESLinter.Config;
+    const defaultConfig = getESLintConfig(this.ruleKey);
     let customConfig = this.getCustomConfig(configFilename, apiName);
     customConfig = this.addParserOptionsToCustomConfig(customConfig);
     this.customConfig = customConfig;

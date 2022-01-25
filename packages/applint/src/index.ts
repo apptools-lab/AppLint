@@ -1,3 +1,4 @@
-export { default as ESLint } from './ESLint';
-export { default as Stylelint } from './Stylelint';
-export { default as ProjectLint } from '@applint/projectlint';
+export * from './ESLint';
+export * from './Stylelint';
+export * from '@applint/projectlint';
+export type { RuleKey } from '@applint/spec';

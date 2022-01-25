@@ -23,9 +23,8 @@ describe('Stylelint', () => {
   test('scan', async () => {
     const { data } = await stylelint.scan();
     const { errored, results } = data;
-
     expect(errored).toBeTruthy();
-    expect(results.length).toBe(1);
+    expect(results.length).toBe(2);
     expect(results[0].warnings.length).toBe(2);
   });
 
@@ -34,7 +33,7 @@ describe('Stylelint', () => {
     const { errored, results } = data;
 
     expect(errored).toBeFalsy();
-    expect(results.length).toBe(1);
+    expect(results.length).toBe(2);
     expect(results[0].warnings.length).toBe(0);
   });
 });
