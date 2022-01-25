@@ -1,8 +1,8 @@
 import stylelint from 'stylelint';
-import type { Config as StylelintConfig, LinterOptions } from 'stylelint';
 import { getStylelintConfig } from '@applint/spec';
 import deepmerge from 'deepmerge';
 import Linter from './Linter';
+import type { Config as StylelintConfig, LinterOptions, LinterResult } from 'stylelint';
 import type { LinterParams } from './types';
 
 const configFilename = '.stylelintrc.js';
@@ -10,7 +10,7 @@ const ignoreFilename = '.stylelintignore';
 const apiName = 'getStylelintConfig';
 const supportiveFileRegExp = /(\.css|\.less|\.scss|\.sass)$/;
 
-export default class Stylelint extends Linter {
+export default class Stylelint extends Linter<StylelintConfig, LinterResult> {
   private config: StylelintConfig;
   private customConfig: StylelintConfig;
   private defaultOptions: LinterOptions;

@@ -1,12 +1,12 @@
-import type { RuleKey } from '@applint/spec';
 import path from 'path';
 import ignore from 'ignore';
 import fse from 'fs-extra';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
 import type { FileInfo, LinterParams } from './types';
+import type { RuleKey } from '@applint/spec';
 
-export default abstract class Linter {
+export default abstract class Linter<Config, Result> {
   public files: FileInfo[];
   public ruleKey: RuleKey;
   public directory: string;
@@ -46,8 +46,7 @@ export default abstract class Linter {
   }
 
   public getCustomConfig(configFileName: string, apiName: string) {
-    // TODO: update TS types
-    let config: any;
+    let config = {};
     const configFilePath = path.join(this.directory, configFileName);
 
     if (fse.existsSync(configFilePath)) {
@@ -70,11 +69,11 @@ export default abstract class Linter {
       });
     }
 
-    return config || {};
+    return config as Config;
   }
 
   // TODO: update types to Promise<Result>
-  public abstract scan(): Promise<any>;
+  public abstract scan(): Promise<{ data: Result; customConfig: Config }>;
 
-  public abstract fix(): Promise<any>;
+  public abstract fix(): Promise<{ data: Result; customConfig: Config }>;
 }
