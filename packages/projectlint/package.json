@@ -1,6 +1,7 @@
 {
   "name": "@applint/projectlint",
   "version": "1.0.0",
+  "description": "提供项目级别检测和修复 Node API，目前包括 Codemod 检查和修复、依赖检查和 bundle 体积检查",
   "main": "./dist/index.js",
   "scripts": {
     "build": "rm -rf dist && tsc",

@@ -2,7 +2,7 @@
 
 ## 1.0.0
 
-- chore: `export default ProjectLint` instead of `export ProjectLint`
+- chore: bump version
 
 ## 0.1.3
 
