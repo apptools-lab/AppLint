@@ -21,7 +21,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@applint/projectlint": "1.0.0",
+    "@applint/projectlint": "^1.0.0",
     "@applint/spec": "^1.0.0",
     "@babel/parser": "^7.15.8",
     "@babel/traverse": "^7.15.4",
