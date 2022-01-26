@@ -1,6 +1,6 @@
 # @applint/stylelint-config
 
-阿里巴巴淘系前端 Stylelint 可共享配置。参考 [stylelint-config-ali](https://www.npmjs.com/package/stylelint-config-ali)。
+遵循 [阿里巴巴大淘宝前端 CSS 编码规范](/packages/stylelint-config/docs/css.md) 的 Stylelint 可共享配置。
 
 ## 安装
 

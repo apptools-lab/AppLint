@@ -1,8 +1,10 @@
 # @applint/eslint-config
 
-阿里巴巴大淘宝前端 ESLint 可共享配置。
+遵循 阿里巴巴大淘宝前端 JavaScript、TypeScript、React 编码规范的 ESLint 可共享配置。
 
-## 安装
+## 快速开始
+
+### 安装
 
 ```bash
 # 方式一
@@ -12,7 +14,7 @@ npx install-peerdeps --dev @applint/eslint-config
 npm install --save-dev @applint/eslint-config eslint @typescript-eslint/eslint-plugin eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-jsx-plus eslint-plugin-react eslint-plugin-react-hooks
 ```
 
-## 使用
+### 使用
 
 创建 `.eslintrc.js` 并加入以下配置：
 
@@ -29,3 +31,9 @@ module.exports = {
   ],
 };
 ```
+
+## 编码规范
+
+- [JavaScript 编码规范](/packages/eslint-config/docs/JavaScript.md)
+- [TypeScript 编码规范](/packages/eslint-config/docs/TypeScript.md)
+- [React 编码规范](/packages/eslint-config/docs/React.md)

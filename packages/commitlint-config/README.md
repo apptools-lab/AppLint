@@ -1,6 +1,6 @@
 # @applint/commitlint-config
 
-阿里巴巴淘系前端 Commitlint 可共享配置。参考 [commitlint-config-ali](https://www.npmjs.com/package/commitlint-config-ali)。
+阿里巴巴大淘宝前端 Commitlint 可共享配置。参考 [commitlint-config-ali](https://www.npmjs.com/package/commitlint-config-ali)。
 
 ## 安装
 

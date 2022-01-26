@@ -2,6 +2,7 @@
   // https://www.typescriptlang.org/docs/handbook/project-references.html#overall-structure
   "files": [],
   "references": [
+    { "path": "packages/prettier-config" },
     { "path": "packages/projectlint" },
     { "path": "packages/spec" },
     { "path": "packages/applint" },

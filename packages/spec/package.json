@@ -1,6 +1,6 @@
 {
   "name": "@applint/spec",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
   "main": "dist/index.js",
   "files": [
@@ -25,6 +25,7 @@
   "dependencies": {
     "@applint/commitlint-config": "^1.0.0",
     "@applint/eslint-config": "^1.0.0",
+    "@applint/prettier-config": "^1.0.0",
     "@applint/stylelint-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "deepmerge": "^4.2.2",

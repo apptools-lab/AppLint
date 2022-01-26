@@ -1,12 +1,3 @@
-import type { Options } from 'prettier';
+import { config } from '@applint/prettier-config';
 
-const prettierConfig: Options = {
-  printWidth: 120,
-  tabWidth: 2,
-  semi: true,
-  singleQuote: true,
-  trailingComma: 'all',
-  parser: 'babel',
-};
-
-export default prettierConfig;
+export default config;

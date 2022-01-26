@@ -41,6 +41,6 @@ describe('getPrettierConfig API', () => {
 async function getPrettierResult(rule: RuleKey) {
   const prettierConfig = getPrettierConfig(rule);
   const source = await fs.readFile(path.join(testFixturesDir, 'prettier/index.js'), 'utf-8');
-  const result = await prettier.check(source, prettierConfig);
+  const result = await prettier.check(source, { ...prettierConfig, parser: 'babel' });
   return result;
 }

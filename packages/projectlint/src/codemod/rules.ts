@@ -18,17 +18,21 @@ export const rules: Record<string, CodemodRule> = {
   'lint-config-to-iceworks-spec': {
     title: '遵循阿里巴巴前端规范，并接入 @iceworks/spec 的最佳实践',
     title_en: 'Follow Alibaba FED lint rules, and use @iceworks/spec best practices',
-    message: '遵循阿里巴巴前端规范，并更新 rax, ice 和 react 项目中的 eslint / stylelint / prettier 配置。',
-    message_en: 'Follow Alibaba FED lint rules, and update eslint / stylelint / prettier in rax, ice and react project.',
+    message:
+      '遵循阿里巴巴前端规范，并更新 rax, ice 和 react 项目中的 eslint / stylelint / prettier 配置。',
+    message_en:
+      'Follow Alibaba FED lint rules, and update eslint / stylelint / prettier in rax, ice and react project.',
     severity: CodemodSeverity.off,
     tags: [],
     npm_deprecate: '@ice/spec',
   },
   'lint-config-to-applint-spec': {
-    title: '遵循阿里巴巴淘系前端规范，并接入 @applint/spec 的最佳实践',
+    title: '遵循阿里巴巴大淘宝前端规范，并接入 @applint/spec 的最佳实践',
     title_en: 'Follow Alibaba Tao Tech FED lint rules, and use @applint/spec best practices',
-    message: '遵循阿里巴巴淘系前端规范，并更新 rax, ice 和 react 项目中的 eslint / stylelint / prettier 配置。',
-    message_en: 'Follow Alibaba Tao Tech FED lint rules, and update eslint / stylelint / prettier in rax, ice and react project.',
+    message:
+      '遵循阿里巴巴大淘宝前端规范，并更新 rax, ice 和 react 项目中的 eslint / stylelint / prettier 配置。',
+    message_en:
+      'Follow Alibaba Tao Tech FED lint rules, and update eslint / stylelint / prettier in rax, ice and react project.',
     severity: CodemodSeverity.off,
     tags: [],
     npm_deprecate: '@iceworks/spec',
