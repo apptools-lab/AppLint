@@ -1,4 +1,5 @@
 import stylelint from 'stylelint';
+import path from 'path';
 import { getStylelintConfig } from '@applint/spec';
 import deepmerge from 'deepmerge';
 import Linter from './Linter';
@@ -29,6 +30,10 @@ export class Stylelint extends Linter<StylelintConfig, LinterResult> {
       files: this.getTargetFiles(ignoreFilename, supportiveFileRegExp),
       cwd: this.directory,
       config: this.config,
+      configBasedir:
+        this.customConfig.extends || this.customConfig.plugins
+          ? this.directory
+          : path.dirname(require.resolve('@applint/spec')),
     };
   }
 
