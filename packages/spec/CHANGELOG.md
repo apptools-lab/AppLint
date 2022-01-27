@@ -4,6 +4,7 @@
 
 - fix: @typescript-eslint/parser dependency is lost
 - fix: can't find `@applint/eslint-config` in `@appworks/doctor`
+- chore: bump `stylelint-scss` version to `^4.0.0` to support `stylelint@^14`
 
 ## 1.0.1
 
