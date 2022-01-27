@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.0.2
+
+- fix: @typescript-eslint/parser dependency is lost
+
 ## 1.0.1
 
 - feat: add `@applint/prettier-config`
