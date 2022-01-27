@@ -3,6 +3,7 @@
 ## 1.0.2
 
 - fix: @typescript-eslint/parser dependency is lost
+- fix: can't find `@applint/eslint-config` in `@appworks/doctor`
 
 ## 1.0.1
 
