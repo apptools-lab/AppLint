@@ -3,5 +3,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist"
-  }
+  },
+  "exclude": [
+    "__tests__",
+    "__testFixtures__",
+    "jest.config.js"
+  ]
 }

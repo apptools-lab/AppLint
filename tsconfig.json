@@ -3,8 +3,8 @@
   "files": [],
   "references": [
     { "path": "packages/prettier-config" },
-    { "path": "packages/projectlint" },
     { "path": "packages/spec" },
+    { "path": "packages/projectlint" },
     { "path": "packages/applint" },
   ]
 }
