@@ -4,6 +4,8 @@ import raxESLintConfig from './rax';
 import raxTypeScriptESLintConfig from './rax-ts';
 import reactESLintConfig from './react';
 import reactTypeScriptESLintConfig from './react-ts';
+import vueESLintConfig from './vue';
+import vueTypeScriptESLintConfig from './vue-ts';
 
 export default {
   common: commonESLintConfig,
@@ -12,4 +14,6 @@ export default {
   'rax-ts': raxTypeScriptESLintConfig,
   react: reactESLintConfig,
   'react-ts': reactTypeScriptESLintConfig,
+  vue: vueESLintConfig,
+  'vue-ts': vueTypeScriptESLintConfig,
 };
