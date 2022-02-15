@@ -6,9 +6,10 @@
   ],
   "license": "MIT",
   "scripts": {
-    "setup": "yarn install",
+    "setup": "yarn install && npm run build",
     "eslint": "eslint --ext .js,.ts ./",
     "eslint:fix": "eslint --fix --ext  .js,.ts ./",
+    "eslint:diff": "ts-node --project tsconfig.base.json ./scripts/eslint-diff.ts",
     "clean": "rimraf packages/*/dist",
     "build": "npm run clean && tsc --build ./tsconfig.json",
     "watch": "npm run clean && tsc --build ./tsconfig.json --watch",
@@ -17,6 +18,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
+    "chalk": "^4.1.2",
     "enhanced-resolve": "^5.8.3",
     "eslint": "^8.0.0",
     "husky": "^7.0.0",

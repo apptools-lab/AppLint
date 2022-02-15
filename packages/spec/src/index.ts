@@ -8,7 +8,15 @@ import type { UserConfig as CommitlintUserConfig } from '@commitlint/types';
 import type { Config as StylelintConfig } from 'stylelint';
 import type { Options as PrettierConfig } from 'prettier';
 
-export type RuleKey = 'common' | 'common-ts' | 'react' | 'react-ts' | 'rax' | 'rax-ts';
+export type RuleKey =
+  | 'common'
+  | 'common-ts'
+  | 'react'
+  | 'react-ts'
+  | 'rax'
+  | 'rax-ts'
+  | 'vue'
+  | 'vue-ts';
 
 // ESLint
 export function getESLintConfig(rule: RuleKey, userConfig: Linter.Config = {}): Linter.Config {

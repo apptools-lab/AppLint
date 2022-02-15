@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.0
+
+- chore: bump version
+
 ## 0.1.3
 
 - feat: bump `@iceworks/spec` version
