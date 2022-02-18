@@ -6,6 +6,12 @@ module.exports = {
      *  React 规则
      * @link https://github.com/yannickcr/eslint-plugin-react
      */
+    // 防止 React 被标记为未使用
+    'react/jsx-uses-react': 'error',
+
+    // 防止 React 变量被标记为未使用
+    'react/jsx-uses-vars': 'error',
+
     // JSX 语法使用两个空格缩进
     'react/jsx-indent': ['error', 2],
     'react/jsx-indent-props': ['error', 2],
