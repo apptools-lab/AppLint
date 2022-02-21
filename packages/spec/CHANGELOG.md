@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.1.1
+
+- fix: missing package `eslint-plugin-rax-compile-time-miniapp`
+
 ## 1.1.0
 
 - feat: support lint vue files
