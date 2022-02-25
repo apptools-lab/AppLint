@@ -7,7 +7,12 @@ module.exports = {
   coveragePathIgnorePatterns: ['<rootDir>/node_modules/'],
   testEnvironment: 'node',
   roots: ['<rootDir>/packages'],
-  testPathIgnorePatterns: ['/dist/', '/node_modules/', '/__testFixtures__/', '/__tests__/utils/'],
+  testPathIgnorePatterns: [
+    '/dist/',
+    '/node_modules/',
+    '/__tests__/__fixtures__/',
+    '/__tests__/utils/',
+  ],
   globals: {
     'ts-jest': {
       tsconfig: 'tsconfig.base.json',
