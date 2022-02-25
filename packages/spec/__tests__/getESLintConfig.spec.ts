@@ -62,6 +62,7 @@ async function getESLintResults(rule: RuleKey, files: string[]) {
   const eslint = new ESLint({
     baseConfig: eslintConfig,
     useEslintrc: false,
+    ignore: false,
   });
   const results = await eslint.lintFiles(files);
   return results;
