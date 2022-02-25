@@ -1,12 +1,10 @@
 import path from 'path';
 import ignore from 'ignore';
 import fse from 'fs-extra';
-import { parse } from '@babel/parser';
-import traverse from '@babel/traverse';
 import type { FileInfo, LinterParams } from './types';
 import type { RuleKey } from '@applint/spec';
 
-export default abstract class Linter<Config, Result> {
+export default abstract class Linter<Result> {
   public files: FileInfo[];
   public ruleKey: RuleKey;
   public directory: string;
@@ -45,34 +43,23 @@ export default abstract class Linter<Config, Result> {
     return ig;
   }
 
-  public getCustomConfig(configFileName: string, apiName: string) {
-    let config = {};
-    const configFilePath = path.join(this.directory, configFileName);
-
-    if (fse.existsSync(configFilePath)) {
-      const source = fse.readFileSync(configFilePath, { encoding: 'utf-8' });
-      const ast = parse(source, {
-        sourceType: 'module',
-        plugins: ['flow', 'exportDefaultFrom', 'exportNamespaceFrom'],
-      });
-
-      traverse(ast as any, {
-        CallExpression(nodePath: any) {
-          const { node } = nodePath;
-          if (node.callee.name === apiName && node.arguments && node.arguments[1]) {
-            const configNode = node.arguments[1];
-            const configSource = source.substring(configNode.start, configNode.end);
-            // eslint-disable-next-line no-eval
-            config = eval(`(${configSource})`);
-          }
-        },
-      });
+  public getRuleKeyInConfigFile(configFilename: string, apiName: string) {
+    const configFilePath = path.join(this.directory, configFilename);
+    if (!fse.pathExistsSync(configFilePath)) {
+      return '';
     }
-
-    return config as Config;
+    const configCode = fse.readFileSync(configFilePath, 'utf-8');
+    // for example: match react-ts' str from getESLintConfig('react-ts')
+    const regexp = new RegExp(`${apiName}[\\s\\S]*\\(['"]([\\w-]+)['"]`);
+    const matchResult = configCode.match(regexp);
+    if (!matchResult) {
+      return '';
+    }
+    const [, ruleKey] = matchResult;
+    return ruleKey;
   }
 
-  public abstract scan(): Promise<{ data: Result; customConfig: Config }>;
+  public abstract scan(): Promise<{ data: Result }>;
 
-  public abstract fix(): Promise<{ data: Result; customConfig: Config }>;
+  public abstract fix(): Promise<{ data: Result }>;
 }

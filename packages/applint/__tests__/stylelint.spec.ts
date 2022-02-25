@@ -4,7 +4,7 @@ import { Stylelint } from '../src/index';
 import getFiles from './utils/getFiles';
 
 describe('Stylelint', () => {
-  const fixturesDir = path.join(__dirname, '..', '__testFixtures__');
+  const fixturesDir = path.join(__dirname, '__fixtures__');
   const files = getFiles(fixturesDir);
 
   const stylelint = new Stylelint({

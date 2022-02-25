@@ -1,10 +1,9 @@
 import { ESLint as ESLintBase } from 'eslint';
 import type { Linter as ESLinter } from 'eslint';
-import fse from 'fs-extra';
 import { getESLintConfig } from '@applint/spec';
-import deepmerge from 'deepmerge';
 import path from 'path';
 import Linter from './Linter';
+import type { RuleKey } from '@applint/spec';
 import type { LinterParams } from './types';
 
 const configFilename = '.eslintrc.js';
@@ -12,21 +11,14 @@ const ignoreFilename = '.eslintignore';
 const apiName = 'getESLintConfig';
 const supportiveFileRegExp = /(\.js|\.jsx|\.ts|\.tsx|\.vue)$/;
 
-export class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
+export class ESLint extends Linter<ESLintBase.LintResult[]> {
   private config: ESLinter.Config;
-  private customConfig: ESLinter.Config;
   private targetFiles: string[];
 
   public constructor(params: LinterParams) {
     super(params);
-
-    const defaultConfig = getESLintConfig(this.ruleKey);
-    let customConfig = this.getCustomConfig(configFilename, apiName);
-    customConfig = this.addParserOptionsToCustomConfig(customConfig);
-    this.customConfig = customConfig;
-    // TODO: in AppLint CI, only check defaultConfig
-    this.config = deepmerge.all([defaultConfig, customConfig]);
-
+    this.ruleKey = (this.getRuleKeyInConfigFile(configFilename, apiName) || this.ruleKey) as RuleKey;
+    this.config = getESLintConfig(this.ruleKey) as ESLinter.Config;
     this.targetFiles = this.getTargetFiles(ignoreFilename, supportiveFileRegExp);
   }
 
@@ -35,7 +27,6 @@ export class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
     const data = await eslint.lintFiles(this.targetFiles);
     return {
       data,
-      customConfig: this.customConfig,
     };
   }
 
@@ -45,18 +36,13 @@ export class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
     await ESLintBase.outputFixes(data);
     return {
       data,
-      customConfig: this.customConfig,
     };
   }
 
   private initESLintInstance(fix: boolean) {
     const eslint = new ESLintBase({
       cache: false,
-      // If user add extends or plugins, should find plugin form target directory
-      resolvePluginsRelativeTo:
-        this.customConfig.extends || this.customConfig.plugins
-          ? this.directory
-          : path.dirname(require.resolve('@applint/spec')),
+      resolvePluginsRelativeTo: path.dirname(require.resolve('@applint/spec')),
       baseConfig: this.config,
       cwd: this.directory,
       fix,
@@ -64,18 +50,5 @@ export class ESLint extends Linter<ESLinter.Config, ESLintBase.LintResult[]> {
     });
 
     return eslint;
-  }
-
-  private addParserOptionsToCustomConfig(customConfig: ESLinter.Config) {
-    if (this.ruleKey.indexOf('ts') !== -1) {
-      if (!customConfig.parserOptions) {
-        customConfig.parserOptions = {};
-      }
-      if (fse.existsSync(path.join(this.directory, './tsconfig.json'))) {
-        customConfig.parserOptions.project = path.join(this.directory, './tsconfig.json');
-      }
-    }
-
-    return customConfig;
   }
 }
