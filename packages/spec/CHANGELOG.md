@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.2.0
+
+- feat: support strict rules
+
 ## 1.1.1
 
 - fix: missing package `eslint-plugin-rax-compile-time-miniapp`
