@@ -19,7 +19,7 @@ describe('getESLintConfig API', () => {
 
   test('common-ts-strict', async () => {
     const results = await getESLintResults('common-ts-strict', [path.join(testFixturesDir, 'eslint/index.ts')]);
-    expect(results[0].messages.length).toBe(5);
+    expect(results[0].messages.length).toBe(6);
   });
 
   test('react', async () => {
