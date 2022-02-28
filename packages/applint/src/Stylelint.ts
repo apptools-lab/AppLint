@@ -17,6 +17,7 @@ export class Stylelint extends Linter<LinterResult> {
 
   public constructor(params: LinterParams) {
     super(params);
+    // get rule key in `.stylelintrc.js`
     this.ruleKey = (this.getRuleKeyInConfigFile(configFilename, apiName) || this.ruleKey) as RuleKey;
     this.config = getStylelintConfig(this.ruleKey);
     this.defaultOptions = {

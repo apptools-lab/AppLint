@@ -2,7 +2,7 @@
 
 ## 1.2.0
 
-- feat: support strict rules
+- feat: support strict rules(`react-ts-strict`, `rax-ts-strict`, `common-ts-strict`)
 
 ## 1.1.1
 

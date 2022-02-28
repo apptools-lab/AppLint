@@ -17,6 +17,7 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
 
   public constructor(params: LinterParams) {
     super(params);
+    // get rule key in `.eslintrc.js`
     this.ruleKey = (this.getRuleKeyInConfigFile(configFilename, apiName) || this.ruleKey) as RuleKey;
     this.config = getESLintConfig(this.ruleKey) as ESLinter.Config;
     this.targetFiles = this.getTargetFiles(ignoreFilename, supportiveFileRegExp);

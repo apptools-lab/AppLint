@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0
+
+- feat: add typescript strict rules
+
 ## 1.0.2
 
 - fix: get ESLint warning when react variables(e.g.: component) were unused

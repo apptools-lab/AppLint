@@ -1,5 +1,9 @@
 # @applint/applint
 
+## 1.1.0
+
+- feat: support scan special rule in `.eslintrc.js`
+
 ## 1.0.0
 
 - feat: support scan and fix CSS files
