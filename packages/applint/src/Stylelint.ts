@@ -10,7 +10,15 @@ const configFilename = '.stylelintrc.js';
 const ignoreFilename = '.stylelintignore';
 const apiName = 'getStylelintConfig';
 const supportiveFileRegExp = /(\.css|\.less|\.scss|\.sass)$/;
-
+const defaultResult = {
+  data: {
+    cwd: process.cwd(),
+    results: [],
+    errored: false,
+    output: '',
+    reportedDisables: [],
+  },
+};
 export class Stylelint extends Linter<LinterResult> {
   private config: StylelintConfig;
   private defaultOptions: LinterOptions;
@@ -30,19 +38,27 @@ export class Stylelint extends Linter<LinterResult> {
   }
 
   public async scan() {
-    const result = await stylelint.lint(this.defaultOptions);
+    // should not run stylelint when no files were found
+    if (this.defaultOptions.files?.length === 0) {
+      return defaultResult;
+    }
 
+    const result = await stylelint.lint(this.defaultOptions);
     return {
       data: result,
     };
   }
 
   public async fix() {
+    // should not run stylelint when no files were found
+    if (this.defaultOptions.files?.length === 0) {
+      return defaultResult;
+    }
+
     const result = await stylelint.lint({
       ...this.defaultOptions,
       fix: true,
     });
-
     return {
       data: result,
     };

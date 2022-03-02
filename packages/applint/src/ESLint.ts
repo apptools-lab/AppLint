@@ -24,6 +24,12 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
   }
 
   public async scan() {
+    // should not run eslint when no files were found
+    if (this.targetFiles.length === 0) {
+      return {
+        data: [],
+      };
+    }
     const eslint = this.initESLintInstance(false);
     const data = await eslint.lintFiles(this.targetFiles);
     return {
@@ -32,6 +38,12 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
   }
 
   public async fix() {
+    // should not run eslint when no files were found
+    if (this.targetFiles.length === 0) {
+      return {
+        data: [],
+      };
+    }
     const eslint = this.initESLintInstance(true);
     const data = await eslint.lintFiles(this.targetFiles);
     await ESLintBase.outputFixes(data);
