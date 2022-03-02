@@ -26,7 +26,7 @@
     "@applint/commitlint-config": "^1.0.0",
     "@applint/eslint-config": "^1.0.0",
     "@applint/prettier-config": "^1.0.0",
-    "@applint/stylelint-config": "^1.0.0",
+    "@applint/stylelint-config": "^1.0.2-beta.0",
     "@babel/core": "^7.17.2",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
@@ -43,7 +43,9 @@
     "eslint-plugin-vue": "^8.4.1",
     "require-all": "^3.0.0",
     "stylelint-scss": "^4.1.0",
-    "vue-eslint-parser": "^8.2.0"
+    "vue-eslint-parser": "^8.2.0",
+    "postcss-scss": "^4.0.3",
+    "postcss-less": "^6.0.0"
   },
   "devDependencies": {
     "@commitlint/lint": "^16.0.0",
