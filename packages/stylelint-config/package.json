@@ -22,7 +22,8 @@
     "stylelint": ">=11.0.0",
     "stylelint-scss": ">=3.18.0",
     "postcss-scss": ">=4.0.0",
-    "postcss-less": ">=6.0.0"
+    "postcss-less": ">=6.0.0",
+    "postcss": ">=8.0.0"
   },
   "devDependencies": {
     "stylelint": "^13.7.0",
