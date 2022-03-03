@@ -43,7 +43,10 @@
     "eslint-plugin-vue": "^8.4.1",
     "require-all": "^3.0.0",
     "stylelint-scss": "^4.1.0",
-    "vue-eslint-parser": "^8.2.0"
+    "vue-eslint-parser": "^8.2.0",
+    "postcss": "^8.4.7",
+    "postcss-scss": "^4.0.3",
+    "postcss-less": "^6.0.0"
   },
   "devDependencies": {
     "@commitlint/lint": "^16.0.0",

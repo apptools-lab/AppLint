@@ -144,4 +144,16 @@ module.exports = {
     'scss/double-slash-comment-whitespace-inside': 'always',
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+  // stylelint 14 require postcss-less and postcss-scss
+  customSyntax: 'postcss-scss',
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+    {
+      files: ['**/*.less'],
+      customSyntax: 'postcss-less',
+    },
+  ],
 };

@@ -3,6 +3,7 @@
 ## 1.2.0
 
 - feat: support strict rules(`react-ts-strict`, `rax-ts-strict`, `common-ts-strict`)
+- chore: add `"postcss-scss` and `"postcss-less` dependencies
 
 ## 1.1.1
 
