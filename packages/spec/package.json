@@ -26,7 +26,7 @@
     "@applint/commitlint-config": "^1.0.0",
     "@applint/eslint-config": "^1.0.0",
     "@applint/prettier-config": "^1.0.0",
-    "@applint/stylelint-config": "^1.0.2-beta.0",
+    "@applint/stylelint-config": "^1.0.0",
     "@babel/core": "^7.17.2",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-react": "^7.16.7",
