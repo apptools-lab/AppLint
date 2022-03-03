@@ -26,6 +26,16 @@ module.exports = getESLintConfig('react');
 
 ESLint 规则基于 [@applint/eslint-config](https://www.npmjs.com/package/@applint/eslint-config)。
 
+#### 更严格的 TypeScript 配置
+
+如果你希望对项目中的 TypeScript 代码进行更严格的约束，可以使用 'rax-ts-strict' | 'react-ts-strict' | 'common-ts-strict' （依据你的具体场景）。
+
+注意：
+
+- 严格配置的侧重点在于 TypeScript 类型的书写，包括：一致性（如类型断言只允许使用 as、对象的类型声明只允许使用接口等），显性（函数的返回值类型、类成员的可访问性等需要显式注明），语法（使用可选链`?.`替代逻辑与`&&`，使用空值合并`??`替代逻辑或`||`等），TS 专有能力（使用 import type 导入类型等）。
+- 使用严格配置并不意味着放弃基础配置，严格配置同样包含了基础的 ESLint 规则。
+- 开启前，请请确保你能够接受这一程度的强约束。
+
 ### Stylelint
 
 在项目根目录下创建 `.stylelintrc.js`，并加入以下配置：
