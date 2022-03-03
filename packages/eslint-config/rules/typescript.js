@@ -55,6 +55,52 @@ module.exports = {
     // interface 和 type 里的成员统一使用分号（;）进行分割，单行类型的最后一个元素不加分号
     '@typescript-eslint/member-delimiter-style': 'error',
 
+    // 缩进为2个空格
+    indent: 'off',
+    '@typescript-eslint/indent': [
+      'error',
+      2,
+      {
+        SwitchCase: 1,
+        VariableDeclarator: 1,
+        outerIIFEBody: 1,
+        // MemberExpression: null,
+        FunctionDeclaration: {
+          parameters: 1,
+          body: 1,
+        },
+        FunctionExpression: {
+          parameters: 1,
+          body: 1,
+        },
+        CallExpression: {
+          arguments: 1,
+        },
+        ArrayExpression: 1,
+        ObjectExpression: 1,
+        ImportDeclaration: 1,
+        flatTernaryExpressions: false,
+        // list derived from https://github.com/benjamn/ast-types/blob/HEAD/def/jsx.js
+        ignoredNodes: [
+          'TemplateLiteral', // FIXME https://github.com/babel/babel-eslint/issues/799#issuecomment-568195009
+          'JSXElement',
+          'JSXElement > *',
+          'JSXAttribute',
+          'JSXIdentifier',
+          'JSXNamespacedName',
+          'JSXMemberExpression',
+          'JSXSpreadAttribute',
+          'JSXExpressionContainer',
+          'JSXOpeningElement',
+          'JSXClosingElement',
+          'JSXText',
+          'JSXEmptyExpression',
+          'JSXSpreadChild',
+        ],
+        ignoreComments: false,
+      },
+    ],
+
     // 强制使用分号
     semi: 'off',
     '@typescript-eslint/semi': 'error',
