@@ -5,7 +5,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/dist/',
     '<rootDir>/node_modules/',
-    '<rootDir>/__testFixtures__/',
+    '<rootDir>/__tests__/__fixtures__/',
     '<rootDir>/__tests__/utils/',
   ],
 };

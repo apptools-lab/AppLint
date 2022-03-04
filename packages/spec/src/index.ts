@@ -11,10 +11,13 @@ import type { Options as PrettierConfig } from 'prettier';
 export type RuleKey =
   | 'common'
   | 'common-ts'
+  | 'common-ts-strict'
   | 'react'
   | 'react-ts'
+  | 'react-ts-strict'
   | 'rax'
   | 'rax-ts'
+  | 'rax-ts-strict'
   | 'vue'
   | 'vue-ts';
 

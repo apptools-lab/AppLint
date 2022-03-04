@@ -3,7 +3,7 @@ import path from 'path';
 import { getStylelintConfig } from '../dist';
 import type { RuleKey } from '../dist';
 
-const testFixturesDir = path.join(__dirname, '..', '__testFixtures__');
+const testFixturesDir = path.join(__dirname, '__fixtures__');
 
 describe('getStylelintConfig API', () => {
   test('common', async () => {

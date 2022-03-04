@@ -1,6 +1,6 @@
 {
   "name": "@applint/applint",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "提供 ESLint、Stylelint 检查和修复的 Node API。",
   "main": "dist/index.js",
   "files": [
@@ -8,7 +8,6 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/babel__traverse": "^7.14.2",
     "@types/eslint": "^7.28.1",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
@@ -23,9 +22,6 @@
   "dependencies": {
     "@applint/projectlint": "^1.0.0",
     "@applint/spec": "^1.0.0",
-    "@babel/parser": "^7.15.8",
-    "@babel/traverse": "^7.15.4",
-    "deepmerge": "^4.2.2",
     "eslint": "^8.6.0",
     "fs-extra": "^10.0.0",
     "ignore": "^5.1.8",

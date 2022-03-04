@@ -1,7 +1,8 @@
 # CHANGELOG
 
-## 1.0.3
+## 1.1.0
 
+- feat: add typescript strict rules
 - feat: add `@typescript-eslint/indent` rule to avoid `cannot read property 'loc' of undefined` problem. Ref: <https://github.com/eslint/eslint/issues/13956>
 
 ## 1.0.2
