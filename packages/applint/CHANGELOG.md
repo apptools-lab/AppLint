@@ -2,7 +2,7 @@
 
 ## 1.1.0
 
-- feat: support scan special rule in `.eslintrc.js`
+- feat: support scan specified rule in `.eslintrc.js`
 
 ## 1.0.0
 
