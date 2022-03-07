@@ -4,7 +4,7 @@ import { ESLint } from '../src/index';
 import getFiles from './utils/getFiles';
 
 describe('ESLint', () => {
-  const fixturesDir = path.join(__dirname, '..', '__testFixtures__');
+  const fixturesDir = path.join(__dirname, '__fixtures__');
   const files = getFiles(fixturesDir);
 
   const eslint = new ESLint({

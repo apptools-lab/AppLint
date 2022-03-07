@@ -4,7 +4,7 @@ import prettier from 'prettier';
 import { getPrettierConfig } from '../dist';
 import type { RuleKey } from '../dist';
 
-const testFixturesDir = path.join(__dirname, '..', '__testFixtures__');
+const testFixturesDir = path.join(__dirname, '__fixtures__');
 
 describe('getPrettierConfig API', () => {
   test('common', async () => {

@@ -6,7 +6,7 @@
   },
   "exclude": [
     "__tests__",
-    "__testFixtures__",
+    "dist",
     "jest.config.js"
   ]
 }

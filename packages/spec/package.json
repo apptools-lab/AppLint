@@ -1,6 +1,6 @@
 {
   "name": "@applint/spec",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
   "main": "dist/index.js",
   "files": [
@@ -43,7 +43,10 @@
     "eslint-plugin-vue": "^8.4.1",
     "require-all": "^3.0.0",
     "stylelint-scss": "^4.1.0",
-    "vue-eslint-parser": "^8.2.0"
+    "vue-eslint-parser": "^8.2.0",
+    "postcss": "^8.4.7",
+    "postcss-scss": "^4.0.3",
+    "postcss-less": "^6.0.0"
   },
   "devDependencies": {
     "@commitlint/lint": "^16.0.0",

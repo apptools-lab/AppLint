@@ -7,7 +7,6 @@
   "exclude": [
     "examples",
     "__tests__",
-    "__testFixtures__",
     "jest.config.js"
   ]
 }
