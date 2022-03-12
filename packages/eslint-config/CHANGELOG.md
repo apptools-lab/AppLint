@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+- chore: remove `parserOptions.createDefaultProgram` and `parserOptions.project` because it's too slow. Also remove `@typescript-eslint/no-unnecessary-type-arguments`, `@typescript-eslint/prefer-nullish-coalescing`, `@typescript-eslint/await-thenable`, `@typescript-eslint/no-confusing-void-expression`, `@typescript-eslint/promise-function-async`, `@typescript-eslint/no-unnecessary-type-assertion`, `@typescript-eslint/non-nullable-type-assertion-style`
+
 ## 1.1.0
 
 - feat: add typescript strict rules

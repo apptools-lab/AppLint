@@ -1,4 +1,8 @@
 module.exports = {
+  parserOptions: {
+    projects: './tsconfig.json',
+    createDefaultProgram: true,
+  },
   rules: {
     /**
      * 不强制数组类型，[] 与 Array 均可，如 string[] 与 Array<string>

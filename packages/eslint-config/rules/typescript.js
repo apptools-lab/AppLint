@@ -16,8 +16,6 @@ module.exports = {
     'import/extensions': ['.js', '.ts', '.mjs'],
   },
   parserOptions: {
-    project: './tsconfig.json',
-    createDefaultProgram: true, // 兼容未在 tsconfig.json 中包含的文件
     extraFileExtensions: ['.vue'],
   },
   rules: {
@@ -132,22 +130,12 @@ module.exports = {
     // 3. 对于函数类型，应使用入参和返回值被标注的具体类型
     '@typescript-eslint/ban-types': 'error',
 
-    // 不允许返回一个类型是 void 的表达式
-    '@typescript-eslint/no-confusing-void-expression': 'error',
-
     // 不允许不必要的类型标注，但允许类的属性成员进行额外标注
     '@typescript-eslint/no-inferrable-types': 'error',
-
-    // 使用泛型时，不允许指定与默认类型参数一致的类型参数
-    '@typescript-eslint/no-unnecessary-type-arguments': 'error',
 
     // 不允许与默认约束一致的泛型约束
     // 在 TS 3.9 版本以后，对于未指定的泛型约束，默认使用 unknown ，在这之前则是 any
     '@typescript-eslint/no-unnecessary-type-constraint': 'error',
-
-    // 使用可选链式表达式而不是逻辑与运算符
-    // 比如：使用 a?.b 代替 a && a.b，语法上更简洁
-    '@typescript-eslint/prefer-nullish-coalescing': 'warn',
 
     // 不允许非空断言与空值合并同时使用
     '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'warn',
@@ -171,12 +159,6 @@ module.exports = {
 
     // 对于枚举成员值，只允许使用普通字符串、数字、null、正则，而不允许变量复制、模板字符串等需要计算的操作
     '@typescript-eslint/prefer-literal-enum-member': 'warn',
-
-    // 只允许对异步函数、Promise、PromiseLike 使用 await 调用
-    '@typescript-eslint/await-thenable': 'warn',
-
-    // 返回 Promise 的函数必须被标记为 async
-    '@typescript-eslint/promise-function-async': 'error',
 
     // 约束使用 import type {} 进行类型的导入
     '@typescript-eslint/consistent-type-imports': 'error',
@@ -202,12 +184,6 @@ module.exports = {
 
     // 不允许额外的非空断言
     '@typescript-eslint/no-extra-non-null-assertion': 'error',
-
-    // 不允许与实际值一致的类型断言
-    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-
-    // 首选非空断言而不是显式类型转换
-    '@typescript-eslint/non-nullable-type-assertion-style': 'error',
 
     // 使用 as 进行类型断言而不是 <>
     '@typescript-eslint/consistent-type-assertions': 'warn',
