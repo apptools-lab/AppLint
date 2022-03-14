@@ -1,5 +1,9 @@
 # @applint/applint
 
+## 1.1.1
+
+- fix: not specify `parserOptions.tsconfigRootDir` in eslint config
+
 ## 1.1.0
 
 - feat: support scan specified rule in `.eslintrc.js`
