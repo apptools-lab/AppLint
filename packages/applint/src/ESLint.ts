@@ -20,6 +20,9 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
     // get rule key in `.eslintrc.js`
     this.ruleKey = (this.getRuleKeyInConfigFile(configFilename, apiName) || this.ruleKey) as RuleKey;
     this.config = getESLintConfig(this.ruleKey) as ESLinter.Config;
+    // specify `parserOptions.tsconfigRootDir`
+    this.config.parserOptions = this.config.parserOptions || {};
+    this.config.parserOptions = { ...this.config.parserOptions, tsconfigRootDir: this.directory };
     this.targetFiles = this.getTargetFiles(ignoreFilename, supportiveFileRegExp);
   }
 
