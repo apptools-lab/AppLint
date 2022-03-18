@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+- fix: eslint 8 breaks `indent` rule when using decorators. Ref: <https://github.com/eslint/eslint/issues/15299#issuecomment-968099681>
+
 ## 1.1.0
 
 - feat: add typescript strict rules
