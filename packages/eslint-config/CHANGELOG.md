@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.2
+
+- fix: add `allowSingleLine` options to `@typescript-eslint/brace-style` rule
+
 ## 1.1.1
 
 - fix: eslint 8 breaks `indent` rule when using decorators. Ref: <https://github.com/eslint/eslint/issues/15299#issuecomment-968099681>
