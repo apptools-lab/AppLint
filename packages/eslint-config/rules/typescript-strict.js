@@ -1,6 +1,6 @@
 module.exports = {
   parserOptions: {
-    projects: './tsconfig.json',
+    project: './tsconfig.json',
     createDefaultProgram: true,
   },
   rules: {
