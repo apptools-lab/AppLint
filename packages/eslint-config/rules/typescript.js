@@ -116,7 +116,9 @@ module.exports = {
     // 对于非空代码块，采用 Egyptian Brackets 风格
     // 增加对 enum、interface、namespace、module 的支持
     'brace-style': 'off',
-    '@typescript-eslint/brace-style': 'error',
+    '@typescript-eslint/brace-style': ['error', '1tbs', {
+      allowSingleLine: true,
+    }],
 
     // 不要使用 new Array() 和 Array() 创建数组，除非为了构造某一长度的空数组
     'no-array-constructor': 'off',
