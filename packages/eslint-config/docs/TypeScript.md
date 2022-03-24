@@ -2,8 +2,6 @@
 
 **本文档未包含的编码风格说明均默认遵循[《JavaScript 编码规范》](packages/eslint-config/docs/javascript.md)编码规范。**
 
-## 编码风格
-
 ### 1. 空格
 
 **1.1 运算符两侧需要有空格。[@typescript-eslint/space-infix-ops](https://typescript-eslint.io/rules/space-infix-ops)**
@@ -379,40 +377,7 @@ const curly1: number = 1;
 const curly2: Record<'a', string> = { a: 'string' };
 ```
 
-**2.2 不允许返回一个类型是 void 的表达式。[@typescript-eslint/no-confusing-void-expression](https://typescript-eslint.io/rules/no-confusing-void-expression)**
-
-```typescript
-// bad
-console.log(alert('Are you sure?'));  // alert 不会返回任何值
-
-promise.then(value => window.postMessage(value));
-
-function doSomething() {
-  if (!somethingToDo) {
-    return console.error('Nothing to do!');
-  }
-
-  console.log('Doing a thing...');
-}
-
-// good
-alert('Hello, world!');
-
-promise.then(value => {
-  window.postMessage(value);
-});
-
-function doSomething() {
-  if (!somethingToDo) {
-    console.error('Nothing to do!');
-    return;
-  }
-
-  console.log('Doing a thing...');
-}
-```
-
-**2.3 不允许不必要的类型标注，但允许类的属性成员进行额外标注。[@typescript-eslint/no-inferrable-types](https://typescript-eslint.io/rules/no-inferrable-types)**
+**2.2 不允许不必要的类型标注，但允许类的属性成员进行额外标注。[@typescript-eslint/no-inferrable-types](https://typescript-eslint.io/rules/no-inferrable-types)**
 
 ```typescript
 // bad
@@ -488,25 +453,7 @@ class Foo {
 function fn(a = 5, b = true) {}
 ```
 
-**2.4 不允许指定与默认类型参数一致的类型参数。[@typescript-eslint/no-unnecessary-type-arguments](https://typescript-eslint.io/rules/no-unnecessary-type-arguments)**
-
-```typescript
-// bad
-function f<T = number>() {}
-f<number>();
-
-function g<T = number, U = string>() {}
-g<string, string>();
-
-// good
-function f<T = number>() {}
-f<string>();
-
-function g<T = number, U = string>() {}
-g<number, number>();
-```
-
-**2.5 不允许与默认约束一致的泛型约束。[@typescript-eslint/no-unnecessary-type-constraint](https://typescript-eslint.io/rules/no-unnecessary-type-constraint)**
+**2.3 不允许与默认约束一致的泛型约束。[@typescript-eslint/no-unnecessary-type-constraint](https://typescript-eslint.io/rules/no-unnecessary-type-constraint)**
 
 在 TS 3.9 版本以后，对于未指定的泛型约束，默认使用 `unknown` ，在这之前则是 `any`
 
@@ -521,23 +468,7 @@ interface Foo<T> {}
 
 ### 3. 运算符
 
-**3.1 使用可选链式表达式而不是逻辑与运算符。[@typescript-eslint/prefer-nullish-coalescing](https://typescript-eslint.io/rules/prefer-nullish-coalescing)**
-
-使用 `a?.b` 代替 `a && a.b`，语法上更简洁。
-
-```typescript
-// bad
-foo && foo.a && foo.a.b && foo.a.b.c;
-foo && foo['a'] && foo['a'].b && foo['a'].b.c;
-foo && foo.a && foo.a.b && foo.a.b.method && foo.a.b.method();
-
-// good
-foo?.a?.b?.c;
-foo?.['a']?.b?.c;
-foo?.a?.b?.method?.();
-```
-
-**3.2 不允许非空断言与空值合并同时使用。[@typescript-eslint/no-non-null-asserted-nullish-coalescing](https://typescript-eslint.io/rules/no-non-null-asserted-nullish-coalescing)**
+**3.1 不允许非空断言与空值合并同时使用。[@typescript-eslint/no-non-null-asserted-nullish-coalescing](https://typescript-eslint.io/rules/no-non-null-asserted-nullish-coalescing)**
 
 ```typescript
 // bad
@@ -646,59 +577,9 @@ class Foo {
 }
 ```
 
-### 6. 类
+### 6. 枚举
 
-**6.1 类中的方法、参数的可访问性需要被显示标注。[@typescript-eslint/explicit-member-accessibility](https://typescript-eslint.io/rules/explicit-member-accessibility)**
-
-比如在调用该类时，如果设置了 `private` 修饰符，一定程度上可以避免类里的变量值被修改。`public` 可省略。
-
-```typescript
-// { accessibility: 'no-public' }
-// bad
-class Animal {
-  public constructor(public breed, name) {
-    // Parameter property and constructor
-    this.animalName = name;
-  }
-  animalName: string; // Property
-  get name(): string {
-    // get accessor
-    return this.animalName;
-  }
-  set name(value: string) {
-    // set accessor
-    this.animalName = value;
-  }
- 
-  walk() {
-    // method
-  }
-}
-
-// good
-class Animal {
-  public constructor(public breed, name) {
-    // Parameter property and constructor
-    this.animalName = name;
-  }
-  private animalName: string; // Property
-  get name(): string {
-    // get accessor
-    return this.animalName;
-  }
-  set name(value: string) {
-    // set accessor
-    this.animalName = value;
-  }
-  private walk() {
-    // method
-  }
-}
-```
-
-### 7. 枚举
-
-**7.1 对于枚举成员值，只允许使用普通字符串、数字、null、正则，而不允许变量复制、模板字符串等需要计算的操作。[@typescript-eslint/prefer-literal-enum-member](https://typescript-eslint.io/rules/prefer-literal-enum-member/)**
+**6.1 对于枚举成员值，只允许使用普通字符串、数字、null、正则，而不允许变量复制、模板字符串等需要计算的操作。[@typescript-eslint/prefer-literal-enum-member](https://typescript-eslint.io/rules/prefer-literal-enum-member/)**
 
 可能会在运行时动态修改枚举成员，导致可能出现异常行为。
 
@@ -721,45 +602,9 @@ enum Valid {
 }
 ```
 
-### 8. Promise
+### 7. 模块
 
-**8.1 只允许对异步函数、Promise、PromiseLike 使用 await 调用。[@typescript-eslint/await-thenable](https://typescript-eslint.io/rules/await-thenable)**
-
-```typescript
-// bad
-await 'value';
-
-const createValue = () => 'value';
-await createValue();
-
-// good
-await Promise.resolve('value');
-
-const createValue = async () => 'value';
-await createValue();
-```
-
-**8.2 返回 Promise 的函数必须被标记为 async。[@typescript-eslint/promise-function-async](https://typescript-eslint.io/rules/promise-function-async)**
-
-```typescript
-// bad
-const arrowFunctionReturnsPromise = () => Promise.resolve('value');
-
-function functionReturnsPromise() {
-  return Promise.resolve('value');
-}
-
-// good
-const arrowFunctionReturnsPromise = async () => Promise.resolve('value');
-
-async function functionReturnsPromise() {
-  return Promise.resolve('value');
-}
-```
-
-### 9. 模块
-
-**9.1 约束使用 `import type {}` 进行类型的导入。[@typescript-eslint/consistent-type-imports](https://typescript-eslint.io/rules/consistent-type-imports/)**
+**7.1 约束使用 `import type {}` 进行类型的导入。[@typescript-eslint/consistent-type-imports](https://typescript-eslint.io/rules/consistent-type-imports/)**
 
 - TypeScript 3.8 增加对纯类型导入的支持，可以使得 TS 编译器进行优化。另外，TypeScript 4.5 支持了类型与值的混合导入：`import { foo, type Foo }`
 - 通过拆分值导入与类型导入来获得更清晰地项目结构
@@ -779,7 +624,7 @@ type T = Foo;
 const x: Bar = 1;
 ```
 
-**9.2 不允许对同一模块重复导入。[@typescript-eslint/no-duplicate-imports](https://typescript-eslint.io/rules/no-duplicate-imports)**
+**7.2 不允许对同一模块重复导入。[@typescript-eslint/no-duplicate-imports](https://typescript-eslint.io/rules/no-duplicate-imports)**
 继承于 [no-duplicate-imports](https://eslint.org/docs/rules/no-duplicate-imports)，此规则增加对类型导入的支持，类型可重复导入。
 
 ```typescript
@@ -793,9 +638,9 @@ import foo, { named1, named2 } from 'foo';
 import type { Foo } from 'foo';
 ```
 
-### 10. namespace
+### 8. namespace
 
-**10.1 禁止使用 module 来定义命名空间。[@typescript-eslint/prefer-namespace-keyword](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/prefer-namespace-keyword.md)**
+**88.1 禁止使用 module 来定义命名空间。[@typescript-eslint/prefer-namespace-keyword](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/prefer-namespace-keyword.md)**
 
 module 已经成为 JS 语言的关键字，应避免 TypeScript 模块与 ES2015 模块混淆。declare module 不做限制。
 
@@ -808,9 +653,9 @@ namespace Foo {}
 declare namespace Foo {}
 ```
 
-### 11. interface
+### 9. interface
 
-**11.1 接口中的方法使用属性的方式定义。[@typescript-eslint/method-signature-style](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md)**
+**9.1 接口中的方法使用属性的方式定义。[@typescript-eslint/method-signature-style](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md)**
 
 使用属性去定义接口中的方法，可以获得更严格的检查。[相关 PR](https://github.com/microsoft/TypeScript/pull/18654)。
 
@@ -843,7 +688,7 @@ interface T3 {
 }
 ```
 
-**11.2 不允许定义空的接口，允许单继承下的空接口。[@typescript-eslint/no-empty-interface](https://typescript-eslint.io/rules/no-empty-interface)**
+**9.2 不允许定义空的接口，允许单继承下的空接口。[@typescript-eslint/no-empty-interface](https://typescript-eslint.io/rules/no-empty-interface)**
 
 ```typescript
 // bad
@@ -857,23 +702,9 @@ interface Foo {
 interface Baz extends Foo, Bar {}
 ```
 
-**11.3 对于对象类型，优先使用 interface 定义。[@typescript-eslint/consistent-type-definitions](https://typescript-eslint.io/rules/consistent-type-definitions)**
+### 10. 断言
 
-`type` 应当用于声明联合类型、函数类型、工具类型。
-
-```typescript
-// bad
-type T = { x: number };
-
-// good
-interface T {
-  x: number;
-}
-```
-
-### 12. 断言
-
-**12.1 禁止使用容易混淆的非空断言。[@typescript-eslint/no-confusing-non-null-assertion](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-confusing-non-null-assertion.md)**
+**10.1 禁止使用容易混淆的非空断言。[@typescript-eslint/no-confusing-non-null-assertion](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-confusing-non-null-assertion.md)**
 
 在相等比较运算符（`==` 或 `===`）前使用非空断言（`!`）很容易和不等运算符（`!=` 或 `!==`）混淆，不建议使用。
 
@@ -894,7 +725,7 @@ const isEqualsBar = foo.bar == 'hello';
 const isEqualsNum = (1 + foo.num!) == 2;
 ```
 
-**12.2 不允许额外的非空断言。[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion/)**
+**10.2 不允许额外的非空断言。[@typescript-eslint/no-extra-non-null-assertion](https://typescript-eslint.io/rules/no-extra-non-null-assertion/)**
 
 ```typescript
 // bad
@@ -922,43 +753,7 @@ function foo(bar?: { n: number }) {
 }
 ```
 
-**12.3 不允许与实际值一致的类型断言。[@typescript-eslint/no-unnecessary-type-assertion](https://typescript-eslint.io/rules/no-unnecessary-type-assertion)**
-
-```typescript
-// bad
-const foo = 3;
-const bar = foo!;
-
-const foo = <3>3;
-
-type Foo = 3;
-const foo = <Foo>3;
-
-// good
-const foo = <number>3;
-
-const foo = 3 as number;
-
-const foo = 'foo' as const;
-```
-
-**12.4 首选非空断言而不是显式类型转换。[@typescript-eslint/non-nullable-type-assertion-style](https://typescript-eslint.io/rules/non-nullable-type-assertion-style)**
-
-```typescript
-// bad
-const maybe = Math.random() > 0.5 ? '' : undefined;
-
-const definitely = maybe as string;
-const alsoDefinitely = <string>maybe;
-
-// good
-const maybe = Math.random() > 0.5 ? '' : undefined;
-
-const definitely = maybe!;
-const alsoDefinitely = maybe!;
-```
-
-**12.5 使用 `as` 进行类型断言而不是 `<>`。[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)**
+**10.3 使用 `as` 进行类型断言而不是 `<>`。[@typescript-eslint/consistent-type-assertions](https://typescript-eslint.io/rules/consistent-type-assertions)**
 
 - 使用 `<>` 进行类型断言，会出现 JSX 语法冲突的问题
 
@@ -970,9 +765,9 @@ const x = <number>y;
 const x = y as number;
 ```
 
-### 13. 注释
+### 11. 注释
 
-**13.1 禁止使用 `tslint:<rule-flag>` 等相关注释，tslint 已经不再维护了。[@typescript-eslint/ban-tslint-comment](https://typescript-eslint.io/rules/ban-tslint-comment/)**
+**11.1 禁止使用 `tslint:<rule-flag>` 等相关注释，tslint 已经不再维护了。[@typescript-eslint/ban-tslint-comment](https://typescript-eslint.io/rules/ban-tslint-comment/)**
 
 ```typescript
 // bad
@@ -990,7 +785,7 @@ someCode(); // tslint:disable-line
 someCode(); // This is a comment that just happens to mention tslint
 ```
 
-**13.2 禁止使用其他 `@ts` 规则，除非提供必要的说明。推荐使用 `ts-expect-error` 而不是 `ts-ignore`。[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)[@typescript-eslint/prefer-ts-expect-error](https://typescript-eslint.io/rules/prefer-ts-expect-error)**
+**11.2 禁止使用其他 `@ts` 规则，除非提供必要的说明。推荐使用 `ts-expect-error` 而不是 `ts-ignore`。[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)[@typescript-eslint/prefer-ts-expect-error](https://typescript-eslint.io/rules/prefer-ts-expect-error)**
 
 - 避免开发者随意使用 `@ts-` 指令
 - `ts-ignore` 不会检查下一行是否真的存在一个类型错误，只会直接禁用掉对下一行的检查。而 `ts-expect-error` 会在下一行实际并不存在错误时给出警告
