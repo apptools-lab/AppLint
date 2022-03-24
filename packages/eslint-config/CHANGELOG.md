@@ -3,6 +3,8 @@
 ## 1.1.2
 
 - fix: add `allowSingleLine` options to `@typescript-eslint/brace-style` rule
+- chore: remove `parserOptions.createDefaultProgram` and `parserOptions.project` because it's too slow. Also remove `@typescript-eslint/no-unnecessary-type-arguments`, `@typescript-eslint/prefer-nullish-coalescing`, `@typescript-eslint/await-thenable`, `@typescript-eslint/no-confusing-void-expression`, `@typescript-eslint/promise-function-async`, `@typescript-eslint/no-unnecessary-type-assertion`, `@typescript-eslint/non-nullable-type-assertion-style`
+- chore: remove `@typescript-eslint/explicit-member-accessibility`、`@typescript-eslint/consistent-type-definitions`
 
 ## 1.1.1
 
