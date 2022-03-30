@@ -186,9 +186,6 @@ module.exports = {
 
     // 禁止使用其他 @ts 规则，除非提供必要的说明。
     '@typescript-eslint/ban-ts-comment': 'warn',
-
-    // 推荐使用 ts-expect-error 而不是 ts-ignore
-    '@typescript-eslint/prefer-ts-expect-error': 'error',
   },
   overrides: [
     {

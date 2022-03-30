@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.4
+
+- chore: remove `@typescript-eslint/prefer-ts-expect-error` for that it maybe will cause ts compile error
+
 ## 1.1.3
 
 - chore: remove `@typescript-eslint/consistent-type-imports` for that it depends on typescript v3.8+
