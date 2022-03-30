@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.3
+
+- chore: remove `@typescript-eslint/consistent-type-imports` for that it depends on typescript v3.8+
+
 ## 1.1.2
 
 - fix: add `allowSingleLine` options to `@typescript-eslint/brace-style` rule
