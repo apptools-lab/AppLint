@@ -185,7 +185,14 @@ module.exports = {
     '@typescript-eslint/ban-tslint-comment': 'error',
 
     // 禁止使用其他 @ts 规则，除非提供必要的说明。
-    '@typescript-eslint/ban-ts-comment': 'warn',
+    '@typescript-eslint/ban-ts-comment': [
+      'warn',
+      {
+        'ts-expect-error': 'allow-with-description',
+        'ts-ignore': 'allow-with-description',
+        'ts-nocheck': 'allow-with-description',
+      },
+    ],
   },
   overrides: [
     {
