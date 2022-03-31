@@ -2,6 +2,8 @@
 
 **本文档未包含的编码风格说明均默认遵循[《JavaScript 编码规范》](packages/eslint-config/docs/javascript.md)编码规范。**
 
+## 编码风格
+
 ### 1. 空格
 
 **1.1 运算符两侧需要有空格。[@typescript-eslint/space-infix-ops](https://typescript-eslint.io/rules/space-infix-ops)**
@@ -604,27 +606,7 @@ enum Valid {
 
 ### 7. 模块
 
-**7.1 约束使用 `import type {}` 进行类型的导入。[@typescript-eslint/consistent-type-imports](https://typescript-eslint.io/rules/consistent-type-imports/)**
-
-- TypeScript 3.8 增加对纯类型导入的支持，可以使得 TS 编译器进行优化。另外，TypeScript 4.5 支持了类型与值的混合导入：`import { foo, type Foo }`
-- 通过拆分值导入与类型导入来获得更清晰地项目结构
-- 值导入与类型导入在 TypeScript 中使用不同的堆空间来存放，因此无须担心循环依赖（所以你可以父组件导入子组件，子组件导入定义在父组件中的类型这种）
-
-```typescript
-// bad
-import { Foo } from 'Foo';
-import Bar from 'Bar';
-type T = Foo;
-const x: Bar = 1;
-
-// good
-import type { Foo } from 'Foo';
-import type Bar from 'Bar';
-type T = Foo;
-const x: Bar = 1;
-```
-
-**7.2 不允许对同一模块重复导入。[@typescript-eslint/no-duplicate-imports](https://typescript-eslint.io/rules/no-duplicate-imports)**
+**7.1 不允许对同一模块重复导入。[@typescript-eslint/no-duplicate-imports](https://typescript-eslint.io/rules/no-duplicate-imports)**
 继承于 [no-duplicate-imports](https://eslint.org/docs/rules/no-duplicate-imports)，此规则增加对类型导入的支持，类型可重复导入。
 
 ```typescript
@@ -785,31 +767,20 @@ someCode(); // tslint:disable-line
 someCode(); // This is a comment that just happens to mention tslint
 ```
 
-**11.2 禁止使用其他 `@ts` 规则，除非提供必要的说明。推荐使用 `ts-expect-error` 而不是 `ts-ignore`。[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)[@typescript-eslint/prefer-ts-expect-error](https://typescript-eslint.io/rules/prefer-ts-expect-error)**
+**11.2 禁止使用其他 `@ts` 规则，除非提供必要的说明。[@typescript-eslint/ban-ts-comment](https://typescript-eslint.io/rules/ban-ts-comment)
 
 - 避免开发者随意使用 `@ts-` 指令
-- `ts-ignore` 不会检查下一行是否真的存在一个类型错误，只会直接禁用掉对下一行的检查。而 `ts-expect-error` 会在下一行实际并不存在错误时给出警告
 
 ```typescript
 // bad
 if (false) {
-  // @ts-expect-error
-  console.log('hello');
-}
-if (false) {
-  /* @ts-expect-error */
+  // @ts-ignore
   console.log('hello');
 }
 
 // good
 if (false) {
-  // @ts-expect-error: Unreachable code error
-  console.log('hello');
-}
-if (false) {
-  /*
-  @ts-expect-error: Unreachable code error
-  */
+  // @ts-ignore: Unreachable code error
   console.log('hello');
 }
 ```

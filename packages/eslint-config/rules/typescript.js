@@ -159,9 +159,6 @@ module.exports = {
     // 对于枚举成员值，只允许使用普通字符串、数字、null、正则，而不允许变量复制、模板字符串等需要计算的操作
     '@typescript-eslint/prefer-literal-enum-member': 'warn',
 
-    // 约束使用 import type {} 进行类型的导入
-    '@typescript-eslint/consistent-type-imports': 'error',
-
     // 不允许对同一模块重复导入，类型可重复导入
     'no-duplicate-imports': 'off',
     '@typescript-eslint/no-duplicate-imports': 'warn',
@@ -188,10 +185,14 @@ module.exports = {
     '@typescript-eslint/ban-tslint-comment': 'error',
 
     // 禁止使用其他 @ts 规则，除非提供必要的说明。
-    '@typescript-eslint/ban-ts-comment': 'warn',
-
-    // 推荐使用 ts-expect-error 而不是 ts-ignore
-    '@typescript-eslint/prefer-ts-expect-error': 'error',
+    '@typescript-eslint/ban-ts-comment': [
+      'warn',
+      {
+        'ts-expect-error': 'allow-with-description',
+        'ts-ignore': 'allow-with-description',
+        'ts-nocheck': 'allow-with-description',
+      },
+    ],
   },
   overrides: [
     {
