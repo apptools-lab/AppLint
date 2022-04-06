@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.5
+
+- fix: add rule `jsx-closing-bracket-location` option `line-aligned` to fix jsx code can't be auto fix
+
 ## 1.1.4
 
 - chore: remove `@typescript-eslint/prefer-ts-expect-error` for that it maybe will cause ts compile error

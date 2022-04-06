@@ -46,8 +46,8 @@ module.exports = {
     // 没有子组件的标签需要写成自闭合标签
     'react/self-closing-comp': 'error',
 
-    // 标签属性写成多行时，结束标签另起一行，并且结束标签和开始标签对齐
-    'react/jsx-closing-bracket-location': 'error',
+    // 标签属性写成多行时，结束标签另起一行，并且与包含开标签的行对齐
+    'react/jsx-closing-bracket-location': ['error', 'line-aligned'],
 
     // 生命周期方法不应该使用箭头函数，而是原型上的方法
     'react/no-arrow-function-lifecycle': 'error',
