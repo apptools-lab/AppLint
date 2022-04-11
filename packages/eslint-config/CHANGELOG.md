@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.6
+
+- fix: `@typescript-eslint/ban-types` rule can not be auto fixed in some cases
+
 ## 1.1.5
 
 - fix: add rule `jsx-closing-bracket-location` option `line-aligned` to fix jsx code can't be auto fix
