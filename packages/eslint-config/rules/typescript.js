@@ -132,7 +132,7 @@ module.exports = {
     // 1. 不使用大写的原始类型，应该使用小写的类型
     // 2. 对于对象类型，应使用 Record<string, unknown>，而不是 object
     // 3. 对于函数类型，应使用入参和返回值被标注的具体类型
-    '@typescript-eslint/ban-types': 'error',
+    '@typescript-eslint/ban-types': 'warn',
 
     // 不允许不必要的类型标注，但允许类的属性成员进行额外标注
     '@typescript-eslint/no-inferrable-types': 'error',
