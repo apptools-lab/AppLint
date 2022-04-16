@@ -25,21 +25,26 @@ export default function (fileInfo: FileInfo, api: API, options: Options) {
   return JSON.stringify(newPackageJSON);
 }
 
-
 function addAppLintSpecToDependency(packageJSON: PackageJSON): PackageJSON {
   const deprecatedDependencies = ['@iceworks/spec', '@ice/spec'];
   const { dependencies = {}, devDependencies = {} } = packageJSON;
+  if (packageName in dependencies || packageName in devDependencies) {
+    // if @applint/spec has existed, no need to modify devDependencies
+    return newPackageJSON;
+  }
+
   for (const deprecatedDependency of deprecatedDependencies) {
     const dependencyObj = { dependencies, devDependencies };
     for (const key in dependencyObj) {
       const currentDependencies = dependencyObj[key];
       if (deprecatedDependency in currentDependencies) {
         delete currentDependencies[deprecatedDependency];
-        currentDependencies[packageName] = packageVersion;
-        packageJSON[key] = currentDependencies;
       }
     }
   }
 
-  return packageJSON;
+  const newPackageJSON = { ...packageJSON };
+  newPackageJSON['devDependencies'] = { ...devDependencies, [packageName]: packageVersion };
+
+  return newPackageJSON;
 }
