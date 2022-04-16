@@ -1,6 +1,6 @@
 {
   "name": "@applint/spec",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "在 ICE、Rax、React 项目中更简单接入 ESLint(support TypeScript) / Stylelint / Prettier / Commitlint 规则。",
   "main": "dist/index.js",
   "files": [
