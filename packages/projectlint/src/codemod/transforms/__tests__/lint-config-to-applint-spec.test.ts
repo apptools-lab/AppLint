@@ -1,13 +1,11 @@
 import { expect, test } from 'vitest';
 import path from 'path';
 import fse from 'fs-extra';
-import { commandSync } from 'execa';
 // @ts-ignore jscodeshift error
 import { applyTransform } from 'jscodeshift/dist/testUtils';
 import transform from '../../transforms/lint-config-to-applint-spec';
 
-const fixturesDir = path.join(__dirname, '..', '__testfixtures__/lint-config-to-applint-spec');
-commandSync('npm install', { cwd: fixturesDir });
+const fixturesDir = path.join(__dirname, '..', '__fixtures__/lint-config-to-applint-spec');
 
 test('transform @iceworks/spec to @applint/spec', async () => {
   const fixtureDir = path.join(fixturesDir, 'iceworks-spec-config');
@@ -47,4 +45,4 @@ test('transform @iceworks/spec to @applint/spec', async () => {
   } finally {
     await fse.remove(tmpFixtureDir);
   }
-}, 500000);
+});

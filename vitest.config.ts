@@ -9,5 +9,6 @@ export default defineConfig({
       '**/__tests__/__fixtures__/**',
       '**/__tests__/utils/**',
     ],
+    testTimeout: 200000,
   },
 });

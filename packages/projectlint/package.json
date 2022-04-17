@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@applint/spec": "^1.0.0",
+    "@iceworks/spec": "^1.0.0",
     "@types/ejs": "^3.1.0",
     "@types/execa": "^2.0.0",
     "@types/fs-extra": "^9.0.13",
