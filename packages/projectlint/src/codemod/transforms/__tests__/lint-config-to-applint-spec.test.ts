@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import path from 'path';
 import fse from 'fs-extra';
 import { commandSync } from 'execa';
-// @ts-ignore
+// @ts-ignore jscodeshift error
 import { applyTransform } from 'jscodeshift/dist/testUtils';
 import transform from '../../transforms/lint-config-to-applint-spec';
 
