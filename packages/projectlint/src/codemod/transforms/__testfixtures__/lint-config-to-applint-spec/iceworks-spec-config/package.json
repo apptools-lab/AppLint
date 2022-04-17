@@ -1,6 +1,12 @@
 {
+  "dependencies": {
+    "eslint-config-ali": "^14.0.0",
+    "stylelint-config-prettier": "^9.0.3"
+  },
   "devDependencies": {
-    "@iceworks/spec": "^1.0.0"
+    "@iceworks/spec": "^1.0.0",
+    "eslint": "^7.0.0",
+    "stylelint": "^13.1.0"
   },
   "scripts": {}
 }
