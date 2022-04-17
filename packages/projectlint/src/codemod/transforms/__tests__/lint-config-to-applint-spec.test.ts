@@ -22,8 +22,18 @@ test('transform @iceworks/spec to @applint/spec', async () => {
         source: input,
       },
     );
-    expect(output).toContain('@applint/spec');
-    expect(output).not.toContain('@iceworks/spec');
+    const packageJSON = JSON.parse(output);
+    const { devDependencies = {}, scripts = {} } = packageJSON;
+    expect(Object.keys(devDependencies).includes('@applint/spec')).toBeTruthy();
+    expect(Object.keys(devDependencies).includes('@iceworks/spec')).toBeFalsy();
+
+    const eslintScriptExists = Object.keys(scripts).some(key => scripts[key].includes('eslint'));
+    const stylelintScriptExists = Object.keys(scripts).some(key => scripts[key].includes('stylelint'));
+    expect(eslintScriptExists).toBeTruthy();
+    expect(stylelintScriptExists).toBeTruthy();
+
+    expect(devDependencies['eslint']).not.toBeUndefined();
+    expect(devDependencies['stylelint']).not.toBeUndefined();
   } finally {
     await fse.remove(tmpFixtureDir);
   }
