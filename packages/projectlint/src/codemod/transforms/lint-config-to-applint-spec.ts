@@ -1,5 +1,6 @@
 import path from 'path';
 import semver from 'semver';
+import fse from 'fs-extra';
 import type { API, FileInfo, Options } from 'jscodeshift';
 
 interface PackageJSON {
@@ -10,12 +11,26 @@ interface PackageJSON {
 
 interface LintConfig {
   configFiles: string[];
+  configFile: string;
+  ignoreFile: string;
   name: string;
   version: string;
   scripts: Record<string, string>;
   removedDependencyReg: RegExp;
+  configFileTemplate: string;
+  ignoreFileTemplate: string;
 }
-
+const ignoreFileTemplate = `node_modules/
+lib/
+dist/
+build/
+tests/
+coverage/
+demo/
+es/
+.rax/
+.ice/
+`;
 const packageName = '@applint/spec';
 const packageVersion = '^1.0.0';
 const deprecatedDeps = ['@iceworks/spec', '@ice/spec'];
@@ -25,6 +40,8 @@ const eslintConfig: LintConfig = {
     '.eslintrc',
     '.eslintrc.json',
   ],
+  configFile: '.eslintrc.js',
+  ignoreFile: '.eslintignore',
   name: 'eslint',
   version: '^8.0.0',
   removedDependencyReg: /eslint-.*/g,
@@ -32,6 +49,13 @@ const eslintConfig: LintConfig = {
     eslint: 'eslint --ext .js,.jsx,.ts,.tsx ./',
     'eslint:fix': 'eslint --ext .js,.jsx,.ts,.tsx ./ --fix',
   },
+  ignoreFileTemplate,
+  configFileTemplate: `
+  const { getESLintConfig } = require('@applint/spec');
+
+  // https://www.npmjs.com/package/@applint/spec
+  module.exports = getESLintConfig('<%= eslintRuleKey %>'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, 2) %><% } %>);
+  `,
 };
 const stylelintConfig: LintConfig = {
   configFiles: [
@@ -39,6 +63,8 @@ const stylelintConfig: LintConfig = {
     '.stylelintrc',
     '.stylelintrc.json',
   ],
+  configFile: '.stylelintrc.js',
+  ignoreFile: '.stylelintignore',
   name: 'stylelint',
   version: '^14.0.0',
   removedDependencyReg: /stylelint-.*/g,
@@ -46,6 +72,13 @@ const stylelintConfig: LintConfig = {
     stylelint: 'stylelint **/*.{css,scss,less}',
     'stylelint:fix': 'stylelint **/*.{css,scss,less} --fix',
   },
+  ignoreFileTemplate,
+  configFileTemplate: `
+    const { getStylelintConfig } = require('@applint/spec');
+
+    // https://www.npmjs.com/package/@applint/spec
+    module.exports = getStylelintConfig('<%= eslintRuleKey %>'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, 2) %><% } %>);
+  `,
 };
 
 export default function (fileInfo: FileInfo, api: API, options: Options) {
@@ -62,8 +95,8 @@ export default function (fileInfo: FileInfo, api: API, options: Options) {
   const deprecatedDep = findDeprecatedDep(packageJSON);
   packageJSON = addAppLintSpecToDevDependency(packageJSON, deprecatedDep);
 
-  packageJSON = handleLintConfig(packageJSON, eslintConfig);
-  packageJSON = handleLintConfig(packageJSON, stylelintConfig);
+  packageJSON = handleLintConfig(packageJSON, eslintConfig, dir);
+  packageJSON = handleLintConfig(packageJSON, stylelintConfig, dir);
 
   return JSON.stringify(packageJSON);
 }
@@ -104,8 +137,8 @@ function findDeprecatedDep(packageJSON: PackageJSON) {
 /**
  * 添加或修改配置文件、scripts 脚本、依赖包
  */
-function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig) {
-  const { scripts, name, removedDependencyReg, version } = lintConfig;
+function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string) {
+  const { scripts, name, removedDependencyReg, version, ignoreFile, ignoreFileTemplate } = lintConfig;
   let newPackageJSON = { ...packageJSON };
 
   // 1. 处理 scripts 脚本
@@ -122,6 +155,8 @@ function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig) {
   // 3. 移除 lint 插件包、规则包等
   newPackageJSON = removeDependencies(removedDependencyReg, newPackageJSON);
 
+  // 4. 处理 lintignore 文件
+  handleIgnoreFile(dir, ignoreFile, ignoreFileTemplate);
   return newPackageJSON;
 }
 
@@ -176,4 +211,33 @@ function addDepToDevDeps(packageJSON: PackageJSON, dep: string, version: string)
   const newPackageJSON = { ...packageJSON };
   newPackageJSON['devDependencies'] = { ...packageJSON.devDependencies, [dep]: version };
   return newPackageJSON;
+}
+
+function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string) {
+  const ignoreFilePath = path.join(dir, ignoreFile);
+  if (!fse.pathExistsSync(ignoreFilePath)) {
+    // 如果 ignore 文件不存在，则新增文件
+    fse.writeFileSync(ignoreFilePath, ignoreFileTemplate, 'utf-8');
+  }
+}
+
+function getCustomConfig(api: API, dir: string, configFiles: string[]) {
+  const { jscodeshift } = api;
+  let customConfig = {};
+  let originalConfig = {};
+  for (const configFile of configFiles) {
+    const configFilePath = path.join(dir, configFile);
+    if (!fse.pathExistsSync(configFilePath)) {
+      continue;
+    }
+
+    const source = fse.readFileSync(configFilePath, 'utf-8');
+    if (configFile.endsWith('.js')) {
+      // TODO:
+    } else {
+      originalConfig = JSON.parse(source);
+    }
+  }
+
+  return customConfig;
 }

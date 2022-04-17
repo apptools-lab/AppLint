@@ -34,6 +34,9 @@ test('transform @iceworks/spec to @applint/spec', async () => {
 
     expect(devDependencies['eslint']).not.toBeUndefined();
     expect(devDependencies['stylelint']).not.toBeUndefined();
+
+    expect(fse.pathExistsSync(path.join(tmpFixtureDir, '.eslintignore'))).toBeTruthy();
+    expect(fse.pathExistsSync(path.join(tmpFixtureDir, '.stylelintignore'))).toBeTruthy();
   } finally {
     await fse.remove(tmpFixtureDir);
   }
