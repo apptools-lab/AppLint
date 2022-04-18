@@ -21,18 +21,15 @@ class Codemod implements ProjectLinterImpl {
 
   private transformRules: Record<string, CodemodRule>;
 
-  private jscodeshiftArgs?: string[];
-
   private args: any[];
 
-  public constructor({ cwd, transforms, jscodeshiftArgs = [], customTransformRules = {} }: CodemodTransformParams) {
+  public constructor({ cwd, transforms, customTransformRules = {} }: CodemodTransformParams) {
     this.transformRules = { ...rules, ...customTransformRules };
     this.cwd = cwd;
-    this.jscodeshiftArgs = jscodeshiftArgs;
     this.transforms = transforms || this.getAllCodemodTransforms();
     const files = this.getFiles(cwd);
     // init jscodeshift args
-    this.args = [...files, ...jscodeshiftArgs, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
+    this.args = [...files, '--parser=tsx', '--extensions=tsx,ts,jsx,js,json', '--cpus=7'];
   }
 
   public async scan() {
