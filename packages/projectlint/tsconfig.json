@@ -10,6 +10,7 @@
     "scripts",
     "dist",
     "__tests__",
-    "__testfixtures__"
+    "__testfixtures__",
+    "bin"
   ]
 }

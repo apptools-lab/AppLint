@@ -2,6 +2,7 @@ import path from 'path';
 import semver from 'semver';
 import fse from 'fs-extra';
 import ejs from 'ejs';
+import prettier from 'prettier';
 import type { FileInfo } from 'jscodeshift';
 
 interface PackageJSON {
@@ -103,7 +104,7 @@ export default function (fileInfo: FileInfo) {
   packageJSON = handleLintConfig(packageJSON, eslintConfig, dir);
   packageJSON = handleLintConfig(packageJSON, stylelintConfig, dir);
 
-  return JSON.stringify(packageJSON);
+  return JSON.stringify(packageJSON, null, 2);
 }
 
 function addAppLintSpecToDevDependency(packageJSON: PackageJSON, deprecatedDep: string): PackageJSON {
@@ -160,7 +161,11 @@ function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir:
   // 1. 生成 lint config 文件
   const customConfig = getCustomConfig(dir, configFiles, removedConfigKeys);
   const ruleKey = generateRuleKey(packageJSON, dir);
-  fse.writeFileSync(path.join(dir, configFile), ejs.render(configFileTemplate, { ruleKey, customConfig }), 'utf8');
+  const renderContent = ejs.render(configFileTemplate, { ruleKey, customConfig });
+  const content = prettier.format(renderContent, {
+    singleQuote: true,
+  });
+  fse.writeFileSync(path.join(dir, configFile), content, 'utf8');
 
   // 2. 处理 lintignore 文件
   handleIgnoreFile(dir, ignoreFile, ignoreFileTemplate);
@@ -221,7 +226,7 @@ function removeDependencies(reg: RegExp, originalPackageJSON: PackageJSON) {
 
 function addDepToDevDeps(packageJSON: PackageJSON, dep: string, version: string) {
   const { devDependencies = {} } = packageJSON;
-  const sourceDepMajor = semver.minVersion(devDependencies[dep])?.major;
+  const sourceDepMajor = devDependencies[dep] && semver.minVersion(devDependencies[dep])?.major;
   const targetDepMajor = semver.minVersion(version)?.major;
   /**
    * 如果目标依赖版本是 ^8.0.0， devDependencies[dep] 主版本小于它才需要更新依赖。
@@ -254,8 +259,8 @@ function getCustomConfig(dir: string, configFiles: string[], removedConfigKeys: 
     const source = fse.readFileSync(configFilePath, 'utf-8');
 
     if (configFile.endsWith('.js')) {
-      // TODO: 确保依赖已安装
       try {
+        // 确保已安装 configFile 中的依赖已安装
         customConfig = require(configFilePath);
       } catch (error) {
         console.error(error);
