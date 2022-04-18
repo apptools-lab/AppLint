@@ -94,6 +94,7 @@ module.exports = {
           'JSXEmptyExpression',
           'JSXSpreadChild',
           'PropertyDefinition',
+          'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
         ],
         ignoreComments: false,
       },

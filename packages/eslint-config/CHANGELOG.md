@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- fix: eslint 8 breaks `indent` rule when using decorators in params. Ref: <https://github.com/eslint/eslint/issues/15299#issuecomment-968099681>
+
 ## 1.1.6
 
 - fix: `@typescript-eslint/ban-types` rule can not be auto fixed in some cases
