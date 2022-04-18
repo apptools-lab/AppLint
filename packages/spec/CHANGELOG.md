@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.2.1
+
+- feat: add global variable `weex` to vue config
+
 ## 1.2.0
 
 - feat: support strict rules(`react-ts-strict`, `rax-ts-strict`, `common-ts-strict`)
