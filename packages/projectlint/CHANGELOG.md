@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.0
+
+- feat: update `lint-config-to-applint-spec` codemod transform
+- feat: support run codemod transform by CLI
+
 ## 1.0.0
 
 - chore: bump version

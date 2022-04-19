@@ -1,179 +1,296 @@
-import fs from 'fs';
 import path from 'path';
+import semver from 'semver';
+import fse from 'fs-extra';
 import ejs from 'ejs';
-import type { API, FileInfo, Options } from 'jscodeshift';
+import prettier from 'prettier';
+import type { FileInfo } from 'jscodeshift';
 
-const LIB_CONFIGS: Record<string, any> = {
-  eslint: {
-    processPackageJson: {
-      recommendedVersion: '^7.22.0',
-      removePackagesReg: /eslint-.*/g, // remove all other eslint-xx packages
-    },
-    processOriginalConfig: {
-      configFileName: '.eslintrc',
-      removeConfigKeys: ['extends', 'plugins'],
-    },
-    generateFiles: {
-      ignoreFile: '.eslintignore',
-      configFile: '.eslintrc.js',
-      configFileTemplate:
-        'const { getESLintConfig } = require(\'@applint/spec\');\n' +
-        '\n' +
-        '// https://www.npmjs.com/package/@applint/spec\n' +
-        'module.exports = getESLintConfig(\'<%= eslintRuleKey %>\'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, \'  \') %><% } %>);\n',
-    },
-  },
-  stylelint: {
-    processPackageJson: {
-      recommendedVersion: '^13.7.2',
-      removePackagesReg: /stylelint-.*/g, // remove all other stylelint-xx packages
-    },
-    processOriginalConfig: {
-      configFileName: '.stylelintrc',
-      removeConfigKeys: ['extends', 'plugins'],
-    },
-    generateFiles: {
-      ignoreFile: '.stylelintignore',
-      configFile: '.stylelintrc.js',
-      configFileTemplate:
-        'const { getStylelintConfig } = require(\'@applint/spec\');\n' +
-        '\n' +
-        '// https://www.npmjs.com/package/@applint/spec\n' +
-        'module.exports = getStylelintConfig(\'<%= ruleKey %>\'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, \'  \') %><% } %>);\n',
-    },
-  },
-  prettier: {
-    processPackageJson: {
-      recommendedVersion: '^2.1.0',
-      configFileReg: /\.prettierrc\.(js|json)$/, // only process js and json file
-    },
-    generateFiles: {
-      ignoreFile: '.prettierignore',
-      configFile: '.prettierrc.js',
-      configFileTemplate:
-        'const { getPrettierConfig } = require(\'@applint/spec\');\n' +
-        '\n' +
-        '// https://www.npmjs.com/package/@applint/spec\n' +
-        'module.exports = getPrettierConfig(\'<%= ruleKey %>\'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, \'  \') %><% } %>);\n',
-    },
-  },
-};
+interface PackageJSON {
+  dependencies?: Record<string, string>;
+  devDependencies?: Record<string, string>;
+  peerDependencies?: Record<string, string>;
+  scripts?: Record<string, string>;
+}
 
-const IGNORE_FILE_TEMPLATE = `node_modules/
+interface LintConfig {
+  configFiles: string[];
+  configFile: string;
+  ignoreFile: string;
+  name: string;
+  version: string;
+  scripts: Record<string, string>;
+  removedDependencyReg: RegExp;
+  configFileTemplate: string;
+  ignoreFileTemplate: string;
+  removedConfigKeys: string[];
+}
+const ignoreFileTemplate = `node_modules/
 lib/
 dist/
 build/
 tests/
-__tests__/
 coverage/
 demo/
 es/
 .rax/
 .ice/
 `;
+const packageName = '@applint/spec';
+const packageVersion = '^1.0.0';
+const deprecatedDeps = ['@iceworks/spec', '@ice/spec'];
+const eslintConfig: LintConfig = {
+  configFiles: [
+    '.eslintrc.js',
+    '.eslintrc',
+    '.eslintrc.json',
+  ],
+  configFile: '.eslintrc.js',
+  ignoreFile: '.eslintignore',
+  name: 'eslint',
+  version: '^8.0.0',
+  removedDependencyReg: /eslint-.*/g,
+  scripts: {
+    eslint: 'eslint --ext .js,.jsx,.ts,.tsx ./',
+    'eslint:fix': 'eslint --ext .js,.jsx,.ts,.tsx ./ --fix',
+  },
+  ignoreFileTemplate,
+  configFileTemplate: `
+const { getESLintConfig } = require('@applint/spec');
 
-const SCRIPT_TEMPLATE = {
-  eslint: 'eslint --fix --ext  .js,.jsx,.ts,.tsx ./',
-  stylelint: 'stylelint "**/*.{css,scss,less}"',
-  prettier: 'prettier **/* --write',
-  lint: 'npm run eslint && npm run stylelint',
+// https://www.npmjs.com/package/@applint/spec
+module.exports = getESLintConfig('<%= ruleKey %>'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, 2) %><% } %>);
+  `,
+  removedConfigKeys: ['extends', 'plugins'],
+};
+const stylelintConfig: LintConfig = {
+  configFiles: [
+    '.stylelintrc.js',
+    '.stylelintrc',
+    '.stylelintrc.json',
+  ],
+  configFile: '.stylelintrc.js',
+  ignoreFile: '.stylelintignore',
+  name: 'stylelint',
+  version: '^14.0.0',
+  removedDependencyReg: /stylelint-.*/g,
+  scripts: {
+    stylelint: 'stylelint **/*.{css,scss,less}',
+    'stylelint:fix': 'stylelint **/*.{css,scss,less} --fix',
+  },
+  ignoreFileTemplate,
+  configFileTemplate: `
+const { getStylelintConfig } = require('@applint/spec');
+
+// https://www.npmjs.com/package/@applint/spec
+module.exports = getStylelintConfig('<%= ruleKey %>'<% if (customConfig) { %>, <%- JSON.stringify(customConfig, null, 2) %><% } %>);
+  `,
+  removedConfigKeys: ['extends', 'plugins'],
 };
 
-export default function (fileInfo: FileInfo, api: API, options: Options) {
-  const { jscodeshift } = api;
+export default function (fileInfo: FileInfo) {
   const { path: filePath, source } = fileInfo;
   const dir = path.dirname(filePath);
   const basename = path.basename(filePath);
 
-  const { projectType, projectLanguageType } = options;
-
-  let ruleKey = '';
-  let eslintRuleKey = '';
-  let customConfig: any;
-
-  // 'unknown' | 'rax' | 'react' | 'vue';
-  if (projectType === 'unknown') {
-    ruleKey = 'common';
-  } else {
-    ruleKey = projectType;
+  if (basename !== 'package.json') {
+    return source;
   }
 
-  eslintRuleKey = ruleKey;
-  if (projectLanguageType === 'ts') {
-    // 'ts' | 'js';
-    eslintRuleKey += '-ts';
+  let originalPackageJSON = JSON.parse(source);
+  let packageJSON = originalPackageJSON;
+  const deprecatedDep = findDeprecatedDep(packageJSON);
+  packageJSON = addAppLintSpecToDevDependency(packageJSON, deprecatedDep);
+
+  packageJSON = handleLintConfig(packageJSON, eslintConfig, dir);
+  packageJSON = handleLintConfig(packageJSON, stylelintConfig, dir);
+
+  return JSON.stringify(packageJSON, null, 2);
+}
+
+function addAppLintSpecToDevDependency(packageJSON: PackageJSON, deprecatedDep: string): PackageJSON {
+  if (!deprecatedDep) {
+    // 如果 @applint/spec 已经存在, 不需要修改 devDependencies
+    return packageJSON;
   }
 
-  if (basename === 'package.json') {
-    const packageJSON = JSON.parse(source);
-    const { scripts = {}, devDependencies = {} } = packageJSON;
-
-    // if @applint/spec not exists, then run.
-    if (!devDependencies['@applint/spec']) {
-      Object.assign(scripts, SCRIPT_TEMPLATE);
-      devDependencies['@applint/spec'] = 'latest';
-
-      Object.keys(LIB_CONFIGS).forEach((key) => {
-        const libConfig = LIB_CONFIGS[key];
-        const { processPackageJson, processOriginalConfig, generateFiles } = libConfig;
-
-        // 1. process package.json
-        if (processPackageJson) {
-          devDependencies[key] = processPackageJson.recommendedVersion;
-          if (processPackageJson.removePackagesReg) {
-            Object.keys(devDependencies).forEach((key) => {
-              if (processPackageJson.removePackagesReg.test(key)) {
-                delete devDependencies[key];
-              }
-            });
-          }
-        }
-
-        // 2. process original config
-        if (processOriginalConfig) {
-          let originalConfig: any;
-          // Only process js and json config file
-          const jsConfigFile = path.join(dir, `${processOriginalConfig.configFileName}.js`);
-          const jsonConfigFile = path.join(dir, `${processOriginalConfig.configFileName}.json`);
-
-          if (fs.existsSync(jsConfigFile)) {
-            const source = fs.readFileSync(jsConfigFile, 'utf-8');
-            // Only find fist level object
-            let isFirstLevelObject = true;
-            jscodeshift(source).find(jscodeshift.ObjectExpression).forEach((astPath) => {
-              if (!isFirstLevelObject) return;
-              // @ts-expect-error: astPath has no ts type
-              const { start, end } = astPath.node;
-              // eslint-disable-next-line
-              originalConfig = eval(`(${source.substring(start, end)})`);
-              isFirstLevelObject = false;
-            });
-          } else if (fs.existsSync(jsonConfigFile)) {
-            const source = fs.readFileSync(jsConfigFile, 'utf-8');
-            originalConfig = JSON.parse(source);
-          }
-
-          // Set new custom config
-          if (originalConfig) {
-            processOriginalConfig.removeConfigKeys.forEach((key: string) => {
-              delete originalConfig[key];
-            });
-            customConfig = originalConfig;
-          }
-        }
-
-        // 3. generate files
-        if (options.dry !== true && generateFiles) {
-          fs.writeFileSync(path.join(dir, generateFiles.ignoreFile), IGNORE_FILE_TEMPLATE, 'utf8');
-          fs.writeFileSync(path.join(dir, generateFiles.configFile), ejs.render(generateFiles.configFileTemplate, { ruleKey, eslintRuleKey, customConfig }), 'utf8');
-        }
-      });
-
-      return JSON.stringify(packageJSON, null, 2);
+  // 从 package.json 删除废弃的 npm 包
+  const { dependencies = {}, devDependencies = {} } = packageJSON;
+  const dependencyObj: Record<string, Record<string, string>> = { dependencies, devDependencies };
+  for (const key in dependencyObj) {
+    const currentDependencies = dependencyObj[key];
+    if (deprecatedDep in currentDependencies) {
+      delete currentDependencies[deprecatedDep];
     }
-
-    return null;
   }
 
-  return null;
+  // 添加 @applint/spec 到 package.json 的 devDependencies 对象
+  const newPackageJSON = { ...packageJSON };
+  newPackageJSON['devDependencies'] = { ...devDependencies, [packageName]: packageVersion };
+
+  return newPackageJSON;
+}
+
+/**
+ * 寻找废弃的依赖
+ * @param packageJSON
+ * @returns 如果返回空字符串，说明没找到废弃依赖；否则找到 deprecatedDeps 数组中的一个
+ */
+function findDeprecatedDep(packageJSON: PackageJSON) {
+  const { dependencies = {}, devDependencies = {} } = packageJSON;
+  return Object.keys(Object.assign({}, dependencies, devDependencies)).find(dep => deprecatedDeps.includes(dep)) || '';
+}
+
+/**
+ * 添加或修改配置文件、scripts 脚本、依赖包
+ */
+function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string) {
+  const {
+    scripts,
+    name,
+    configFiles,
+    configFile,
+    removedConfigKeys,
+    removedDependencyReg,
+    version,
+    ignoreFile,
+    ignoreFileTemplate,
+    configFileTemplate,
+  } = lintConfig;
+  let newPackageJSON = { ...packageJSON };
+
+  // 1. 生成 lint config 文件
+  const customConfig = getCustomConfig(dir, configFiles, removedConfigKeys);
+  const ruleKey = generateRuleKey(packageJSON, dir);
+  const renderContent = ejs.render(configFileTemplate, { ruleKey, customConfig });
+  const content = prettier.format(renderContent, {
+    singleQuote: true,
+  });
+  fse.writeFileSync(path.join(dir, configFile), content, 'utf8');
+
+  // 2. 处理 lintignore 文件
+  handleIgnoreFile(dir, ignoreFile, ignoreFileTemplate);
+
+  // 3. 处理 scripts 脚本
+  const existedScripts = findExistedScripts(name, packageJSON);
+  // 如果已经存在 eslint/stylelint 等用户有自定义的脚本，比如 "eslint ./" 不需要增加
+  if (!Object.keys(existedScripts).length) {
+    // 如果没有脚本，则新增新的脚本
+    newPackageJSON.scripts = { ...(packageJSON.scripts || {}), ...scripts };
+  }
+
+  // 4. 添加 eslint/stylelint 等依赖到 devDependencies
+  newPackageJSON = addDepToDevDeps(newPackageJSON, name, version);
+
+  // 5. 移除 lint 插件包、规则包等
+  newPackageJSON = removeDependencies(removedDependencyReg, newPackageJSON);
+
+  return newPackageJSON;
+}
+
+/**
+ * 根据 cli 的名称找到已存在的脚本
+ * @param cliName
+ */
+function findExistedScripts(cliName: string, packageJSON: PackageJSON) {
+  const { scripts = {} } = packageJSON;
+  const existedScripts: Record<string, string> = {};
+  for (const key of Object.keys(scripts)) {
+    const script = scripts[key];
+    if (RegExp(cliName).test(script)) {
+      existedScripts[key] = script;
+    }
+  }
+  return existedScripts;
+}
+
+function removeDependencies(reg: RegExp, originalPackageJSON: PackageJSON) {
+  const packageJSON: PackageJSON = { ...originalPackageJSON };
+  const { dependencies = {}, devDependencies = {} } = packageJSON;
+  const dependencyObj: Record<string, Record<string, string>> = { dependencies, devDependencies };
+  for (const key in dependencyObj) {
+    const currentDependencies = dependencyObj[key];
+    for (const dependency of Object.keys(currentDependencies)) {
+      if (reg.test(dependency)) {
+        delete currentDependencies[dependency];
+      }
+    }
+    if (Object.keys(currentDependencies).length) {
+      packageJSON[key as keyof PackageJSON] = currentDependencies;
+    } else {
+      delete packageJSON[key as keyof PackageJSON];
+    }
+  }
+
+  return packageJSON;
+}
+
+function addDepToDevDeps(packageJSON: PackageJSON, dep: string, version: string) {
+  const { devDependencies = {} } = packageJSON;
+  const sourceDepMajor = devDependencies[dep] && semver.minVersion(devDependencies[dep])?.major;
+  const targetDepMajor = semver.minVersion(version)?.major;
+  /**
+   * 如果目标依赖版本是 ^8.0.0， devDependencies[dep] 主版本小于它才需要更新依赖。
+   * 比如 ^7.0.0，需要更新依赖，^8.0.0、^8.12.0、^9.0.0 不需要更新依赖
+   */
+  if (devDependencies[dep] && sourceDepMajor && targetDepMajor && targetDepMajor <= sourceDepMajor) {
+    return packageJSON;
+  }
+  const newPackageJSON = { ...packageJSON };
+  newPackageJSON['devDependencies'] = { ...packageJSON.devDependencies, [dep]: version };
+  return newPackageJSON;
+}
+
+function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string) {
+  const ignoreFilePath = path.join(dir, ignoreFile);
+  if (!fse.pathExistsSync(ignoreFilePath)) {
+    // 如果 ignore 文件不存在，则新增文件
+    fse.writeFileSync(ignoreFilePath, ignoreFileTemplate, 'utf-8');
+  }
+}
+
+function getCustomConfig(dir: string, configFiles: string[], removedConfigKeys: string[]) {
+  let customConfig: Record<string, any> = {};
+
+  for (const configFile of configFiles) {
+    const configFilePath = path.join(dir, configFile);
+    if (!fse.pathExistsSync(configFilePath)) {
+      continue;
+    }
+    const source = fse.readFileSync(configFilePath, 'utf-8');
+
+    if (configFile.endsWith('.js')) {
+      try {
+        // 确保已安装 configFile 中的依赖已安装
+        customConfig = require(configFilePath);
+      } catch (error) {
+        console.error(error);
+        console.error('请先在项目根目录运行安装所有依赖后，再执行 codemod。');
+        process.exit(1);
+      }
+    } else {
+      customConfig = JSON.parse(source);
+    }
+  }
+  // 移除多余的配置项
+  removedConfigKeys.forEach((removedConfigKey: string) => {
+    delete customConfig[removedConfigKey];
+  });
+
+  return customConfig;
+}
+
+function generateRuleKey(packageJSON: PackageJSON, dir: string) {
+  const { dependencies = {}, peerDependencies = {} } = packageJSON;
+  let type = 'common';
+  if (dependencies.rax || peerDependencies.rax) {
+    type = 'rax';
+  } else if (dependencies.react || peerDependencies.react) {
+    type = 'react';
+  } else if (dependencies.vue || peerDependencies.vue) {
+    type = 'vue';
+  }
+  if (fse.pathExistsSync(path.join(dir, 'tsconfig.json'))) {
+    return `${type}-ts`;
+  }
+  return type;
 }
