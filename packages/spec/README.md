@@ -10,6 +10,14 @@ npm i --save-dev @applint/spec eslint stylelint prettier @commitlint/cli husky
 
 > 注意: 你不需要安装任何其他 Lint 插件或者插件集，@applint/spec 中已包含这部分依赖。
 
+## 快速迁移
+
+运行以下命令可一键迁移到 `@applint/spec` 中：
+
+```bash
+tnpx @applint/projectlint codemod --transform 'lint-config-to-applint-spec' --fix
+```
+
 ## 使用
 
 ### ESLint

@@ -108,18 +108,15 @@ export default function (fileInfo: FileInfo) {
 }
 
 function addAppLintSpecToDevDependency(packageJSON: PackageJSON, deprecatedDep: string): PackageJSON {
-  if (!deprecatedDep) {
-    // 如果 @applint/spec 已经存在, 不需要修改 devDependencies
-    return packageJSON;
-  }
-
-  // 从 package.json 删除废弃的 npm 包
   const { dependencies = {}, devDependencies = {} } = packageJSON;
-  const dependencyObj: Record<string, Record<string, string>> = { dependencies, devDependencies };
-  for (const key in dependencyObj) {
-    const currentDependencies = dependencyObj[key];
-    if (deprecatedDep in currentDependencies) {
-      delete currentDependencies[deprecatedDep];
+  if (deprecatedDep) {
+    // 从 package.json 删除废弃的 npm 包
+    const dependencyObj: Record<string, Record<string, string>> = { dependencies, devDependencies };
+    for (const key in dependencyObj) {
+      const currentDependencies = dependencyObj[key];
+      if (deprecatedDep in currentDependencies) {
+        delete currentDependencies[deprecatedDep];
+      }
     }
   }
 
