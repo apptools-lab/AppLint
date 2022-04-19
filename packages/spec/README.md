@@ -124,6 +124,27 @@ module.exports = getPrettierConfig('react');
 
 运行 `npm run prettier` 会使用 Prettier 对代码进行格式化。
 
+#### 配合 ESLint 使用
+
+ESLint 的某些规则可能会跟 Prettier 格式化的结果有冲突，比如 [@typescript-eslint/indent](https://github.com/typescript-eslint/typescript-eslint/issues/372) 规则。需要做以下的安装和配置来解决此问题：
+
+##### 安装
+
+```bash
+npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+```
+
+##### 配置
+
+```js
+// .eslintrc.js
+const { getESLintConfig } = require('@applint/spec');
+
+module.exports = getESLintConfig('react-ts', {
+  extends: ['prettier']
+});
+```
+
 ### Commitlint
 
 在项目根目录下创建 `.commitlintrc.js`，并加入以下配置：
