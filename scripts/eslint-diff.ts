@@ -1,11 +1,15 @@
 import { execSync } from 'child_process';
 import { ESLint } from 'eslint';
 import chalk from 'chalk';
+const baseConfig = require('../.eslintrc.js');
 
 const GIT_DIFF = 'git diff --cached --diff-filter=ACMR --name-only';
 
 (async () => {
-  const linter = new ESLint();
+  const linter = new ESLint({
+    useEslintrc: false,
+    baseConfig: baseConfig,
+  });
 
   // file level
   const fileList = execSync(GIT_DIFF).toString().split('\n');

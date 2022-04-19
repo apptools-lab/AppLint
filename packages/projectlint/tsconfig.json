@@ -8,6 +8,9 @@
   },
   "exclude": [
     "scripts",
-    "dist"
+    "dist",
+    "__tests__",
+    "__testfixtures__",
+    "bin"
   ]
 }

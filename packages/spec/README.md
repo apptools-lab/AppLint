@@ -1,6 +1,6 @@
 # @applint/spec
 
-在 ICE、Rax、React 项目中更简单接入 ESLint(支持 TypeScript) / Stylelint / Prettier / Commitlint 规则，规则阿里巴巴大淘宝前端规范保持一致。
+在 ICE、Rax、React 项目中更简单接入 ESLint(支持 TypeScript) / Stylelint / Prettier / Commitlint 规则，规则与阿里巴巴大淘宝前端规范保持一致。
 
 ## 安装
 
@@ -9,6 +9,14 @@ npm i --save-dev @applint/spec eslint stylelint prettier @commitlint/cli husky
 ```
 
 > 注意: 你不需要安装任何其他 Lint 插件或者插件集，@applint/spec 中已包含这部分依赖。
+
+## 快速迁移
+
+运行以下命令可一键迁移到 `@applint/spec` 中：
+
+```bash
+tnpx @applint/projectlint codemod --transform 'lint-config-to-applint-spec' --fix
+```
 
 ## 使用
 
@@ -20,15 +28,42 @@ npm i --save-dev @applint/spec eslint stylelint prettier @commitlint/cli husky
 // .eslintrc.js
 const { getESLintConfig } = require('@applint/spec');
 
-// getESLintConfig(rule: 'common' | 'common-ts' | 'common-ts-strict' | 'rax' | 'rax-ts' | 'rax-ts-strict' | 'react' | 'react-ts' | 'react-ts-strict' | 'vue' | 'vue-ts', customConfig?: Linter.Config);
-module.exports = getESLintConfig('react');
+// getESLintConfig(rule: 'common' | 'common-ts' | 'rax' | 'rax-ts' | 'react' | 'react-ts' | 'vue' | 'vue-ts', customConfig?: Linter.Config);
+module.exports = getESLintConfig('react', {
+  // 自定义配置
+  // rules: { 'no-console': 0 }
+});
 ```
 
 ESLint 规则基于 [@applint/eslint-config](https://www.npmjs.com/package/@applint/eslint-config)。
 
+然后在 `package.json` 中加入脚本：
+
+```diff
+{
+  "scripts": {
++   "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./",
++   "eslint:fix": "npm run eslint -- --fix"
+  }
+}
+```
+
+在终端运行 `npm run eslint` 查看项目有哪些 Lint 问题；运行 `npm run eslint:fix` 会让 ESLint 尝试修复能被自动修复的问题。
+
 #### 更严格的 TypeScript 配置
 
 如果你希望对项目中的 TypeScript 代码进行更严格的约束，可以使用 'rax-ts-strict' | 'react-ts-strict' | 'common-ts-strict' （依据你的具体场景）。
+
+```js
+// .eslintrc.js
+const { getESLintConfig } = require('@applint/spec');
+
+// getESLintConfig(rule: 'common-ts-strict' | 'rax-ts-strict' | 'react-ts-strict', customConfig?: Linter.Config);
+module.exports = getESLintConfig('react-ts-strict', {
+  // 自定义配置
+  // rules: { 'no-console': 0 }
+});
+```
 
 注意：
 
@@ -50,6 +85,19 @@ module.exports = getStylelintConfig('react');
 
 Stylelint 规则基于 [@applint/stylelint-config](https://www.npmjs.com/package/@applint/stylelint-config)。
 
+然后在 `package.json` 中加入脚本：
+
+```diff
+{
+  "scripts": {
++   "stylelint": "stylelint \"**/*.{css,scss,less}\"",
++   "stylelint:fix": "npm run stylelint -- --fix"
+  }
+}
+```
+
+在终端运行 `npm run stylelint` 查看项目有哪些 Lint 问题；运行 `npm run stylelint:fix` 会让 Stylelint 尝试修复能被自动修复的问题。
+
 ### Prettier
 
 在项目根目录下创建 `.prettierrc.js`，并加入以下配置：
@@ -63,6 +111,39 @@ module.exports = getPrettierConfig('react');
 ```
 
 规则基于 [@applint/prettier-config](https://github.com/apptools-lab/AppLint/tree/main/packages/spec/src/prettier)。
+
+然后在 `package.json` 中加入脚本：
+
+```diff
+{
+  "scripts": {
++   "prettier": "prettier **/* --write"
+  }
+}
+```
+
+运行 `npm run prettier` 会使用 Prettier 对代码进行格式化。
+
+#### 配合 ESLint 使用
+
+ESLint 的某些规则可能会跟 Prettier 格式化的结果有冲突，比如 [@typescript-eslint/indent](https://github.com/typescript-eslint/typescript-eslint/issues/372) 规则。需要做以下的安装和配置来解决此问题：
+
+##### 安装
+
+```bash
+npm install --save-dev eslint-config-prettier eslint-plugin-prettier
+```
+
+##### 配置
+
+```js
+// .eslintrc.js
+const { getESLintConfig } = require('@applint/spec');
+
+module.exports = getESLintConfig('react-ts', {
+  extends: ['prettier']
+});
+```
 
 ### Commitlint
 
