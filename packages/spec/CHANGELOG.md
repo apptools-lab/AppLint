@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.2.2
+
+- fix: disable `react/self-closing-comp` rule in rax because the self closing comp will be error in some cases
+
 ## 1.2.1
 
 - feat: add global variable `weex` to vue config
