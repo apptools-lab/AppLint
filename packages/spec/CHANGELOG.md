@@ -1,5 +1,9 @@
 # @applint/spec
 
+## 1.2.2
+
+- chore: remove `@commitlint/cli` and `prettier` peerDependencies
+
 ## 1.2.1
 
 - feat: add global variable `weex` to vue config
