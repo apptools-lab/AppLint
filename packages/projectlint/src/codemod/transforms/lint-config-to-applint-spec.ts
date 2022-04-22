@@ -141,7 +141,7 @@ function findDeprecatedDep(packageJSON: PackageJSON) {
 /**
  * 添加或修改配置文件、scripts 脚本、依赖包
  */
-function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string, dry: boolean) {
+function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string, dry?: boolean) {
   const {
     scripts,
     name,
@@ -246,7 +246,7 @@ function handleConfigFile(
   packageJSON: PackageJSON,
   configFileTemplate: string,
   configFile: string,
-  dry: boolean,
+  dry?: boolean,
 ) {
   const customConfig = getCustomConfig(dir, configFiles, removedConfigKeys);
   const ruleKey = generateRuleKey(packageJSON, dir);
@@ -254,15 +254,15 @@ function handleConfigFile(
   const content = prettier.format(renderContent, {
     singleQuote: true,
   });
-  if (dry !== true) {
+  if (!dry) {
     fse.writeFileSync(path.join(dir, configFile), content, 'utf8');
   }
 }
 
-function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string, dry: boolean) {
+function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string, dry?: boolean) {
   const ignoreFilePath = path.join(dir, ignoreFile);
   if (!fse.pathExistsSync(ignoreFilePath)) {
-    if (dry !== true) {
+    if (!dry) {
       // 如果 ignore 文件不存在，则新增文件
       fse.writeFileSync(ignoreFilePath, ignoreFileTemplate, 'utf-8');
     }
