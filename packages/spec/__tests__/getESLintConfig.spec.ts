@@ -41,19 +41,19 @@ describe('getESLintConfig API', () => {
   test('rax', async () => {
     const results = await getESLintResults('rax', [path.join(testFixturesDir, 'eslint/index.jsx')]);
     expect(results.length).toBe(1);
-    expect(results[0].messages.length).toBe(3);
+    expect(results[0].messages.length).toBe(2);
   });
 
   test('rax-ts', async () => {
     const results = await getESLintResults('rax-ts', [path.join(testFixturesDir, 'eslint/index.tsx')]);
     expect(results.length).toBe(1);
-    expect(results[0].messages.length).toBe(5);
+    expect(results[0].messages.length).toBe(4);
   });
 
   test('rax-ts-strict', async () => {
     const results = await getESLintResults('rax-ts-strict', [path.join(testFixturesDir, 'eslint/index.tsx')]);
     expect(results.length).toBe(1);
-    expect(results[0].messages.length).toBe(7);
+    expect(results[0].messages.length).toBe(6);
   });
 });
 
