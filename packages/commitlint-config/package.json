@@ -1,6 +1,6 @@
 {
   "name": "@applint/commitlint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "阿里巴巴大淘宝前端 Commitlint 可共享配置。",
   "main": "index.js",
   "repository": {
@@ -18,9 +18,5 @@
   "license": "MIT",
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^4.6.1"
-  },
-  "peerDependencies": {
-    "@commitlint/cli": ">=13.0.0",
-    "husky": ">=7.0.0"
   }
 }
