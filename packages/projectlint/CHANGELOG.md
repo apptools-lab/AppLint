@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+- fix: generate lint config file when dry run codemod
+
 ## 1.1.0
 
 - feat: update `lint-config-to-applint-spec` codemod transform

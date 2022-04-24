@@ -1,8 +1,12 @@
 # @applint/spec
 
-## 1.2.2
+## 1.2.3
 
 - fix: disable `react/self-closing-comp` rule in rax because the self closing comp will be error in some cases
+
+## 1.2.2
+
+- chore: remove `@commitlint/cli` and `prettier` peerDependencies
 
 ## 1.2.1
 

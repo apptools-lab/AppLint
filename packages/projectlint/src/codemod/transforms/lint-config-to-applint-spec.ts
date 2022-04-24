@@ -3,7 +3,7 @@ import semver from 'semver';
 import fse from 'fs-extra';
 import ejs from 'ejs';
 import prettier from 'prettier';
-import type { FileInfo } from 'jscodeshift';
+import type { API, FileInfo, Options } from 'jscodeshift';
 
 interface PackageJSON {
   dependencies?: Record<string, string>;
@@ -87,9 +87,10 @@ module.exports = getStylelintConfig('<%= ruleKey %>'<% if (customConfig) { %>, <
   removedConfigKeys: ['extends', 'plugins'],
 };
 
-export default function (fileInfo: FileInfo) {
+export default function (fileInfo: FileInfo, api: API, options: Options) {
   const { path: filePath, source } = fileInfo;
   const dir = path.dirname(filePath);
+  const { dry } = options;
   const basename = path.basename(filePath);
 
   if (basename !== 'package.json') {
@@ -101,8 +102,8 @@ export default function (fileInfo: FileInfo) {
   const deprecatedDep = findDeprecatedDep(packageJSON);
   packageJSON = addAppLintSpecToDevDependency(packageJSON, deprecatedDep);
 
-  packageJSON = handleLintConfig(packageJSON, eslintConfig, dir);
-  packageJSON = handleLintConfig(packageJSON, stylelintConfig, dir);
+  packageJSON = handleLintConfig(packageJSON, eslintConfig, dir, dry);
+  packageJSON = handleLintConfig(packageJSON, stylelintConfig, dir, dry);
 
   return JSON.stringify(packageJSON, null, 2);
 }
@@ -140,7 +141,7 @@ function findDeprecatedDep(packageJSON: PackageJSON) {
 /**
  * 添加或修改配置文件、scripts 脚本、依赖包
  */
-function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string) {
+function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir: string, dry?: boolean) {
   const {
     scripts,
     name,
@@ -156,16 +157,17 @@ function handleLintConfig(packageJSON: PackageJSON, lintConfig: LintConfig, dir:
   let newPackageJSON = { ...packageJSON };
 
   // 1. 生成 lint config 文件
-  const customConfig = getCustomConfig(dir, configFiles, removedConfigKeys);
-  const ruleKey = generateRuleKey(packageJSON, dir);
-  const renderContent = ejs.render(configFileTemplate, { ruleKey, customConfig });
-  const content = prettier.format(renderContent, {
-    singleQuote: true,
-  });
-  fse.writeFileSync(path.join(dir, configFile), content, 'utf8');
-
+  handleConfigFile(
+    dir,
+    configFiles,
+    removedConfigKeys,
+    packageJSON,
+    configFileTemplate,
+    configFile,
+    dry,
+  );
   // 2. 处理 lintignore 文件
-  handleIgnoreFile(dir, ignoreFile, ignoreFileTemplate);
+  handleIgnoreFile(dir, ignoreFile, ignoreFileTemplate, dry);
 
   // 3. 处理 scripts 脚本
   const existedScripts = findExistedScripts(name, packageJSON);
@@ -237,11 +239,33 @@ function addDepToDevDeps(packageJSON: PackageJSON, dep: string, version: string)
   return newPackageJSON;
 }
 
-function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string) {
+function handleConfigFile(
+  dir: string,
+  configFiles: string[],
+  removedConfigKeys: string[],
+  packageJSON: PackageJSON,
+  configFileTemplate: string,
+  configFile: string,
+  dry?: boolean,
+) {
+  const customConfig = getCustomConfig(dir, configFiles, removedConfigKeys);
+  const ruleKey = generateRuleKey(packageJSON, dir);
+  const renderContent = ejs.render(configFileTemplate, { ruleKey, customConfig });
+  const content = prettier.format(renderContent, {
+    singleQuote: true,
+  });
+  if (!dry) {
+    fse.writeFileSync(path.join(dir, configFile), content, 'utf8');
+  }
+}
+
+function handleIgnoreFile(dir: string, ignoreFile: string, ignoreFileTemplate: string, dry?: boolean) {
   const ignoreFilePath = path.join(dir, ignoreFile);
   if (!fse.pathExistsSync(ignoreFilePath)) {
-    // 如果 ignore 文件不存在，则新增文件
-    fse.writeFileSync(ignoreFilePath, ignoreFileTemplate, 'utf-8');
+    if (!dry) {
+      // 如果 ignore 文件不存在，则新增文件
+      fse.writeFileSync(ignoreFilePath, ignoreFileTemplate, 'utf-8');
+    }
   }
 }
 
