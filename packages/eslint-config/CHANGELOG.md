@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.8
+
+- fix: remove `@typescript-eslint/indent` rule. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/1824>
+
+## 1.1.7
+
 - fix: eslint 8 breaks `indent` rule when using decorators in params. Ref: <https://github.com/eslint/eslint/issues/15299#issuecomment-968099681>
 
 ## 1.1.6
