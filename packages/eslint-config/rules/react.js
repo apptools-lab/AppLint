@@ -55,9 +55,6 @@ module.exports = {
     // 组件 props 值为 true 时，可以忽略其值
     'react/jsx-boolean-value': 'error',
 
-    // 防止使用未知的 DOM 属性。在 JSX 中，所有的 DOM 属性和属性都应该使用 CAMELCASE，与标准的 DOM API 保持一致。
-    'react/no-unknown-property': 'error',
-
     /**
      * React Hooks 规则
      * @link https://www.npmjs.com/package/eslint-plugin-react-hooks
