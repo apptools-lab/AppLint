@@ -3,6 +3,7 @@
 ## 1.1.9
 
 - fix: `@typescript-eslint/keyword-spacing` rule will occur Unexpected space(s) before "{" in import type error. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/6063>
+- fix: `@typescript-eslint/no-inferrable-types` will be conflict with `typedef` rule
 
 ## 1.1.8
 
