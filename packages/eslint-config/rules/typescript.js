@@ -25,7 +25,13 @@ module.exports = {
 
     // 关键字前后有一个空格，并增加了对函数调用的泛型类型参数的支持。
     'keyword-spacing': 'off',
-    '@typescript-eslint/keyword-spacing': 'error',
+    '@typescript-eslint/keyword-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+      },
+    ],
 
     // 指定类型时应该正确添加空格
     '@typescript-eslint/type-annotation-spacing': 'error',

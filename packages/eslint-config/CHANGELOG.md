@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.9
+
+- fix: `@typescript-eslint/keyword-spacing` rule will occur Unexpected space(s) before "{" in import type error. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/6063>
+
 ## 1.1.8
 
 - fix: remove `@typescript-eslint/indent` rule. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/1824>
