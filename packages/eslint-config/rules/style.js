@@ -198,9 +198,6 @@ module.exports = {
     // 使用分号
     semi: ['error', 'always'],
 
-    // 一条声明语句声明一个变量
-    'one-var': ['error', 'always'],
-
     // 一行声明一个变量
     'one-var-declaration-per-line': ['error', 'always'],
 

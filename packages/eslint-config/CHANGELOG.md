@@ -5,6 +5,7 @@
 - fix: `@typescript-eslint/keyword-spacing` rule will occur Unexpected space(s) before "{" in import type error. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/6063>
 - fix: `@typescript-eslint/no-inferrable-types` will be conflict with `typedef` rule
 - chore: remove `react/no-unknown-property` rule
+- chore: remove `one-var` rule for ugly code
 
 ## 1.1.8
 
