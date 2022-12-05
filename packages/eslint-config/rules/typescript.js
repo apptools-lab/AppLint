@@ -25,7 +25,13 @@ module.exports = {
 
     // 关键字前后有一个空格，并增加了对函数调用的泛型类型参数的支持。
     'keyword-spacing': 'off',
-    '@typescript-eslint/keyword-spacing': 'error',
+    '@typescript-eslint/keyword-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+      },
+    ],
 
     // 指定类型时应该正确添加空格
     '@typescript-eslint/type-annotation-spacing': 'error',
@@ -68,9 +74,13 @@ module.exports = {
     // 对于非空代码块，采用 Egyptian Brackets 风格
     // 增加对 enum、interface、namespace、module 的支持
     'brace-style': 'off',
-    '@typescript-eslint/brace-style': ['error', '1tbs', {
-      allowSingleLine: true,
-    }],
+    '@typescript-eslint/brace-style': [
+      'error',
+      '1tbs',
+      {
+        allowSingleLine: true,
+      },
+    ],
 
     // 不要使用 new Array() 和 Array() 创建数组，除非为了构造某一长度的空数组
     'no-array-constructor': 'off',
@@ -78,9 +88,14 @@ module.exports = {
 
     // 禁止定义没有使用的变量
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn', {
-      vars: 'all', args: 'after-used', ignoreRestSiblings: true,
-    }],
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: true,
+      },
+    ],
 
     // 禁止部分值被作为类型标注，需要对每一种被禁用的类型提供特定的说明
     // 1. 不使用大写的原始类型，应该使用小写的类型
@@ -89,7 +104,13 @@ module.exports = {
     '@typescript-eslint/ban-types': 'warn',
 
     // 不允许不必要的类型标注，但允许类的属性成员进行额外标注
-    '@typescript-eslint/no-inferrable-types': 'error',
+    '@typescript-eslint/no-inferrable-types': [
+      'error',
+      {
+        ignoreParameters: true,
+        ignoreProperties: true,
+      },
+    ],
 
     // 不允许与默认约束一致的泛型约束
     // 在 TS 3.9 版本以后，对于未指定的泛型约束，默认使用 unknown ，在这之前则是 any

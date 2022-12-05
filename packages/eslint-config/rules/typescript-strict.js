@@ -130,7 +130,13 @@ module.exports = {
     ],
     'keyword-spacing': 'off',
     // fixable
-    '@typescript-eslint/keyword-spacing': ['error'],
+    '@typescript-eslint/keyword-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+      },
+    ],
     'lines-between-class-members': 'off',
     // fixable
     '@typescript-eslint/lines-between-class-members': ['error'],

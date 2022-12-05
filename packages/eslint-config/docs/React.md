@@ -289,21 +289,7 @@ const AnotherHello = createReactClass({
 });
 ```
 
-### 2. DOM 属性
-
-**2.1 防止使用未知的 DOM 属性。eslint: [react/no-unknown-property](https://github.com/yannickcr/eslint-plugin-react/blob/e3d3525bf9d2ddbb312e31edc0837293e1b391f5/docs/rules/no-unknown-property.md)**
-
-在 JSX 中，所有的 DOM 属性和属性都应该使用 CAMELCASE，与标准的 DOM API 保持一致。
-
-```jsx
-// bad
-const Hello = <div class="hello">Hello World</div>;
-
-// good
-const Hello = <div className="hello">Hello World</div>;
-```
-
-### 3. Props
+### 2. Props
 
 **3.1 组件 props 值为 true 时，可以忽略其值。eslint: [react/jsx-boolean-value](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)**
 
