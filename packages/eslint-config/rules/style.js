@@ -97,13 +97,17 @@ module.exports = {
     ],
 
     // 禁止用空行来填充块语句
-    'padded-blocks': ['error', {
-      blocks: 'never',
-      classes: 'never',
-      switches: 'never',
-    }, {
-      allowSingleLineBlocks: true,
-    }],
+    'padded-blocks': [
+      'error',
+      {
+        blocks: 'never',
+        classes: 'never',
+        switches: 'never',
+      },
+      {
+        allowSingleLineBlocks: true,
+      },
+    ],
 
     // 禁止使用多个连续空行来填充代码
     'no-multiple-empty-lines': ['error', { max: 2, maxBOF: 1 }],
@@ -121,9 +125,15 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
 
     // 对象属性名优先不实用单引号，除非包含不合法的字符
-    'quote-props': ['error', 'as-needed', {
-      keywords: false, unnecessary: true, numbers: false,
-    }],
+    'quote-props': [
+      'error',
+      'as-needed',
+      {
+        keywords: false,
+        unnecessary: true,
+        numbers: false,
+      },
+    ],
 
     // 使用字面量创建对象
     'no-new-object': 'warn',
@@ -150,14 +160,22 @@ module.exports = {
     'func-call-spacing': ['error', 'never'],
 
     // 保证对象中的键与值有空格
-    'key-spacing': ['error', {
-      beforeColon: false, afterColon: true,
-    }],
+    'key-spacing': [
+      'error',
+      {
+        beforeColon: false,
+        afterColon: true,
+      },
+    ],
 
     // 逗号的前面无空格，后面有空格
-    'comma-spacing': ['error', {
-      before: false, after: true,
-    }],
+    'comma-spacing': [
+      'error',
+      {
+        before: false,
+        after: true,
+      },
+    ],
 
     // 保证块语句的 { 符号与其前面的字符以及 } 与其后面的字符保证有一个空格
     'block-spacing': ['error', 'always'],
@@ -169,29 +187,37 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
 
     // 优先使用单引号
-    quotes: ['error', 'single', {
-      avoidEscape: true,
-    }],
+    quotes: [
+      'error',
+      'single',
+      {
+        avoidEscape: true,
+      },
+    ],
 
     // 使用分号
     semi: ['error', 'always'],
-
-    // 一条声明语句声明一个变量
-    'one-var': ['error', 'never'],
 
     // 一行声明一个变量
     'one-var-declaration-per-line': ['error', 'always'],
 
     // 使用花括号包裹多行的块语句
-    'nonblock-statement-body-position': ['error', 'beside', {
-      overrides: {
+    'nonblock-statement-body-position': [
+      'error',
+      'beside',
+      {
+        overrides: {},
       },
-    }],
+    ],
 
     // 大括号换行风格：one true brace style 风格，且单行代码块可不换行
-    'brace-style': ['error', '1tbs', {
-      allowSingleLine: true,
-    }],
+    'brace-style': [
+      'error',
+      '1tbs',
+      {
+        allowSingleLine: true,
+      },
+    ],
 
     // 避免不必要的三元表达式
     'no-unneeded-ternary': ['error', { defaultAssignment: false }],
@@ -266,11 +292,14 @@ module.exports = {
     camelcase: ['warn', { properties: 'never', ignoreDestructuring: false }],
 
     // 使用大驼峰 (PascalCase) 来命名构造器函数或类
-    'new-cap': ['warn', {
-      newIsCap: true,
-      newIsCapExceptions: [],
-      capIsNew: false,
-      capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
-    }],
+    'new-cap': [
+      'warn',
+      {
+        newIsCap: true,
+        newIsCapExceptions: [],
+        capIsNew: false,
+        capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
+      },
+    ],
   },
 };
