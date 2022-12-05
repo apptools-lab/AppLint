@@ -17,8 +17,9 @@ const defaultResult = {
     errored: false,
     output: '',
     reportedDisables: [],
+    ruleMetadata: {},
   },
-};
+} as { data: LinterResult };
 export class Stylelint extends Linter<LinterResult> {
   private config: StylelintConfig;
   private defaultOptions: LinterOptions;
