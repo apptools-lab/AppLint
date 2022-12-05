@@ -104,7 +104,13 @@ module.exports = {
     '@typescript-eslint/ban-types': 'warn',
 
     // 不允许不必要的类型标注，但允许类的属性成员进行额外标注
-    '@typescript-eslint/no-inferrable-types': 'error',
+    '@typescript-eslint/no-inferrable-types': [
+      'error',
+      {
+        ignoreParameters: true,
+        ignoreProperties: true,
+      },
+    ],
 
     // 不允许与默认约束一致的泛型约束
     // 在 TS 3.9 版本以后，对于未指定的泛型约束，默认使用 unknown ，在这之前则是 any
