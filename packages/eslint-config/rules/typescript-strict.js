@@ -289,7 +289,7 @@ module.exports = {
     // interface 必须是 I 开头，便于区分
     '@typescript-eslint/naming-convention': 'off',
     // 使用 for of 遍历
-    '@typescript-eslint/prefer-for-of': ['error'],
+    '@typescript-eslint/prefer-for-of': ['warn'],
     // 使用字面量作为枚举成员值而避免引用变量
     '@typescript-eslint/prefer-literal-enum-member': ['warn'],
     // 使用 ?? 而不是 ||
@@ -319,8 +319,13 @@ module.exports = {
     '@typescript-eslint/triple-slash-reference': ['off'],
     '@typescript-eslint/type-annotation-spacing': ['error'],
     'react/no-unknown-property': 'off',
+    'react-hooks/exhaustive-deps': 'off',
     'no-confusing-arrow': 'off',
     'id-length': 'off',
     'camelcase': 'off',
+    'max-len': 'off',
+    'no-negated-condition': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
   },
 };
