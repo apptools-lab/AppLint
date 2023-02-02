@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.10
+
+- chore: Batch adjustment on `strict` rules, lower the warning level of some rules and remove some unnecessary general rules.
+
 ## 1.1.9
 
 - fix: `@typescript-eslint/keyword-spacing` rule will occur Unexpected space(s) before "{" in import type error. Ref: <https://github.com/typescript-eslint/typescript-eslint/issues/6063>
