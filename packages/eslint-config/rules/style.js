@@ -1,51 +1,5 @@
 module.exports = {
   rules: {
-    // 使用 2 个空格缩进
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-        VariableDeclarator: 1,
-        outerIIFEBody: 1,
-        // MemberExpression: null,
-        FunctionDeclaration: {
-          parameters: 1,
-          body: 1,
-        },
-        FunctionExpression: {
-          parameters: 1,
-          body: 1,
-        },
-        CallExpression: {
-          arguments: 1,
-        },
-        ArrayExpression: 1,
-        ObjectExpression: 1,
-        ImportDeclaration: 1,
-        flatTernaryExpressions: false,
-        // list derived from https://github.com/benjamn/ast-types/blob/HEAD/def/jsx.js
-        ignoredNodes: [
-          'TemplateLiteral', // FIXME https://github.com/babel/babel-eslint/issues/799#issuecomment-568195009
-          'JSXElement',
-          'JSXElement > *',
-          'JSXAttribute',
-          'JSXIdentifier',
-          'JSXNamespacedName',
-          'JSXMemberExpression',
-          'JSXSpreadAttribute',
-          'JSXExpressionContainer',
-          'JSXOpeningElement',
-          'JSXClosingElement',
-          'JSXText',
-          'JSXEmptyExpression',
-          'JSXSpreadChild',
-          'PropertyDefinition',
-        ],
-        ignoreComments: false,
-      },
-    ],
-
     // 函数声明时，对于命名函数，参数的小括号前无空格；对于匿名函数和 async 箭头函数，参数的小括号前有空格
     'space-before-function-paren': [
       'error',
