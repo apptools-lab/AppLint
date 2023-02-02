@@ -20,7 +20,7 @@ module.exports = {
      * 如：// @ts-ignore: 这里的类型确实判断不出来...
      */
     '@typescript-eslint/ban-ts-comment': [
-      'error',
+      'warn',
       {
         'ts-expect-error': 'allow-with-description',
         'ts-ignore': 'allow-with-description',
@@ -35,7 +35,7 @@ module.exports = {
      * fixable
      */
     '@typescript-eslint/ban-types': [
-      'error',
+      'warn',
       {
         types: {
           Function: {
@@ -66,7 +66,7 @@ module.exports = {
      * const array = <const>[1, 2, 3] ×
      */
     '@typescript-eslint/consistent-type-assertions': [
-      'error',
+      'warn',
       {
         assertionStyle: 'as',
         // 允许对对象字面量类型做断言 const x = {} as IObjetcType
@@ -78,7 +78,7 @@ module.exports = {
      * type 只应该用来声明函数、工具类型等
      * fixable
      */
-    '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+    '@typescript-eslint/consistent-type-definitions': ['off'],
     /**
      *  对于类型导入统一使用 import type
      *  如：import type { SomeType } from 'xxx';
@@ -86,7 +86,7 @@ module.exports = {
      * fixable
      */
     '@typescript-eslint/consistent-type-imports': [
-      'error',
+      'warn',
       {
         prefer: 'type-imports',
       },
@@ -102,31 +102,13 @@ module.exports = {
      * rquire explicit class member modifiers
      * fixable
      */
-    '@typescript-eslint/explicit-member-accessibility': [
-      'error',
-      {
-        // public！
-        accessibility: 'explicit',
-        overrides: {
-          accessors: 'explicit',
-          constructors: 'no-public',
-          methods: 'explicit',
-          parameterProperties: 'explicit',
-        },
-      },
-    ],
+    '@typescript-eslint/explicit-member-accessibility': ['off'],
     /**
      * 导出的函数与类方法的参数、返回值都必须显式指定
      * Require explicit return and argument types on exported functions' and classes' public class methods
      */
     '@typescript-eslint/explicit-module-boundary-types': [
-      'error',
-      {
-        // 不允许 any 参数（目前已关闭）
-        allowArgumentsExplicitlyTypedAsAny: true,
-        allowHigherOrderFunctions: true,
-        allowTypedFunctionExpressions: true,
-      },
+      'off',
     ],
     'keyword-spacing': 'off',
     // fixable
@@ -169,7 +151,7 @@ module.exports = {
       }
       fixable
      */
-    '@typescript-eslint/method-signature-style': ['error', 'property'],
+    '@typescript-eslint/method-signature-style': ['warn', 'property'],
     /**
      * 不允许使用难以分辨的非空断言（如与 !== 一起）
      * const isEqualsBar = foo.bar! == 'hello';
@@ -182,7 +164,7 @@ module.exports = {
      * fixable
      */
     '@typescript-eslint/no-confusing-void-expression': [
-      'error',
+      'warn',
       // allow arrow shorthand like promise.then(value => window.postMessage(value));
       // 箭头函数的缩写还是可以的！
       { ignoreArrowShorthand: true },
@@ -220,7 +202,7 @@ module.exports = {
      * fixable
      */
     '@typescript-eslint/no-explicit-any': [
-      'warn',
+      'off',
       {
         fixToUnknown: false,
         ignoreRestArgs: true,
@@ -236,7 +218,7 @@ module.exports = {
     '@typescript-eslint/no-loss-of-precision': ['error'],
     // 能够推导的类型不需要手动声明，但在函数参数、类属性中允许
     '@typescript-eslint/no-inferrable-types': [
-      'error',
+      'warn',
       {
         ignoreParameters: true,
         ignoreProperties: true,
@@ -247,7 +229,7 @@ module.exports = {
     // 不要使用 foo?.bar()!
     '@typescript-eslint/no-non-null-asserted-optional-chain': ['error'],
     // 非空断言在大部分情况下还是需要的
-    '@typescript-eslint/no-non-null-assertion': ['warn'],
+    '@typescript-eslint/no-non-null-assertion': ['off'],
     'no-restricted-imports': 'off',
     // 禁止某些导入，目前还没遇到需要的
     '@typescript-eslint/no-restricted-imports': 'off',
@@ -284,15 +266,15 @@ module.exports = {
     '@typescript-eslint/non-nullable-type-assertion-style': ['error'],
     // 不允许未使用的变量、参数
     '@typescript-eslint/no-unused-vars': [
-      'error',
+      'warn',
       {
         // check all(global) variables
-        vars: 'all',
+        vars: 'local',
         // https://eslint.org/docs/rules/no-unused-vars#options
         args: 'none',
         // allow rest omit operator
         ignoreRestSiblings: true,
-        varsIgnorePattern: 'createElement|my|pi',
+        varsIgnorePattern: '^_',
         // allow _arg
         argsIgnorePattern: '^_',
         // catch statement
@@ -303,29 +285,19 @@ module.exports = {
     '@typescript-eslint/no-require-imports': 'warn',
     // 类似于类型断言，使用 as const 做常量断言，而不是 <const>
     // fixable
-    '@typescript-eslint/prefer-as-const': ['error'],
+    '@typescript-eslint/prefer-as-const': ['off'],
     // interface 必须是 I 开头，便于区分
-    '@typescript-eslint/naming-convention': [
-      'error',
-      {
-        selector: 'interface',
-        format: ['PascalCase'],
-        custom: {
-          regex: '^I[A-Z]',
-          match: true,
-        },
-      },
-    ],
+    '@typescript-eslint/naming-convention': 'off',
     // 使用 for of 遍历
-    '@typescript-eslint/prefer-for-of': ['error'],
-    // 使用字符串作为枚举成员值
-    '@typescript-eslint/prefer-literal-enum-member': ['error'],
+    '@typescript-eslint/prefer-for-of': ['warn'],
+    // 使用字面量作为枚举成员值而避免引用变量
+    '@typescript-eslint/prefer-literal-enum-member': ['warn'],
     // 使用 ?? 而不是 ||
     '@typescript-eslint/prefer-nullish-coalescing': ['warn'],
     // 使用 ?. 而不是 &&
     '@typescript-eslint/prefer-optional-chain': ['warn'],
     // 为 reduce 方法传入显式的类型参数，因为通常 reduce 方法的初始值会是 [] 或者 {} 这种，没法推导出来结果类型
-    '@typescript-eslint/prefer-reduce-type-parameter': ['error'],
+    '@typescript-eslint/prefer-reduce-type-parameter': ['warn'],
     // 使用 @ts-expect-error 而不是 @ts-ignore
     // fixable
     '@typescript-eslint/prefer-ts-expect-error': ['error'],
@@ -344,7 +316,16 @@ module.exports = {
     // 在 switch 语句中使用联合类型时需要考虑到其所有情况
     '@typescript-eslint/switch-exhaustiveness-check': ['error'],
     // 不允许使用三斜线指令
-    '@typescript-eslint/triple-slash-reference': ['error'],
+    '@typescript-eslint/triple-slash-reference': ['off'],
     '@typescript-eslint/type-annotation-spacing': ['error'],
+    'react/no-unknown-property': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'no-confusing-arrow': 'off',
+    'id-length': 'off',
+    'camelcase': 'off',
+    'max-len': 'off',
+    'no-negated-condition': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
   },
 };
