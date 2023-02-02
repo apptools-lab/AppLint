@@ -322,7 +322,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     'no-confusing-arrow': 'off',
     'id-length': 'off',
-    'camelcase': 'off',
+    camelcase: 'off',
     'max-len': 'off',
     'no-negated-condition': 'off',
     'no-shadow': 'off',

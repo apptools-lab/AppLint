@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.11
+
+- chore: remove eslint indent rule
+
 ## 1.1.10
 
 - chore: Batch adjustment on `strict` rules, lower the warning level of some rules and remove some unnecessary general rules.

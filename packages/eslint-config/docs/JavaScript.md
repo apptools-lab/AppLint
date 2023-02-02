@@ -2,32 +2,7 @@
 
 ## 编码风格
 
-### 1. 缩进
-
-**1.1 使用两个空格作为缩进，同时使用两个空格作为 tab 操作。eslint: [indent](https://eslint.org/docs/rules/indent.html)**
-
-```javascript
-// bad
-function foo() {
-∙∙∙∙let name;
-}
-
-// bad
-function bar() {
-∙let name;
-}
-
-// good
-function baz() {
-∙∙let name;
-}
-```
-
-参考
-airbnb 19.1
-集团规范 1.1.1
-
-### 2. 引号
+### 1. 引号
 
 **2.1  字符串优先使用`''`单引号。 eslint: [quotes](https://eslint.org/docs/rules/quotes.html)**
 
@@ -56,7 +31,7 @@ HTML 属性通常使用双引号而不是单引号，因此 JSX 属性沿用了�
 <a b="c" />
 ```
 
-### 3. eval
+### 2. eval
 
 **3.1 禁止使用 eval。eslint: [no-eval](https://eslint.org/docs/rules/no-eval)、[no-implied-eval](https://eslint.org/docs/rules/no-implied-eval#disallow-implied-eval-no-implied-eval)**
 
@@ -100,9 +75,9 @@ airbnb 6.4
 集团规范 2.10.1
 fb #169
 
-### 4. 缩进、空格与空行
+### 3. 缩进、空格与空行
 
-**4.1 使用空格。eslint: [space-before-function-paren](https://eslint.org/docs/rules/space-before-function-paren)、[space-before-blocks](https://eslint.org/docs/rules/space-before-blocks)、[generator-star-spacing](https://eslint.org/docs/rules/generator-star-spacing)、[spaced-comment](https://eslint.org/docs/rules/spaced-comment)、[indent](https://eslint.org/docs/rules/indent.html)、[space-before-blocks](https://eslint.org/docs/rules/space-before-blocks.html)、[keyword-spacing](https://eslint.org/docs/rules/keyword-spacing.html)、[space-infix-ops](https://eslint.org/docs/rules/space-infix-ops.html)、[object-curly-spacing](https://eslint.org/docs/rules/object-curly-spacing.html)、[block-spacing](https://eslint.org/docs/rules/block-spacing)、[comma-spacing](https://eslint.org/docs/rules/comma-spacing)、[key-spacing](https://eslint.org/docs/rules/key-spacing)**
+**3.1 使用空格。eslint: [space-before-function-paren](https://eslint.org/docs/rules/space-before-function-paren)、[space-before-blocks](https://eslint.org/docs/rules/space-before-blocks)、[generator-star-spacing](https://eslint.org/docs/rules/generator-star-spacing)、[spaced-comment](https://eslint.org/docs/rules/spaced-comment)、[indent](https://eslint.org/docs/rules/indent.html)、[space-before-blocks](https://eslint.org/docs/rules/space-before-blocks.html)、[keyword-spacing](https://eslint.org/docs/rules/keyword-spacing.html)、[space-infix-ops](https://eslint.org/docs/rules/space-infix-ops.html)、[object-curly-spacing](https://eslint.org/docs/rules/object-curly-spacing.html)、[block-spacing](https://eslint.org/docs/rules/block-spacing)、[comma-spacing](https://eslint.org/docs/rules/comma-spacing)、[key-spacing](https://eslint.org/docs/rules/key-spacing)**
 
 - 使用两个空格作为缩进
 - 函数前后使用空格
@@ -300,7 +275,7 @@ const obj = { foo: 42 };
 airbnb 7.11 11.3 18.3 19.2 19.3 19.4 19.14 19.15 19.17 19.18
 集团规范 1.5.1 3.3
 
-**4.2 不要用空行来填充块语句。eslint: [padded-blocks](https://eslint.org/docs/rules/padded-blocks.html)**
+**3.2 不要用空行来填充块语句。eslint: [padded-blocks](https://eslint.org/docs/rules/padded-blocks.html)**
 
 ```javascript
 // bad
@@ -345,7 +320,7 @@ if (baz) {
 airbnb 19.8
 集团规范 1.6.2
 
-**4.3 不要使用多个连续空行来填充代码。eslint: [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)**
+**3.3 不要使用多个连续空行来填充代码。eslint: [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)**
 
 ```javascript
 // bad
@@ -400,7 +375,7 @@ class Person {
 参考
 airbnb 19.9
 
-**4.4 不要在`()`中增加空格。eslint: [space-in-parens](https://eslint.org/docs/rules/space-in-parens.html)**
+**3.4 不要在`()`中增加空格。eslint: [space-in-parens](https://eslint.org/docs/rules/space-in-parens.html)**
 
 ```javascript
 // bad
@@ -428,7 +403,7 @@ if (foo) {
 aibnb 19.10
 集团规范 1.5.1
 
-**4.5 不要在方括号`[]`中增加空格。eslint: [array-bracket-spacing](https://eslint.org/docs/rules/array-bracket-spacing.html)**
+**3.5 不要在方括号`[]`中增加空格。eslint: [array-bracket-spacing](https://eslint.org/docs/rules/array-bracket-spacing.html)**
 
 ```javascript
 // bad
@@ -444,7 +419,7 @@ console.log(foo[0]);
 airbnb 19.11
 集团规范 1.5.1
 
-**4.6 函数调用前后不需要空格。eslint: [func-call-spacing](https://eslint.org/docs/rules/func-call-spacing)**
+**3.6 函数调用前后不需要空格。eslint: [func-call-spacing](https://eslint.org/docs/rules/func-call-spacing)**
 
 ```javascript
 // bad
@@ -460,7 +435,7 @@ func();
 参考
 airbnb 19.17
 
-**4.7 每行代码末尾避免增加空格。eslint: [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces)**
+**3.7 每行代码末尾避免增加空格。eslint: [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces)**
 
 ```javascript
 // bad
@@ -473,7 +448,7 @@ console.log('hello world')
 参考
 airbnb 19.19
 
-**4.8 避免多个连续空行。eslint: [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)**
+**3.8 避免多个连续空行。eslint: [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)**
 
 - 避免首行是一个空行
 - 允许文件末尾是一个空行
@@ -503,7 +478,7 @@ const y = 2;
 参考
 airbnb 19.20
 
-**4.8 不要混用 tab 与 space。eslint: [no-mixed-spaces-and-tabs](https://eslint.org/docs/rules/no-mixed-spaces-and-tabs#disallow-mixed-spaces-and-tabs-for-indentation-no-mixed-spaces-and-tabs)**
+**3.9 不要混用 tab 与 space。eslint: [no-mixed-spaces-and-tabs](https://eslint.org/docs/rules/no-mixed-spaces-and-tabs#disallow-mixed-spaces-and-tabs-for-indentation-no-mixed-spaces-and-tabs)**
 
 - 保证代码风格一致和可读性
 
@@ -533,7 +508,7 @@ function add(x, y) {
 参考
 fb #330
 
-**4.9 禁止正则表达式字面量中出现多个空格。eslint: [no-regex-spaces](https://eslint.org/docs/rules/no-regex-spaces)**
+**3.10 禁止正则表达式字面量中出现多个空格。eslint: [no-regex-spaces](https://eslint.org/docs/rules/no-regex-spaces)**
 
 正则表达式很复杂且难以理解，在多人协作的项目代码应该尽可能保持简单并可避免出现有效错误。使用正则最容易出错的是使用多个空格。
 
@@ -547,7 +522,7 @@ const re = /foo {3}bar/;
 const re = new RegExp("foo {3}bar");
 ```
 
-**4.10 禁止出现多个空格。eslint: [no-multi-spaces](https://eslint.org/docs/rules/no-multi-spaces)**
+**3.11 禁止出现多个空格。eslint: [no-multi-spaces](https://eslint.org/docs/rules/no-multi-spaces)**
 
 ```javascript
 // bad
@@ -565,7 +540,7 @@ const arr = [1, 2];
 a ? b: c
 ```
 
-**4.11 禁止或强制在计算属性中使用空格。eslint: [computed-property-spacing](https://eslint.org/docs/rules/computed-property-spacing)**
+**3.12 禁止或强制在计算属性中使用空格。eslint: [computed-property-spacing](https://eslint.org/docs/rules/computed-property-spacing)**
 
 ```javascript
 // bad
@@ -581,7 +556,7 @@ const x = {[b]: a}
 obj[foo[bar]]
 ```
 
-**4.12 禁止属性前有空格。eslint: [no-whitespace-before-property](https://eslint.org/docs/rules/no-whitespace-before-property)**
+**3.13 禁止属性前有空格。eslint: [no-whitespace-before-property](https://eslint.org/docs/rules/no-whitespace-before-property)**
 
 JavaScript 允许在对象和它们的属性中间存在空白。然而，不一致的空格会使代码难以阅读，而且可能导致出错。
 
@@ -605,7 +580,7 @@ foo
   .baz()
 ```
 
-**4.13 强制将对象的属性放在不同的行上。eslint: [object-property-newline](https://eslint.org/docs/rules/object-property-newline)**
+**3.14 强制将对象的属性放在不同的行上。eslint: [object-property-newline](https://eslint.org/docs/rules/object-property-newline)**
 
 对象的属性需遵循一致的换行风格，所有属性要么都换行，要么都写在一行。
 
@@ -626,7 +601,7 @@ const newObject = {
 };
 ```
 
-**4.14 强制分号后有空格，分号前有空格。eslint: [semi-spacing](https://eslint.org/docs/rules/semi-spacing)**
+**3.15 强制分号后有空格，分号前有空格。eslint: [semi-spacing](https://eslint.org/docs/rules/semi-spacing)**
 
 ```jsx
 // bad
@@ -648,7 +623,7 @@ if (true) {;}
 ;foo();
 ```
 
-**4.15 要求或禁止在一元操作符之前或之后有空格。eslint: [space-unary-ops](https://eslint.org/docs/rules/space-unary-ops)**
+**3.16 要求或禁止在一元操作符之前或之后有空格。eslint: [space-unary-ops](https://eslint.org/docs/rules/space-unary-ops)**
 
 - 一元操作符两侧**无空格**，比如： -、+、--、++、!、!!
 - 单词类一元操作符两侧**有空格**，比如：new、delete、typeof、void、yield
@@ -687,7 +662,7 @@ async function foo() {
 }
 ```
 
-**4.16 switch 的 case 和 default 子句冒号前面无空格，后面有空格。eslint: [switch-colon-spacing](https://eslint.org/docs/rules/switch-colon-spacing)**
+**3.17 switch 的 case 和 default 子句冒号前面无空格，后面有空格。eslint: [switch-colon-spacing](https://eslint.org/docs/rules/switch-colon-spacing)**
 
 ```jsx
 // bad
@@ -708,7 +683,7 @@ switch (a) {
 }
 ```
 
-**4.17 禁止在模板标记和它们的字面量之前有空格。eslint: [template-tag-spacing](https://eslint.org/docs/rules/template-tag-spacing)**
+**3.18 禁止在模板标记和它们的字面量之前有空格。eslint: [template-tag-spacing](https://eslint.org/docs/rules/template-tag-spacing)**
 
 该规则旨在维持[模板标记函数](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Template_literals#%E5%B8%A6%E6%A0%87%E7%AD%BE%E7%9A%84%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2)和它们的模板字面量直接的空格的一致性。
 
@@ -720,7 +695,7 @@ func `Hello world` ;
 func` Hello world` ;
 ```
 
-**4.18 要求箭头函数的箭头之前和之后要有空格。eslint: [arrow-spacing](https://eslint.org/docs/rules/arrow-spacing)**
+**3.19 要求箭头函数的箭头之前和之后要有空格。eslint: [arrow-spacing](https://eslint.org/docs/rules/arrow-spacing)**
 
 ```jsx
 // bad
@@ -740,7 +715,7 @@ a => a;
 () => {'\n'};
 ```
 
-**4.19 强制剩余和扩展运算符及其表达式之间有空格。eslint: [rest-spread-spacing](https://eslint.org/docs/rules/rest-spread-spacing)**
+**3.20 强制剩余和扩展运算符及其表达式之间有空格。eslint: [rest-spread-spacing](https://eslint.org/docs/rules/rest-spread-spacing)**
 
 ```jsx
 // bad
@@ -760,7 +735,7 @@ let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
 let n = { x, y, ...z };
 ```
 
-### 5. 代码长度
+### 4. 代码长度
 
 **5.1 代码长度最大不超过 120 个字符。eslint: [max-len](https://eslint.org/docs/rules/max-len.html)**
 
@@ -796,9 +771,9 @@ $.ajax({
 airbnb 19.13
 集团规范 1.7.1
 
-### 6. 逗号
+### 5. 逗号
 
-**6.1 在多行情况下，使用末尾逗号的风格。eslint: [comma-style](https://eslint.org/docs/rules/comma-style.html)**
+**5.1 在多行情况下，使用末尾逗号的风格。eslint: [comma-style](https://eslint.org/docs/rules/comma-style.html)**
 
 ```javascript
 // bad
@@ -836,9 +811,9 @@ const hero = {
 airbnb 20.1
 集团规范 1.3.1
 
-### 7. 分号
+### 6. 分号
 
-**7.1 使用分号。 eslint: [semi](https://eslint.org/docs/rules/semi.html)**
+**6.1 使用分号。 eslint: [semi](https://eslint.org/docs/rules/semi.html)**
 
 - 统一以分号结束语句，可以避免 JS 引擎自动分号插入机制的怪异行为，在语义上也更加明确。
 - 自动分号插入机制（即 [Automatic Semicolon Insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion)，简称 ASI） 是当 JS 遇到不带分号的语句时判断是否自动添加分号的机制，它在个别情况下的行为比较怪异，可能导致意想不到的效果。此外随着 JS 新特性的增加，异常的情况可能变得更加复杂。
@@ -886,7 +861,7 @@ function foo() {
 airbnb 21.1
 集团规范 1.2.1
 
-**7.2 禁止不必要分号。eslint: [no-extra-semi](https://eslint.org/docs/rules/no-extra-semi)**
+**6.2 禁止不必要分号。eslint: [no-extra-semi](https://eslint.org/docs/rules/no-extra-semi)**
 
 ```javascript
 // bad
@@ -903,7 +878,7 @@ function foo() {
 }
 ```
 
-**7.3 分号必须写在行尾。eslint: [semi-style](https://eslint.org/docs/rules/semi-style)**
+**6.3 分号必须写在行尾。eslint: [semi-style](https://eslint.org/docs/rules/semi-style)**
 
 ```jsx
 // bad
@@ -931,9 +906,9 @@ for (
 }
 ```
 
-### 8. 命名规范
+### 7. 命名规范
 
-**8.1 避免单个字符命名，保障命名能描述实际含义。eslint: [id-length](https://eslint.org/docs/rules/id-length)**
+**7.1 避免单个字符命名，保障命名能描述实际含义。eslint: [id-length](https://eslint.org/docs/rules/id-length)**
 
 ```javascript
 // bad
@@ -950,7 +925,7 @@ function query() {
 参考
 airbnb 23.1
 
-**8.2 使用小驼峰 (camelCase) 来命名对象、函数、实例。eslint: [camelcase](https://eslint.org/docs/rules/camelcase.html)**
+**7.2 使用小驼峰 (camelCase) 来命名对象、函数、实例。eslint: [camelcase](https://eslint.org/docs/rules/camelcase.html)**
 
 ```javascript
 // bad
@@ -967,7 +942,7 @@ function thisIsMyFunction() {}
 airbnb 23.2
 集团规范 4.1
 
-**8.3 使用大驼峰 (PascalCase) 来命名构造器函数或类。eslint: [new-cap](https://eslint.org/docs/rules/new-cap.html)**
+**7.3 使用大驼峰 (PascalCase) 来命名构造器函数或类。eslint: [new-cap](https://eslint.org/docs/rules/new-cap.html)**
 
 ```javascript
 // bad
@@ -995,9 +970,9 @@ const good = new User({
 airbnb 23.3
 集团规范 4.2
 
-### 9. 调试 debugger
+### 8. 调试 debugger
 
-**9.1 保障线上代码不存在`debugger` 语句，避免浏览器因触发调试而停止执行。eslint: [no-debugger](https://eslint.org/docs/rules/no-debugger#disallow-the-use-of-debugger-no-debugger)**
+**8.1 保障线上代码不存在`debugger` 语句，避免浏览器因触发调试而停止执行。eslint: [no-debugger](https://eslint.org/docs/rules/no-debugger#disallow-the-use-of-debugger-no-debugger)**
 
 ```javascript
 // bad
@@ -1015,9 +990,9 @@ function isTruthy(x) {
 参考
 fb #74
 
-### 10. label
+### 9. label
 
-**10.1 禁止使用 label 语句。eslint: [no-labels](https://eslint.org/docs/rules/no-labels)**
+**9.1 禁止使用 label 语句。eslint: [no-labels](https://eslint.org/docs/rules/no-labels)**
 
 - label 导致代码的可读性降低
 
@@ -1060,7 +1035,7 @@ label:
 参考
 fb #177
 
-**10.2 禁止不必要的标签。eslint: [no-extra-label](https://eslint.org/docs/rules/no-extra-label)**
+**9.2 禁止不必要的标签。eslint: [no-extra-label](https://eslint.org/docs/rules/no-extra-label)**
 
 如果一个循环中不包含嵌套循环或 switch 语句，对这样的循环使用标签是不必要的。
 
@@ -1082,7 +1057,7 @@ for (let i = 0; i < 10; ++i) {
 }
 ```
 
-**10.3 禁用未使用过的标签。eslint: [no-unused-labels](https://eslint.org/docs/rules/no-unused-labels)**
+**9.3 禁用未使用过的标签。eslint: [no-unused-labels](https://eslint.org/docs/rules/no-unused-labels)**
 
 这样的标签不仅占据代码空间，而且会使读者感到迷惑。
 
