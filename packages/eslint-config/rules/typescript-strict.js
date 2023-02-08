@@ -50,10 +50,6 @@ module.exports = {
             message: 'Donot use top-level Object as type!',
             fixWith: 'Record<string, any>',
           },
-          object: {
-            message: 'Donot use object as type!',
-            fixWith: 'Record<string, any>',
-          },
         },
       },
     ],
@@ -107,18 +103,7 @@ module.exports = {
      * 导出的函数与类方法的参数、返回值都必须显式指定
      * Require explicit return and argument types on exported functions' and classes' public class methods
      */
-    '@typescript-eslint/explicit-module-boundary-types': [
-      'off',
-    ],
-    'keyword-spacing': 'off',
-    // fixable
-    '@typescript-eslint/keyword-spacing': [
-      'error',
-      {
-        before: true,
-        after: true,
-      },
-    ],
+    '@typescript-eslint/explicit-module-boundary-types': ['off'],
     'lines-between-class-members': 'off',
     // fixable
     '@typescript-eslint/lines-between-class-members': ['error'],
@@ -184,7 +169,7 @@ module.exports = {
      * 在部分情况下空函数是有作用的，如函数类型属性的默认值、mock stub 等
      */
     'no-empty-function': 'off',
-    '@typescript-eslint/no-empty-function': ['warn'],
+    '@typescript-eslint/no-empty-function': 'off',
     /**
      * 不允许空接口，但在单继承的情况下允许
      * interface Foo extends Bar {}
@@ -281,8 +266,7 @@ module.exports = {
         caughtErrors: 'none',
       },
     ],
-    // ts 中不允许用 require 引入
-    '@typescript-eslint/no-require-imports': 'warn',
+    '@typescript-eslint/no-require-imports': 'off',
     // 类似于类型断言，使用 as const 做常量断言，而不是 <const>
     // fixable
     '@typescript-eslint/prefer-as-const': ['off'],
@@ -291,7 +275,8 @@ module.exports = {
     // 使用 for of 遍历
     '@typescript-eslint/prefer-for-of': ['warn'],
     // 使用字面量作为枚举成员值而避免引用变量
-    '@typescript-eslint/prefer-literal-enum-member': ['warn'],
+    // UPDATE: TS 5.0 对枚举支持进一步增强了
+    '@typescript-eslint/prefer-literal-enum-member': 'off',
     // 使用 ?? 而不是 ||
     '@typescript-eslint/prefer-nullish-coalescing': ['warn'],
     // 使用 ?. 而不是 &&
@@ -320,12 +305,11 @@ module.exports = {
     '@typescript-eslint/type-annotation-spacing': ['error'],
     'react/no-unknown-property': 'off',
     'react-hooks/exhaustive-deps': 'off',
-    'no-confusing-arrow': 'off',
     'id-length': 'off',
     camelcase: 'off',
-    'max-len': 'off',
     'no-negated-condition': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    ...require('./prettier').rules,
   },
 };
