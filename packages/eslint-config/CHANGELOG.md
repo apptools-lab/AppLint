@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.12
+
+- chore: append `eslint-config-prettier` to strict rule set.
+
 ## 1.1.11
 
 - chore: remove eslint indent rule
