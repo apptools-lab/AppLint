@@ -310,6 +310,5 @@ module.exports = {
     'no-negated-condition': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': 'off',
-    ...require('./prettier').rules,
   },
 };
