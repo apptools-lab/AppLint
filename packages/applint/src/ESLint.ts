@@ -23,6 +23,7 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
     // specify `parserOptions.tsconfigRootDir`
     this.config.parserOptions = this.config.parserOptions || {};
     this.config.parserOptions = { ...this.config.parserOptions, tsconfigRootDir: this.directory };
+    this.config.extends = this.appendATTsharableRules(this.config.extends);
     this.targetFiles = this.getTargetFiles(ignoreFilename, supportiveFileRegExp);
   }
 
@@ -66,5 +67,17 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
     });
 
     return eslint;
+  }
+
+  private appendATTsharableRules(rawExtendsConfig: ESLinter.Config['extends']) {
+    let extendsConfig: ESLinter.Config['extends'];
+    if (typeof rawExtendsConfig === 'string') {
+      extendsConfig = [rawExtendsConfig];
+    } else {
+      extendsConfig = [];
+    }
+    extendsConfig.push('@ali/eslint-config-att');
+
+    return extendsConfig;
   }
 }
