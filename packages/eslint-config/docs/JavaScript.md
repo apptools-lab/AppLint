@@ -4,7 +4,7 @@
 
 ### 1. 引号
 
-**2.1  字符串优先使用`''`单引号。 eslint: [quotes](https://eslint.org/docs/rules/quotes.html)**
+**1.1  字符串优先使用 `''` 单引号。 eslint: [quotes](https://eslint.org/docs/rules/quotes.html)**
 
 ```javascript
 // bad
@@ -15,11 +15,7 @@ const name = `tod` ; // 模板字符串中应包含变量或换行，否则需�
 const name = 'tod';
 ```
 
-参考
-airbnb 6.1
-集团 2.2.5.1
-
-**2.2 强制在 JSX 属性中使用一致的双引号。eslint: [jsx-quotes](https://eslint.org/docs/rules/jsx-quotes)**
+**1.2 强制在 JSX 属性中使用一致的双引号。eslint: [jsx-quotes](https://eslint.org/docs/rules/jsx-quotes)**
 
 HTML 属性通常使用双引号而不是单引号，因此 JSX 属性沿用了这种约定。
 
@@ -33,7 +29,7 @@ HTML 属性通常使用双引号而不是单引号，因此 JSX 属性沿用了�
 
 ### 2. eval
 
-**3.1 禁止使用 eval。eslint: [no-eval](https://eslint.org/docs/rules/no-eval)、[no-implied-eval](https://eslint.org/docs/rules/no-implied-eval#disallow-implied-eval-no-implied-eval)**
+**2.1 禁止使用 eval。eslint: [no-eval](https://eslint.org/docs/rules/no-eval)、[no-implied-eval](https://eslint.org/docs/rules/no-implied-eval#disallow-implied-eval-no-implied-eval)**
 
 - `eval` 存在较多安全隐患
 - 针对 `setTimeout` 、`setInterval` 可以接受字符串作为执行逻辑的情况的隐式 eval 仍然禁止
@@ -69,11 +65,6 @@ setInterval(function() {
     alert('Hi!');
 }, 100);
 ```
-
-参考
-airbnb 6.4
-集团规范 2.10.1
-fb #169
 
 ### 3. 缩进、空格与空行
 
@@ -271,10 +262,6 @@ const obj = { foo: 42 };
 
 对象键值空格
 
-参考
-airbnb 7.11 11.3 18.3 19.2 19.3 19.4 19.14 19.15 19.17 19.18
-集团规范 1.5.1 3.3
-
 **3.2 不要用空行来填充块语句。eslint: [padded-blocks](https://eslint.org/docs/rules/padded-blocks.html)**
 
 ```javascript
@@ -372,9 +359,6 @@ class Person {
 }
 ```
 
-参考
-airbnb 19.9
-
 **3.4 不要在`()`中增加空格。eslint: [space-in-parens](https://eslint.org/docs/rules/space-in-parens.html)**
 
 ```javascript
@@ -399,10 +383,6 @@ if (foo) {
 }
 ```
 
-参考
-aibnb 19.10
-集团规范 1.5.1
-
 **3.5 不要在方括号`[]`中增加空格。eslint: [array-bracket-spacing](https://eslint.org/docs/rules/array-bracket-spacing.html)**
 
 ```javascript
@@ -414,10 +394,6 @@ console.log(foo[ 0 ]);
 const foo = [1, 2, 3];
 console.log(foo[0]);
 ```
-
-参考
-airbnb 19.11
-集团规范 1.5.1
 
 **3.6 函数调用前后不需要空格。eslint: [func-call-spacing](https://eslint.org/docs/rules/func-call-spacing)**
 
@@ -432,9 +408,6 @@ func
 func();
 ```
 
-参考
-airbnb 19.17
-
 **3.7 每行代码末尾避免增加空格。eslint: [no-trailing-spaces](https://eslint.org/docs/rules/no-trailing-spaces)**
 
 ```javascript
@@ -444,9 +417,6 @@ console.log('hello world')··
 // good
 console.log('hello world')
 ```
-
-参考
-airbnb 19.19
 
 **3.8 避免多个连续空行。eslint: [no-multiple-empty-lines](https://eslint.org/docs/rules/no-multiple-empty-lines)**
 
@@ -475,9 +445,6 @@ const x = 1;
 const y = 2;
 ```
 
-参考
-airbnb 19.20
-
 **3.9 不要混用 tab 与 space。eslint: [no-mixed-spaces-and-tabs](https://eslint.org/docs/rules/no-mixed-spaces-and-tabs#disallow-mixed-spaces-and-tabs-for-indentation-no-mixed-spaces-and-tabs)**
 
 - 保证代码风格一致和可读性
@@ -504,9 +471,6 @@ function add(x, y) {
     return x + y;
 }
 ```
-
-参考
-fb #330
 
 **3.10 禁止正则表达式字面量中出现多个空格。eslint: [no-regex-spaces](https://eslint.org/docs/rules/no-regex-spaces)**
 
@@ -807,10 +771,6 @@ const hero = {
 };
 ```
 
-参考
-airbnb 20.1
-集团规范 1.3.1
-
 ### 6. 分号
 
 **6.1 使用分号。 eslint: [semi](https://eslint.org/docs/rules/semi.html)**
@@ -856,10 +816,6 @@ function foo() {
   return 'search your feelings, you know it to be foo';
 }
 ```
-
-参考
-airbnb 21.1
-集团规范 1.2.1
 
 **6.2 禁止不必要分号。eslint: [no-extra-semi](https://eslint.org/docs/rules/no-extra-semi)**
 
@@ -922,9 +878,6 @@ function query() {
 }
 ```
 
-参考
-airbnb 23.1
-
 **7.2 使用小驼峰 (camelCase) 来命名对象、函数、实例。eslint: [camelcase](https://eslint.org/docs/rules/camelcase.html)**
 
 ```javascript
@@ -937,10 +890,6 @@ function c() {}
 const thisIsMyObject = {};
 function thisIsMyFunction() {}
 ```
-
-参考
-airbnb 23.2
-集团规范 4.1
 
 **7.3 使用大驼峰 (PascalCase) 来命名构造器函数或类。eslint: [new-cap](https://eslint.org/docs/rules/new-cap.html)**
 
@@ -966,10 +915,6 @@ const good = new User({
 });
 ```
 
-参考
-airbnb 23.3
-集团规范 4.2
-
 ### 8. 调试 debugger
 
 **8.1 保障线上代码不存在`debugger` 语句，避免浏览器因触发调试而停止执行。eslint: [no-debugger](https://eslint.org/docs/rules/no-debugger#disallow-the-use-of-debugger-no-debugger)**
@@ -986,9 +931,6 @@ function isTruthy(x) {
     return Boolean(x); 
 }
 ```
-
-参考
-fb #74
 
 ### 9. label
 
@@ -1031,9 +973,6 @@ label:
         break label;
     }
 ```
-
-参考
-fb #177
 
 **9.2 禁止不必要的标签。eslint: [no-extra-label](https://eslint.org/docs/rules/no-extra-label)**
 
@@ -1151,10 +1090,6 @@ obj.name = 'bar';
 
 针对数组、对象数据类型错误使用 let
 
-参考
-airbnb 2.1、2.2
-集团规范 2.1.1、2.1.2
-
 **1.2 每个使用`let` 或`const` 来定义的变量或赋值语句都单独一行。eslint: [one-var](https://eslint.org/docs/rules/one-var)**
 
 - 这样做更易于追加新的声明语句（你不需要总去把最后的 `;` 改成 `,` 了）
@@ -1177,10 +1112,6 @@ const items = getItems();
 const goSportsTeam = true;
 const dragonball = 'z';
 ```
-
-参考
-airbnb 13.2
-集团规范 2.1.3
 
 **1.3 使用字面量语法，而不是使用构造函数 eslint: [no-new-object](https://eslint.org/docs/rules/no-new-object.html)、[no-array-constructor](https://eslint.org/docs/rules/no-array-constructor.html)、[no-new-func](https://eslint.org/docs/rules/no-new-func)、[no-obj-calls](https://eslint.org/docs/rules/no-obj-calls#disallow-calling-global-object-properties-as-functions-no-obj-calls)**
 
@@ -1231,11 +1162,6 @@ const first = Atomics.load(foo, 0);
 
 ```
 
-参考
-airbnb 3.1、4.1
-集团规范 2.4.1、2.3.1
-fb #104
-
 **1.4 对象属性名优先不使用单引号，除非包含不合法的字符 eslint: [quote-props](https://eslint.org/docs/rules/quote-props)**
 > It improves syntax highlighting, and is also more easily optimized by many JS engines. -airbnb 规范
 
@@ -1255,10 +1181,6 @@ const good = {
   'one two': 12,
 };
 ```
-
-参考
-airbnb 3.6
-集团规范 2.4.4
 
 **1.5 不要使用链式(chain variable assignments)赋值。 eslint: [no-multi-assign](https://eslint.org/docs/rules/no-multi-assign)**
 
@@ -1292,10 +1214,6 @@ console.log(c); // throws ReferenceError
 // the same applies for `const`
 ```
 
-参考
-airbnb 13.5
-集团规范 2.1.9
-
 **1.6 避免使用 `=` 时的赋值语句造成的换行。eslint: [operator-linebreak](https://eslint.org/docs/rules/operator-linebreak.html)**
 
 - 如果超过了最大长度，那么用括号将赋值操作包裹起来
@@ -1318,9 +1236,6 @@ const foo = (
 // good
 const foo = 'superLongLongLongLongLongLongLongLongString';
 ```
-
-参考
-airbnb 13.7
 
 **1.7 不要定义没有使用的变量。eslint: [no-unused-vars](https://eslint.org/docs/rules/no-unused-vars)**
 
@@ -1355,10 +1270,6 @@ alert(getXPlusY(x, y));
 
 ```
 
-参考
-airbnb 13.8
-集团规范 2.1.4
-
 **1.8 不允许初始化变量值为 undefined。eslint: [no-undef-init](https://eslint.org/docs/rules/no-undef-init)**
 
 在 JavaScript 中，声明一个变量但未初始化，变量会自动获得 `undefined` 作为初始值。
@@ -1386,9 +1297,6 @@ const foo = Boolean(!!bar);
 const foo = !!bar;
 const foo = Boolean(bar);
 ```
-
-参考
-集团规范 2.2.4
 
 ### 3. 数字
 
@@ -1439,10 +1347,6 @@ import has from 'has'; // https://www.npmjs.com/package/has
 console.log(has(object, key));
 ```
 
-参考
-airbnb 3.7
-集团规范 2.4.9
-
 **4.2 对象属性优先使用`.`进行访问。eslint: [dot-notation](https://eslint.org/docs/rules/dot-notation.html)**
 
 - `[]` 仅应在访问动态属性名或包含特殊字符的属性名时被使用。  
@@ -1460,10 +1364,6 @@ const isJedi = luke['jedi'];
 const isJedi = luke.jedi;
 ```
 
-参考
-airbnb 12.1
-集团规范 2.4.5
-
 **4.3 不要使用重复的属性名称。eslint: [no-dupe-keys](https://eslint.org/docs/rules/no-dupe-keys#disallow-duplicate-keys-in-object-literals-no-dupe-keys)**
 
 ```javascript
@@ -1479,9 +1379,6 @@ const foo = {
     quxx: "qux"
 };
 ```
-
-参考
-fb #78
 
 **4.4 对象键名不要使用没必要的计算属性。eslint: [no-useless-computed-key](https://eslint.org/docs/rules/no-useless-computed-key)**
 
@@ -1546,11 +1443,6 @@ inbox.filter((msg) => {
 
 ```
 
-参考
-
-- aibnb 4.7
-集团规范 2.3.2
-
 ### 6. 字符串
 
 **6.1 字符串拼接优先使用模板字符串。eslint: [prefer-template](https://eslint.org/docs/rules/prefer-template.html)[template-curly-spacing](https://eslint.org/docs/rules/template-curly-spacing)**
@@ -1579,10 +1471,6 @@ function sayHi(name) {
 }
 ```
 
-参考
-airbnb 6.3
-集团规范 2.2.5.2
-
 **6.2 禁止使用不必要的转义字符。eslint: [no-useless-escape](https://eslint.org/docs/rules/no-useless-escape)**
 
 - 反斜杠转义字符大幅降低可读性，尽量有必要时使用
@@ -1609,10 +1497,6 @@ const foo = `my name is '${name}'`;
 }());
 ```
 
-参考
-airbnb 7.2
-集团规范 2.5.11
-
 **7.2 不要使用`arguments` 对象，使用语法剩余参数操作符`...`代替。eslint: [prefer-rest-params](https://eslint.org/docs/rules/prefer-rest-params)**
 
 - ES6 提供了 rest 操作符 `...`，与 `arguments` 相比可以更清晰地聚合函数的剩余参数。此外， `...` 得到的是一个真正的数组，而 `arguments` 得到的则是类数组结构
@@ -1629,10 +1513,6 @@ function concatenateAll(...args) {
   return args.join('');
 }
 ```
-
-参考
-airbnb 7.6
-集团规范 2.5.7
 
 **7.3 如果使用匿名函数(例如作为回调函数传递)，使用箭头函数语法。 eslint: [prefer-arrow-callback](https://eslint.org/docs/rules/prefer-arrow-callback.html)**
 
@@ -1652,10 +1532,6 @@ airbnb 7.6
   return x * y;
 });
 ```
-
-参考
-airbnb 8.1
-集团规范 2.5.4
 
 **7.4 不要使用重复的参数名称。eslint: [no-dupe-args](https://eslint.org/docs/rules/no-dupe-args#disallow-duplicate-arguments-in-function-definitions-no-dupe-args)**
 
@@ -1680,9 +1556,6 @@ const bar = function (a, b, c) {
     console.log(a, b, c);
 };
 ```
-
-参考
-fb #76
 
 **7.5 不要使用`arguments.caller` 和 `arguments.callee` 。eslint: [no-caller](https://eslint.org/docs/rules/no-caller#disallow-use-of-callercallee-no-caller)**
 
@@ -1715,9 +1588,6 @@ function foo(n) {
     return !(n > 1) ? 1 : factorial(n - 1) * n;
 });
 ```
-
-参考
-fb #145
 
 **7.6 要求调用无参构造函数时带括号。eslint: [new-parens](https://eslint.org/docs/rules/new-parens)**
 
@@ -1777,10 +1647,6 @@ class Rey extends Jedi {
 }
 ```
 
-参考
-airbnb 9.5
-集团规范 2.6.3
-
 **8.2 避免重复的类成员。eslint: [no-dupe-class-members](https://eslint.org/docs/rules/no-dupe-class-members)**
 
 ```javascript
@@ -1800,10 +1666,6 @@ class Foo {
   bar() { return 2; }
 }
 ```
-
-参考
-airbnb 9.6
-集团规范 2.6.5
 
 **8.3 保证子类的构造函数调用了`super` 函数，而非继承的构造函数没有调用`super` 函数。eslint: [constructor-super](https://eslint.org/docs/rules/constructor-super#verify-calls-of-super-in-constructors-constructor-super)**
 
@@ -1841,9 +1703,6 @@ class A extends B {
     }
 }
 ```
-
-参考
-fb #396
 
 **8.4 不要在`super` 调用前使用`this` 。eslint: [no-this-before-super](https://eslint.org/docs/rules/no-this-before-super#disallow-use-of-thissuper-before-calling-super-in-constructors-no-this-before-super)**
 
@@ -1897,9 +1756,6 @@ class A extends B {
 }
 ```
 
-参考
-fb #405
-
 ### 9. 模块
 
 **9.1 从同一个位置引用同一个路径的内容。eslint: [no-duplicate-imports](https://eslint.org/docs/rules/no-duplicate-imports)**
@@ -1920,9 +1776,6 @@ import foo, {
 } from 'foo';
 ```
 
-参考
-airbnb 10.4
-
 **9.2 将 import 语句放到非 import 的语句位置上方(一般位于代码最上方)。eslint: [import/first](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)**
 
 - 由于 `import` 语句会被声明提升，将它们放到模块的最上方以防止异常行为
@@ -1940,10 +1793,6 @@ import bar from 'bar';
 
 foo.init();
 ```
-
-参考
-airbnb 10.7
-集团规范 2.73
 
 **9.3 禁止在 import 和 export 和解构赋值时将引用重复名为相同的名字。eslint: [no-useless-rename](https://eslint.org/docs/rules/no-useless-rename)**
 
@@ -1997,10 +1846,6 @@ if (Number(id) === 83949) {
 }
 ```
 
-参考
-airbnb 15.1
-集团规范 2.8.1
-
 **10.2 在`switch` 语句中，使用大括号包裹在`case` 与`default` 中有词法声明的情况，例如`let` 、`const` 、`function` 、`class` 。eslint: [no-case-declarations](https://eslint.org/docs/rules/no-case-declarations.html)**
 
 - 避免不同 case 中声明相同的变量
@@ -2048,9 +1893,6 @@ switch (foo) {
 }
 ```
 
-参考
-airbnb 15.5
-
 **10.3 避免不必要的三元表达式语句。eslint: [no-unneeded-ternary](https://eslint.org/docs/rules/no-unneeded-ternary.html)**
 
 ```javascript
@@ -2064,10 +1906,6 @@ const foo = a || b;
 const bar = !!c;
 const baz = !c;
 ```
-
-参考
-airbnb 15.7
-集团规范 2.8.5
 
 **10.4 禁止在`in` 语句中的使用`!`取反左侧运算符。eslint: [no-negated](https://eslint.org/docs/rules/no-negated-in-lhs#disallow-negating-the-left-operand-in-in-expressions-no-negated-in-lhs)**
 
@@ -2090,9 +1928,6 @@ if(('' + !key) in object) {
     // in a rare situation when that is the intended meaning
 }
 ```
-
-参考
-fb #102
 
 **10.5 强制使用`isNaN()`而不是使用`NaN` 来进行比较。eslint: [use-isnan](https://eslint.org/docs/rules/use-isnan#require-calls-to-isnan-when-checking-for-nan-use-isnan)**
 
@@ -2126,9 +1961,6 @@ if (!isNaN(foo)) {
 }
 ```
 
-参考
-fb #112
-
 **10.6 强制`typeof` 的计算值为固定为合法的字符串字面量。eslint: [valid-typeof](https://eslint.org/docs/rules/valid-typeof#enforce-comparing-typeof-expressions-against-valid-strings-valid-typeof)**
 
 - `"undefined"`、`"boolean"`、`"number"`、`"string"`、`"function"`、`"symbol"`、`"bigint"`
@@ -2147,9 +1979,6 @@ typeof bar == "undefined"
 typeof bar === typeof qux
 ```
 
-参考
-fb #116
-
 **10.7 禁止对变量使用 delete 运算符。eslint: [no-delete-var](https://eslint.org/docs/rules/no-delete-var#disallow-deleting-variables-no-delete-var)**
 
 ```javascript
@@ -2157,9 +1986,6 @@ fb #116
 const x;
 delete x;
 ```
-
-参考
-fb #249
 
 ### 11. 块语句 Block
 
@@ -2189,10 +2015,6 @@ function bar() {
 }
 ```
 
-参考
-airbnb 16.1
-集团规范 1.4
-
 **11.2 对于非空代码块，采用 Egyptian Brackets 风格。eslint: [brace-style](https://eslint.org/docs/rules/brace-style)**
 
 对于非空的代码块，大括号的换行方式采用 [Egyptian Brackets](https://blog.codinghorror.com/new-programming-jargon/) 风格，具体规则如下：
@@ -2221,10 +2043,6 @@ if (test) {
   thing3();
 }
 ```
-
-参考
-airbnb 16.2
-集团规范 1.4.2.1
 
 ### 12. 类型转换
 
@@ -2288,10 +2106,6 @@ if (bool) { // false
 
 ```
 
-参考
-airbnb 22.2
-集团规范 2.2.1
-
 **12.2 使用 `parseInt()` 方法时，保证一直传递第二个`基数`参数。eslint: [radix](https://eslint.org/docs/rules/radix)**
 
 ```javascript
@@ -2301,10 +2115,6 @@ parseInt("071"); // => ES5 前的执行环境中得到的是 57
 // good
 parseInt("071", 10); // => 71
 ```
-
-参考
-airbnb 22.3
-集团规范 2.2.3
 
 ### 13. 标准库([Standard built-in objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects))
 
@@ -2322,9 +2132,6 @@ Number.isNaN('1.2.3'); // false
 Number.isNaN(Number('1.2.3')); // true
 ```
 
-参考
-airbnb 29.1
-
 **13.2 使用 `Number.isFinite` 而不是`global` 上的`isFinite`。eslint: [no-restricted-globals](https://eslint.org/docs/rules/no-restricted-globals)**
 
 - `global` 上的 `isFinite` 会强制将非数字转换成数字，会对任何能转换成有限数字的内容返回 `true` ，如果这个操作是期望的，那么显式地进行处理
@@ -2337,6 +2144,3 @@ isFinite('2e3'); // true
 Number.isFinite('2e3'); // false
 Number.isFinite(parseInt('2e3', 10)); // true
 ```
-
-参考
-airbnb 29.2
