@@ -30,6 +30,10 @@ export class ESLint extends Linter<ESLintBase.LintResult[]> {
     this.config = config;
   }
 
+  public getConfig() {
+    return this.config;
+  }
+
   public async scan() {
     // should not run eslint when no files were found
     if (this.targetFiles.length === 0) {
