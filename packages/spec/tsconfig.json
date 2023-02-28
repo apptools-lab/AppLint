@@ -6,7 +6,6 @@
   },
   "exclude": [
     "examples",
-    "__tests__",
-    "jest.config.js"
+    "__tests__"
   ]
 }

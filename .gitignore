@@ -1,9 +1,5 @@
 node_modules
 
-# lock file
-yarn.lock
-package-lock.json
-
 # Logs
 logs
 *.log
@@ -23,3 +19,6 @@ coverage/
 
 #tmp
 **/*-tmp/**
+
+# cache
+.eslintcache

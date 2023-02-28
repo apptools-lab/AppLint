@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import fs from 'fs/promises';
 import path from 'path';
 import prettier from 'prettier';

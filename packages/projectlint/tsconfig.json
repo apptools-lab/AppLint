@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "jscodeshift", "node"]
+    "types": ["jscodeshift", "node"]
   },
   "exclude": [
     "scripts",
