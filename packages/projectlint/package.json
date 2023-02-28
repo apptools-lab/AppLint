@@ -7,8 +7,8 @@
     "projectlint": "./bin/cli.js"
   },
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "prepublishOnly": "npm run build",
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "yarn build",
     "watch": "tsc -w"
   },
   "files": [
