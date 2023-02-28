@@ -2,7 +2,7 @@
   "mode": "exit",
   "tag": "alpha",
   "initialVersions": {
-    "@applint/applint": "1.1.1",
+    "@applint/applint": "1.2.0-alpha.0",
     "@applint/commitlint-config": "1.0.2",
     "@applint/eslint-config": "1.1.12",
     "@applint/prettier-config": "1.0.1",
@@ -11,6 +11,7 @@
     "@applint/stylelint-config": "1.0.2"
   },
   "changesets": [
-    "healthy-avocados-run"
+    "healthy-avocados-run",
+    "hungry-pigs-confess"
   ]
 }

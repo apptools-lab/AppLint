@@ -1,6 +1,6 @@
 {
   "name": "@applint/applint",
-  "version": "1.2.0-alpha.0",
+  "version": "1.2.0-alpha.1",
   "description": "提供 ESLint、Stylelint 检查和修复的 Node API。",
   "main": "dist/index.js",
   "files": [

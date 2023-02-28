@@ -1,5 +1,11 @@
 # @applint/applint
 
+## 1.2.0-alpha.1
+
+### Patch Changes
+
+- 97aea4a: feat: add getConfig member function
+
 ## 1.2.0-alpha.0
 
 ### Minor Changes
