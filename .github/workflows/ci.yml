@@ -5,6 +5,11 @@ on: [push]
 jobs:
   main:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16]
+
     steps:
       - uses: actions/checkout@v2
 
@@ -14,20 +19,16 @@ jobs:
       - name: Echo branch name
         run: echo ${BRANCH_NAME}
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
+          node-version: ${{ matrix.node-version }}
 
-      - name: Install Dependencies
-        run: npm run setup
-
-      - name: Build Packages
-        run: npm run build
+      - name: Step
+        run: yarn setup
 
       - name: Run Lint
-        run: npm run eslint
+        run: yarn eslint
 
       - name: Run Test
-        run: npm run test
+        run: yarn test

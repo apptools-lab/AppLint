@@ -16,10 +16,9 @@
   },
   "homepage": "https://github.com/apptools-lab/applint",
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "prepublishOnly": "npm run build",
-    "watch": "tsc -w",
-    "pretest": "npm run build"
+    "build": "rimraf dist && tsc",
+    "prepublishOnly": "yarn build",
+    "watch": "tsc -w"
   },
   "dependencies": {
     "@applint/commitlint-config": "^1.0.0",
