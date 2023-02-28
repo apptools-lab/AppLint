@@ -1,5 +1,11 @@
 # @applint/applint
 
+## 1.2.0-alpha.0
+
+### Minor Changes
+
+- 813bdb3: feat: support set eslint config
+
 ## 1.1.1
 
 - fix: not specify `parserOptions.tsconfigRootDir` in eslint config
