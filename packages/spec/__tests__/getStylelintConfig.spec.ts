@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import stylelint from 'stylelint';
 import path from 'path';
 import { getStylelintConfig } from '../dist';

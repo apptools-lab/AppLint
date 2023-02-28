@@ -9,14 +9,11 @@
   "license": "MIT",
   "devDependencies": {
     "@types/eslint": "^7.28.1",
-    "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "glob": "^7.2.0",
-    "jest": "^27.4.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "ts-jest": "^27.1.3",
     "typescript": "^4.4.4"
   },
   "dependencies": {
@@ -30,7 +27,6 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "prepublishOnly": "npm run build",
-    "watch": "tsc -w",
-    "test": "jest"
+    "watch": "tsc -w"
   }
 }

@@ -6,7 +6,6 @@
   },
   "exclude": [
     "__tests__",
-    "dist",
-    "jest.config.js"
+    "dist"
   ]
 }

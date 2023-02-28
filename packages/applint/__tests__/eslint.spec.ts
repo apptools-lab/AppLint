@@ -1,3 +1,4 @@
+import { describe, test, expect, afterAll } from 'vitest';
 import path from 'path';
 import fse from 'fs-extra';
 import { ESLint } from '../src/index';

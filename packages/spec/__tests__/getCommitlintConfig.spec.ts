@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import commitlint from '@commitlint/lint';
 import loadCommitlint from '@commitlint/load';
 import { getCommitlintConfig } from '../dist';
