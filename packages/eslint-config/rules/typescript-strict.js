@@ -278,7 +278,7 @@ module.exports = {
     // UPDATE: TS 5.0 对枚举支持进一步增强了
     '@typescript-eslint/prefer-literal-enum-member': 'off',
     // 使用 ?? 而不是 ||
-    '@typescript-eslint/prefer-nullish-coalescing': ['warn'],
+    '@typescript-eslint/prefer-nullish-coalescing': ['off'],
     // 使用 ?. 而不是 &&
     '@typescript-eslint/prefer-optional-chain': ['warn'],
     // 为 reduce 方法传入显式的类型参数，因为通常 reduce 方法的初始值会是 [] 或者 {} 这种，没法推导出来结果类型
