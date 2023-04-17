@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.13
+
+- chore: remove rule `@typescript-eslint/prefer-nullish-coalescing` as it's not smart enough to determine the actual case.
+
 ## 1.1.12
 
 - chore: append `eslint-config-prettier` to strict rule set.
