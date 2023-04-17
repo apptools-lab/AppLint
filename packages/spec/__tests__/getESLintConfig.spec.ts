@@ -20,7 +20,7 @@ describe('getESLintConfig API', () => {
 
   test('common-ts-strict', async () => {
     const results = await getESLintResults('common-ts-strict', [path.join(testFixturesDir, 'eslint/index.ts')]);
-    expect(results[0].messages.length).toBe(2);
+    expect(results[0].messages.length).toBe(1);
   });
 
   test('react', async () => {
@@ -36,7 +36,7 @@ describe('getESLintConfig API', () => {
   test('react-ts-strict', async () => {
     const results = await getESLintResults('react-ts-strict', [path.join(testFixturesDir, 'eslint/index.tsx')]);
     expect(results.length).toBe(1);
-    expect(results[0].messages.length).toBe(4);
+    expect(results[0].messages.length).toBe(3);
   });
 
   test('rax', async () => {
@@ -54,7 +54,7 @@ describe('getESLintConfig API', () => {
   test('rax-ts-strict', async () => {
     const results = await getESLintResults('rax-ts-strict', [path.join(testFixturesDir, 'eslint/index.tsx')]);
     expect(results.length).toBe(1);
-    expect(results[0].messages.length).toBe(3);
+    expect(results[0].messages.length).toBe(2);
   });
 });
 
