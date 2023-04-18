@@ -18,5 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^4.6.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
