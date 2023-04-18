@@ -1,5 +1,15 @@
 # @applint/applint
 
+## 1.2.0
+
+### Minor Changes
+
+- fbf9e7d: feat: support set eslint config
+
+### Patch Changes
+
+- fbf9e7d: feat: add getConfig member function
+
 ## 1.2.0-alpha.1
 
 ### Patch Changes
